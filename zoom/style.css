@@ -309,7 +309,7 @@ body {
 }
 
 .progress-badge {
-  background-color: #28a745;
+  background-color: #176b2c;
   color: #ffffff;
   padding: 2px 10px;
   border-radius: 12px;
@@ -369,10 +369,10 @@ body {
 }
 
 .tab-check-badge {
-  opacity: 0;
-  transform: scale(0.6);
+  display: none;
   transition: all 0.25s ease-in-out;
-  font-size: 1.1rem;
+  font-size: 0.75rem;
+  font-weight: 700;
 }
 
 @keyframes checkPop {
@@ -382,6 +382,7 @@ body {
 }
 
 .tab-button.explored .tab-check-badge {
+  display: inline-block;
   opacity: 1;
   transform: scale(1);
   animation: checkPop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -667,6 +668,7 @@ body {
 /* Tab Panel Hidden State */
 .tab-panel {
   display: none;
+  scroll-margin-top: 190px;
 }
 
 .tab-panel.active {
@@ -1229,14 +1231,57 @@ footer.app-footer a {
     flex-direction: column;
     align-items: flex-start;
   }
+
+  .app-title-group,
+  .a11y-controls,
+  .font-slider-container,
+  .control-item {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .a11y-controls {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .font-slider-container,
+  .control-item {
+    flex-wrap: wrap;
+  }
+
+  .font-slider-container input[type="range"] {
+    width: auto;
+    min-width: 0;
+    flex: 1 1 130px;
+  }
+
+  .control-item[role="group"] .btn-a11y {
+    flex: 1 1 120px;
+  }
+
+  #theme-select {
+    min-width: 0;
+    max-width: 100%;
+    width: 100%;
+  }
+
+  .progress-indicator-pill {
+    width: 100%;
+    flex-wrap: wrap;
+  }
   
   .tab-list {
-    overflow-x: auto;
-    white-space: nowrap;
+    flex-direction: column;
+    overflow-x: visible;
+    white-space: normal;
     padding-bottom: 6px;
   }
   
   .tab-button {
+    width: 100%;
+    max-width: 100%;
+    white-space: normal;
     font-size: 0.95rem;
     padding: 12px 14px;
   }

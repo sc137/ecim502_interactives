@@ -63,10 +63,20 @@ function setFontScale(scaleValue) {
   const btnLarge = document.getElementById('btn-font-large');
   const btnXL = document.getElementById('btn-font-xlarge');
 
-  [btnNorm, btnLarge, btnXL].forEach(b => b && b.classList.remove('active'));
-  if (scaleValue <= 1.05 && btnNorm) btnNorm.classList.add('active');
-  else if (scaleValue > 1.05 && scaleValue <= 1.25 && btnLarge) btnLarge.classList.add('active');
-  else if (scaleValue > 1.25 && btnXL) btnXL.classList.add('active');
+  [btnNorm, btnLarge, btnXL].forEach(b => {
+    if (!b) return;
+    b.classList.remove('active');
+    b.setAttribute('aria-pressed', 'false');
+  });
+
+  let activePreset = btnXL;
+  if (scaleValue <= 1.05) activePreset = btnNorm;
+  else if (scaleValue <= 1.25) activePreset = btnLarge;
+
+  if (activePreset) {
+    activePreset.classList.add('active');
+    activePreset.setAttribute('aria-pressed', 'true');
+  }
 
   localStorage.setItem('emeritus_font_scale', scaleValue);
   announceToScreenReader(`Text size set to ${Math.round(scaleValue * 100)} percent.`);
@@ -86,6 +96,9 @@ function changeTheme(themeValue) {
    2. ACCESSIBLE TAB NAVIGATION & SCROLL-TRIGGERED EXPLORATION TRACKING
    ========================================================================== */
 let exploredTabIds = [];
+let activeTabActivatedAt = Date.now();
+let quiz1Passed = false;
+let quiz2Passed = false;
 
 function initTabs() {
   const tabList = document.querySelector('.tab-list');
@@ -102,13 +115,17 @@ function initTabs() {
     exploredTabIds = [];
   }
 
+  if (!Array.isArray(exploredTabIds)) exploredTabIds = [];
+  const validTabIds = new Set(Array.from(tabs, tab => tab.id));
+  exploredTabIds = Array.from(new Set(exploredTabIds)).filter(id => validTabIds.has(id));
+
   updateExplorationUI();
 
   // Add Scroll Listener to detect when student scrolls down to explore tab content
   window.addEventListener('scroll', checkTabScrollCompletion, { passive: true });
 
-  // Initial scroll check in case page is already scrolled
-  setTimeout(checkTabScrollCompletion, 300);
+  // Allow enough reading time before checking whether the full panel is visible.
+  setTimeout(checkTabScrollCompletion, 1200);
 
   tabs.forEach((tab, index) => {
     tab.addEventListener('click', () => {
@@ -149,8 +166,10 @@ function activateTab(selectedTab, allTabs, allPanels) {
 
   if (targetPanel) {
     targetPanel.classList.add('active');
+    activeTabActivatedAt = Date.now();
+    targetPanel.scrollIntoView({ block: 'start' });
 
-    const cleanTitle = selectedTab.textContent.replace('✅','').trim();
+    const cleanTitle = selectedTab.textContent.replace('Explored', '').trim();
     if (exploredTabIds.includes(selectedTab.id)) {
       announceToScreenReader(`Switched to tab: ${cleanTitle}. (Explored)`);
     } else if (selectedTab.id === 'tab-quizzes') {
@@ -159,8 +178,8 @@ function activateTab(selectedTab, allTabs, allPanels) {
       announceToScreenReader(`Switched to tab: ${cleanTitle}. Scroll down to read content and earn module checkmark.`);
     }
 
-    // Check if user is already scrolled down enough to complete this tab
-    setTimeout(checkTabScrollCompletion, 150);
+    // Recheck after the reader has had time to view the selected panel.
+    setTimeout(checkTabScrollCompletion, 1200);
   }
 }
 
@@ -175,17 +194,18 @@ function checkTabScrollCompletion() {
   const panel = document.getElementById(targetPanelId);
   if (!panel) return;
 
-  const scrollY = window.scrollY || window.pageYOffset || 0;
   const panelRect = panel.getBoundingClientRect();
+  const hasViewedPanelLongEnough = Date.now() - activeTabActivatedAt >= 1000;
+  const hasReachedPanelEnd = panelRect.bottom <= window.innerHeight - 24;
 
-  // Completion trigger: student has scrolled down at least 80px OR panel content top is well inside the viewport
-  if (scrollY > 80 || panelRect.top < window.innerHeight * 0.75) {
+  // Mark explored only after the end of the active panel has been reached.
+  if (hasViewedPanelLongEnough && hasReachedPanelEnd) {
     exploredTabIds.push(activeTab.id);
     saveExploredTabs();
     updateExplorationUI();
 
-    const cleanTitle = activeTab.textContent.replace('✅','').trim();
-    announceToScreenReader(`🎉 Checkmark earned for ${cleanTitle}! Exploration progress updated.`);
+    const cleanTitle = activeTab.textContent.replace('Explored', '').trim();
+    announceToScreenReader(`Exploration completed for ${cleanTitle}. Progress updated.`);
   }
 }
 
@@ -196,8 +216,14 @@ function markQuizTabCompleted() {
     updateExplorationUI();
 
     const tabBtn = document.getElementById('tab-quizzes');
-    const cleanTitle = tabBtn ? tabBtn.textContent.replace('✅','').trim() : '5. Checklist & Quizzes';
-    announceToScreenReader(`🎉 Outstanding! Checkmark earned for ${cleanTitle}! Progress updated.`);
+    const cleanTitle = tabBtn ? tabBtn.textContent.replace('Explored', '').trim() : '5. Checklist & Quizzes';
+    announceToScreenReader(`Exploration completed for ${cleanTitle}. Progress updated.`);
+  }
+}
+
+function updateQuizCompletionStatus() {
+  if (quiz1Passed && quiz2Passed) {
+    markQuizTabCompleted();
   }
 }
 
@@ -228,15 +254,15 @@ function updateExplorationUI() {
     percentBadge.textContent = `${percent}%`;
     if (percent === 100) {
       percentBadge.style.backgroundColor = '#155724';
-      percentBadge.textContent = '100% Completed! 🎉';
+      percentBadge.textContent = '100% Completed';
     } else {
-      percentBadge.style.backgroundColor = '#28a745';
+      percentBadge.style.backgroundColor = '#176b2c';
     }
   }
 
-  // Show Claim Certificate Button if quizzes completed or progress >= 50%
+  // Show the certificate only after every module has been explored.
   if (claimCertBtn) {
-    if (exploredTabIds.includes('tab-quizzes') || percent >= 50) {
+    if (percent === 100) {
       claimCertBtn.style.display = 'inline-flex';
     } else {
       claimCertBtn.style.display = 'none';
@@ -246,6 +272,8 @@ function updateExplorationUI() {
 
 function resetExplorationProgress() {
   exploredTabIds = [];
+  quiz1Passed = false;
+  quiz2Passed = false;
   saveExploredTabs();
   updateExplorationUI();
 
@@ -339,14 +367,18 @@ function toggleSimControl(control) {
     if (simState.isMuted) {
       btn.classList.add('danger-state');
       label.textContent = 'Unmute';
+      btn.setAttribute('aria-label', 'Unmute microphone');
+      btn.setAttribute('aria-pressed', 'false');
       drawerTitle.innerHTML = '🎤 Microphone Status: MUTED';
       drawerBody.innerHTML = `
         <p><strong>What happened:</strong> Your microphone is turned off. Other participants cannot hear background sounds from your room.</p>
-        <p><strong>Classroom Tip:</strong> Keep yourself muted during lectures unless called upon by your instructor. To quickly speak on laptops, hold down your <strong>Spacebar</strong> to temporarily unmute!</p>
+        <p><strong>Classroom Tip:</strong> Keep yourself muted during lectures unless called upon by your instructor. If the <em>Press and hold Space key to temporarily unmute</em> setting is enabled, you can hold the <strong>Spacebar</strong> while speaking.</p>
       `;
     } else {
       btn.classList.remove('danger-state');
       label.textContent = 'Mute';
+      btn.setAttribute('aria-label', 'Mute microphone');
+      btn.setAttribute('aria-pressed', 'true');
       drawerTitle.innerHTML = '🎤 Microphone Status: UNMUTED (Live)';
       drawerBody.innerHTML = `
         <p><strong>What happened:</strong> Your microphone is active and live! Everyone in class can hear your voice.</p>
@@ -363,6 +395,8 @@ function toggleSimControl(control) {
     if (simState.isVideoOn) {
       btn.classList.remove('danger-state');
       label.textContent = 'Stop Video';
+      btn.setAttribute('aria-label', 'Stop video');
+      btn.setAttribute('aria-pressed', 'true');
       avatar.style.background = '#28a745';
       avatar.innerHTML = '📷';
       drawerTitle.innerHTML = '📹 Camera Status: VIDEO ON';
@@ -373,6 +407,8 @@ function toggleSimControl(control) {
     } else {
       btn.classList.add('danger-state');
       label.textContent = 'Start Video';
+      btn.setAttribute('aria-label', 'Start video');
+      btn.setAttribute('aria-pressed', 'false');
       avatar.style.background = '#0a4f70';
       avatar.innerHTML = 'ES';
       drawerTitle.innerHTML = '📹 Camera Status: VIDEO OFF';
@@ -385,6 +421,10 @@ function toggleSimControl(control) {
 
   else if (control === 'participants') {
     simState.isParticipantsOpen = !simState.isParticipantsOpen;
+    const btn = document.getElementById('sim-btn-participants');
+    btn.classList.toggle('active', simState.isParticipantsOpen);
+    btn.setAttribute('aria-pressed', String(simState.isParticipantsOpen));
+    btn.setAttribute('aria-label', `${simState.isParticipantsOpen ? 'Close' : 'Open'} participants panel`);
     drawerTitle.innerHTML = '👥 Participants Panel';
     drawerBody.innerHTML = `
       <p><strong>What it does:</strong> Opens a side panel listing everyone in the Zoom meeting room, including the host, co-hosts, and fellow students.</p>
@@ -394,6 +434,10 @@ function toggleSimControl(control) {
 
   else if (control === 'chat') {
     simState.isChatOpen = !simState.isChatOpen;
+    const btn = document.getElementById('sim-btn-chat');
+    btn.classList.toggle('active', simState.isChatOpen);
+    btn.setAttribute('aria-pressed', String(simState.isChatOpen));
+    btn.setAttribute('aria-label', `${simState.isChatOpen ? 'Close' : 'Open'} classroom chat panel`);
     drawerTitle.innerHTML = '💬 In-Meeting Chat';
     drawerBody.innerHTML = `
       <p><strong>What it does:</strong> Opens the meeting chat panel where you can type messages, post questions, or receive web links shared by the instructor.</p>
@@ -413,12 +457,16 @@ function toggleSimControl(control) {
     drawerTitle.innerHTML = '✋ Reactions & Raise Hand';
     drawerBody.innerHTML = `
       <p><strong>What it does:</strong> Lets you raise your virtual hand or send quick visual emojis (thumbs up, applause, heart) without interrupting the spoken lecture.</p>
-      <p><strong>Classroom Tip:</strong> When you raise your hand, your video box moves to the top of the instructor's screen so they know you have a question!</p>
+      <p><strong>Classroom Tip:</strong> A raised-hand indicator appears beside your name. Depending on the host's view and settings, raised hands may also be prioritized in the participant list.</p>
     `;
   }
 
   else if (control === 'captions') {
     simState.isCaptionsOn = !simState.isCaptionsOn;
+    const btn = document.getElementById('sim-btn-captions');
+    btn.classList.toggle('active', simState.isCaptionsOn);
+    btn.setAttribute('aria-pressed', String(simState.isCaptionsOn));
+    btn.setAttribute('aria-label', `Turn ${simState.isCaptionsOn ? 'off' : 'on'} live captions`);
     drawerTitle.innerHTML = 'CC Live Closed Captions';
     drawerBody.innerHTML = `
       <p><strong>What it does:</strong> Displays live spoken words as written text subtitles across the bottom of your Zoom meeting screen.</p>
@@ -427,10 +475,10 @@ function toggleSimControl(control) {
   }
 
   else if (control === 'ai') {
-    drawerTitle.innerHTML = '✨ ZoomMate / AI Companion';
+    drawerTitle.innerHTML = 'ZoomMate and Built-in Zoom AI';
     drawerBody.innerHTML = `
-      <p><strong>What it does:</strong> Zoom's built-in AI assistant. In meetings where enabled by the host, ZoomMate can summarize discussion points or answer questions like "What did I miss?".</p>
-      <p><strong>Privacy Check:</strong> Remember that AI Companion features capture meeting transcript context. Check with your class host regarding AI usage expectations.</p>
+      <p><strong>What they do:</strong> Built-in Zoom AI features can provide capabilities such as meeting summaries or in-meeting questions when enabled. ZoomMate is a separate product for broader search, content creation, and workflow actions.</p>
+      <p><strong>Privacy Check:</strong> Features that summarize or answer questions may use meeting transcripts. Check the host's expectations, your account permissions, and any notice or consent requirements before use.</p>
     `;
   }
 
@@ -460,9 +508,9 @@ function updateDeviceView(val) {
       <div style="font-size: 1.15rem; font-weight: bold; color: var(--primary-blue); margin-bottom: 8px;">
         💻 Desktop App (Windows & Mac) — Recommended for Class
       </div>
-      <p><strong>Best for:</strong> Full class participation, multi-tasking, comfortable screen sharing, and continuous toolbar visibility.</p>
+      <p><strong>Best for:</strong> Full class participation, multi-tasking, comfortable screen sharing, and access to the broadest set of meeting controls.</p>
       <ul>
-        <li><strong>Toolbar Layout:</strong> Full control toolbar stays visible at the bottom of your window.</li>
+        <li><strong>Toolbar Layout:</strong> The full control toolbar appears at the bottom of the meeting window. Enable <em>Always show meeting controls</em> in Zoom settings if you want it to remain visible.</li>
         <li><strong>Key Features:</strong> Easy gallery view of classmates, dual-monitor support, full audio/video settings.</li>
         <li><strong>Emeritus Tip:</strong> Recommended for primary class sessions on laptops or desktop computers.</li>
       </ul>
@@ -494,6 +542,8 @@ function updateDeviceView(val) {
       </ul>
     `;
   }
+  const slider = document.getElementById('device-slider');
+  if (slider) slider.setAttribute('aria-valuetext', label.textContent);
   announceToScreenReader(`Device view set to ${label.textContent}`);
 }
 
@@ -520,10 +570,10 @@ function updateTimelineView(val) {
       <p>Zoom introduced persistent digital Whiteboards and expanded Team Chat, allowing group planning and brainstorming to continue after meetings ended.</p>
     `;
   } else if (val == 3) {
-    label.textContent = '2024: AI Companion 1.0';
+    label.textContent = '2023: AI Companion Launch';
     output.innerHTML = `
       <div style="font-size: 1.15rem; font-weight: bold; color: var(--primary-blue); margin-bottom: 8px;">
-        🤖 2024: The Launch of AI Companion
+        2023: The Launch of AI Companion
       </div>
       <p>Zoom introduced AI Companion to automatically generate meeting summaries, capture action items, and draft chat responses for users.</p>
     `;
@@ -536,6 +586,8 @@ function updateTimelineView(val) {
       <p>Zoom transforms into a complete AI-supported workplace featuring <strong>ZoomMate</strong>, <strong>My Notes</strong>, <strong>Zoom Canvas</strong>, <strong>Slides</strong>, <strong>Sheets</strong>, and <strong>Paper</strong>—turning meeting conversations directly into actionable documents, slides, and workflows.</p>
     `;
   }
+  const slider = document.getElementById('timeline-slider');
+  if (slider) slider.setAttribute('aria-valuetext', label.textContent);
   announceToScreenReader(`Timeline set to ${label.textContent}`);
 }
 
@@ -561,6 +613,8 @@ function updateConfidenceView(val) {
     </div>
     <p>${current.desc}</p>
   `;
+  const slider = document.getElementById('confidence-slider');
+  if (slider) slider.setAttribute('aria-valuetext', current.title);
   announceToScreenReader(`Confidence level set to ${current.title}`);
 }
 
@@ -569,10 +623,16 @@ function updateConfidenceView(val) {
    ========================================================================== */
 function evaluateScenario(scenKey) {
   const btns = document.querySelectorAll('.scenario-btn');
-  btns.forEach(b => b.classList.remove('selected'));
+  btns.forEach(b => {
+    b.classList.remove('selected');
+    b.setAttribute('aria-pressed', 'false');
+  });
 
   const activeBtn = document.getElementById(`scen-${scenKey}`);
-  if (activeBtn) activeBtn.classList.add('selected');
+  if (activeBtn) {
+    activeBtn.classList.add('selected');
+    activeBtn.setAttribute('aria-pressed', 'true');
+  }
 
   const output = document.getElementById('scenario-evaluation-result');
   if (!output) return;
@@ -580,31 +640,31 @@ function evaluateScenario(scenKey) {
   const scenarios = {
     class: {
       title: "🎓 Emeritus Classroom Discussion",
-      badge: "<span style='background:#d4edda; color:#155724; padding:6px 12px; border-radius:6px; font-weight:bold;'>✅ Recommended (With Instructor Guidance)</span>",
-      capture: "Audio transcript, lecture notes, shared slides, chat questions.",
-      access: "Class members, instructor, or meeting host.",
-      advice: "AI summaries (ZoomMate / My Notes) are very helpful for reviewing complex lectures. Ensure the instructor has enabled AI Companion for the class session."
+      badge: "<span style='background:#d4edda; color:#155724; padding:6px 12px; border-radius:6px; font-weight:bold;'>Useful with instructor guidance</span>",
+      capture: "Depending on the feature and settings: meeting audio or transcript context, notes, and meeting content.",
+      access: "My Notes are personal and are not automatically shared. Host-generated summaries and shared documents follow the host's and document owner's sharing settings.",
+      advice: "Ask the instructor which features are approved for class. Confirm what will be captured, who can access it, and whether your account and platform support the feature."
     },
     health: {
       title: "🩺 Private Doctor / Healthcare Consultation",
-      badge: "<span style='background:#f8d7da; color:#721c24; padding:6px 12px; border-radius:6px; font-weight:bold;'>🔴 Privacy Caution: Turn OFF AI Notes</span>",
+      badge: "<span style='background:#f8d7da; color:#721c24; padding:6px 12px; border-radius:6px; font-weight:bold;'>High privacy caution</span>",
       capture: "Sensitive personal medical details, symptoms, prescriptions.",
-      access: "Potentially saved to cloud transcripts or third-party AI processing.",
-      advice: "Do NOT enable AI Companion, My Notes, or recording during private telehealth visits without explicit doctor/patient HIPAA privacy consent."
+      access: "Access and storage depend on the healthcare provider's approved platform, account configuration, and the specific recording or transcription feature.",
+      advice: "Do not record or transcribe unless the provider approves it and all organizational, notice, consent, and applicable legal requirements have been satisfied."
     },
     group: {
       title: "👥 Student Group Project & Study Session",
-      badge: "<span style='background:#d4edda; color:#155724; padding:6px 12px; border-radius:6px; font-weight:bold;'>✅ Highly Useful for Action Items</span>",
+      badge: "<span style='background:#d4edda; color:#155724; padding:6px 12px; border-radius:6px; font-weight:bold;'>Useful for action items</span>",
       capture: "Group brainstorming, sticky notes, task assignments, meeting outline.",
-      access: "All group project members.",
-      advice: "Great scenario to use <strong>Zoom Canvas</strong> or <strong>My Notes</strong>! AI can automatically turn your group brainstorming into a shared document or task list."
+      access: "My Notes remain personal unless the owner shares them. Canvas documents and workflow outputs are available only to people granted access.",
+      advice: "Agree on the feature and sharing plan before use. Review generated action items for accuracy before assigning or sending them."
     },
     family: {
       title: "🏡 Family Chat / Personal Friendship Call",
       badge: "<span style='background:#fff3cd; color:#856404; padding:6px 12px; border-radius:6px; font-weight:bold;'>⚠️ Check Participant Comfort First</span>",
       capture: "Personal family news, photos, casual conversation.",
-      access: "Family members present in call.",
-      advice: "Ask family members if they are comfortable before turning on AI summaries or recording. Casual calls rarely require AI transcripts."
+      access: "Access depends on who creates and shares the note, summary, transcript, or recording.",
+      advice: "Ask everyone before recording or transcribing, explain what will be saved and shared, and follow any notice or consent requirements that apply."
     }
   };
 
@@ -666,18 +726,21 @@ function gradeQuiz1() {
 
   feedback.style.display = 'block';
 
-  // Mark Quiz & Checklist tab as completed when quiz is answered
-  markQuizTabCompleted();
-
   if (opt1 && opt2 && !opt3 && opt4) {
+    quiz1Passed = true;
+    feedback.dataset.passed = 'true';
     feedback.className = 'quiz-feedback-box correct';
     feedback.innerHTML = `
       🎉 <strong>Spot on! Excellent Job!</strong> (Score: 100%)
       <br>• Options A, B, and D are all correct!
       <br>• Option C is incorrect because keeping yourself unmuted causes background noise for the class.
     `;
-    announceToScreenReader('Quiz 1 completed with 100 percent correct score. Tab checkmark earned!');
+    announceToScreenReader(quiz2Passed
+      ? 'Quiz 1 completed with a 100 percent score. Both quizzes are now complete.'
+      : 'Quiz 1 completed with a 100 percent score. Complete Quiz 2 to finish this module.');
   } else {
+    quiz1Passed = false;
+    feedback.dataset.passed = 'false';
     feedback.className = 'quiz-feedback-box incorrect';
     feedback.innerHTML = `
       💡 <strong>Review Feedback:</strong>
@@ -686,8 +749,10 @@ function gradeQuiz1() {
       <br>• <strong>Option C is False:</strong> You should stay MUTED when not speaking.
       <br>• <strong>Option D is Correct:</strong> Raising your virtual hand lets you ask questions politely.
     `;
-    announceToScreenReader('Quiz 1 submitted. Review feedback on screen. Tab checkmark earned!');
+    announceToScreenReader('Quiz 1 submitted. Review the feedback and try again.');
   }
+
+  updateQuizCompletionStatus();
 }
 
 // Grading Quiz 2 (What's New & AI Safety)
@@ -702,28 +767,33 @@ function gradeQuiz2() {
 
   feedback.style.display = 'block';
 
-  // Mark Quiz & Checklist tab as completed when quiz is answered
-  markQuizTabCompleted();
-
   if (opt1 && opt2 && !opt3 && opt4) {
+    quiz2Passed = true;
+    feedback.dataset.passed = 'true';
     feedback.className = 'quiz-feedback-box correct';
     feedback.innerHTML = `
       🎉 <strong>Perfect Score! Outstanding AI Awareness!</strong> (Score: 100%)
-      <br>• Options A, B, and D are all correct!
-      <br>• Option C is false because private medical visits require strict privacy & consent.
+      <br>• Options A, B, and D are all correct.
+      <br>• Option C is false because sensitive conversations require appropriate approval, notice, consent, and account settings.
     `;
-    announceToScreenReader('Quiz 2 completed with 100 percent correct score. Tab checkmark earned!');
+    announceToScreenReader(quiz1Passed
+      ? 'Quiz 2 completed with a 100 percent score. Both quizzes are now complete.'
+      : 'Quiz 2 completed with a 100 percent score. Complete Quiz 1 to finish this module.');
   } else {
+    quiz2Passed = false;
+    feedback.dataset.passed = 'false';
     feedback.className = 'quiz-feedback-box incorrect';
     feedback.innerHTML = `
       💡 <strong>Review Feedback:</strong>
-      <br>• <strong>Option A is Correct:</strong> ZoomMate & AI Companion refer to Zoom's AI assistant.
-      <br>• <strong>Option B is Correct:</strong> Zoom Canvas builds visual documents from notes.
-      <br>• <strong>Option C is False:</strong> Do NOT enable AI on private medical appointments without consent.
+      <br>• <strong>Option A is Correct:</strong> Built-in Zoom AI handles specific tasks, while ZoomMate adds broader agentic capabilities.
+      <br>• <strong>Option B is Correct:</strong> Zoom Canvas can build collaborative documents from notes and meeting context.
+      <br>• <strong>Option C is False:</strong> Sensitive conversations require the appropriate approval, notice, consent, and account settings before recording or transcription.
       <br>• <strong>Option D is Correct:</strong> Always double-check AI summaries for accuracy.
     `;
-    announceToScreenReader('Quiz 2 submitted. Review feedback on screen. Tab checkmark earned!');
+    announceToScreenReader('Quiz 2 submitted. Review the feedback and try again.');
   }
+
+  updateQuizCompletionStatus();
 }
 
 /* ==========================================================================
@@ -731,8 +801,10 @@ function gradeQuiz2() {
    ========================================================================== */
 const glossaryData = [
   { term: "Zoom Workplace", def: "Zoom's integrated platform combining video meetings, team chat, whiteboards, notes, docs, clips, and AI tools into one connected workspace.", tip: "Think of Zoom Workplace as the full umbrella app, with video calls being just one feature." },
-  { term: "ZoomMate / AI Companion", def: "Zoom's built-in artificial intelligence assistant designed to summarize meetings, catch you up on missed points, and answer search queries.", tip: "Look for the spark icon ✨ in Zoom to access AI Companion features." },
-  { term: "My Notes", def: "An AI note-taking tool that captures notes, key takeaways, and action items from Zoom meetings, mobile calls, and external platforms.", tip: "My Notes helps you keep class takeaways organized in one personal place." },
+  { term: "Built-in Zoom AI", def: "Features within Zoom Workplace that perform specific tasks such as meeting summaries, transcription, in-meeting questions, and chat compose when enabled.", tip: "Availability depends on your plan, administrator settings, platform, and meeting configuration." },
+  { term: "ZoomMate", def: "Zoom's separate agentic product for searching across connected information, creating deliverables, and carrying out broader workflows.", tip: "ZoomMate extends beyond the built-in task-specific AI features and may require a separate license or AI credits." },
+  { term: "My Notes", def: "A personal note-taking feature that can optionally enrich notes with transcripts for supported Zoom, in-person, and third-party meetings.", tip: "My Notes are not automatically shared; review platform requirements and sharing settings before use." },
+  { term: "Mute / Unmute", def: "The meeting control that turns your microphone off or on.", tip: "Stay muted when you are not speaking to reduce background noise." },
   { term: "Zoom Canvas", def: "An AI-powered collaborative workspace that transforms conversation notes into interactive documents, tables, and wikis.", tip: "Great for group study projects where everyone can build a document together." },
   { term: "Zoom Clips", def: "Short recorded screen or video messages that can be shared with classmates without needing a live meeting.", tip: "Use Clips when you want to show a quick screen update or explanation." },
   { term: "Zoom Slides", def: "A tool within Zoom AI Productivity Suite that generates presentation slides from meeting transcripts or typed prompts.", tip: "Can export directly to Microsoft PowerPoint files." },
