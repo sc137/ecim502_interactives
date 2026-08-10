@@ -1227,6 +1227,14 @@ footer.app-footer a {
 
 /* Responsive Media Queries */
 @media (max-width: 768px) {
+  .main-nav {
+    position: static;
+  }
+
+  .tab-panel {
+    scroll-margin-top: 16px;
+  }
+
   .a11y-header-bar {
     flex-direction: column;
     align-items: flex-start;
@@ -1272,16 +1280,18 @@ footer.app-footer a {
   }
   
   .tab-list {
-    flex-direction: column;
-    overflow-x: visible;
-    white-space: normal;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    overscroll-behavior-inline: contain;
+    white-space: nowrap;
     padding-bottom: 6px;
   }
   
   .tab-button {
-    width: 100%;
-    max-width: 100%;
-    white-space: normal;
+    width: auto;
+    max-width: none;
+    white-space: nowrap;
     font-size: 0.95rem;
     padding: 12px 14px;
   }
