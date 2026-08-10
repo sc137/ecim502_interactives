@@ -169,7 +169,7 @@ function activateTab(selectedTab, allTabs, allPanels) {
     activeTabActivatedAt = Date.now();
     targetPanel.scrollIntoView({ block: 'start' });
 
-    const cleanTitle = selectedTab.textContent.replace('Explored', '').trim();
+    const cleanTitle = selectedTab.textContent.replace('✅', '').replace('Explored', '').trim();
     if (exploredTabIds.includes(selectedTab.id)) {
       announceToScreenReader(`Switched to tab: ${cleanTitle}. (Explored)`);
     } else if (selectedTab.id === 'tab-quizzes') {
@@ -204,7 +204,7 @@ function checkTabScrollCompletion() {
     saveExploredTabs();
     updateExplorationUI();
 
-    const cleanTitle = activeTab.textContent.replace('Explored', '').trim();
+    const cleanTitle = activeTab.textContent.replace('✅', '').replace('Explored', '').trim();
     announceToScreenReader(`Exploration completed for ${cleanTitle}. Progress updated.`);
   }
 }
@@ -216,7 +216,7 @@ function markQuizTabCompleted() {
     updateExplorationUI();
 
     const tabBtn = document.getElementById('tab-quizzes');
-    const cleanTitle = tabBtn ? tabBtn.textContent.replace('Explored', '').trim() : '5. Checklist & Quizzes';
+    const cleanTitle = tabBtn ? tabBtn.textContent.replace('✅', '').replace('Explored', '').trim() : '5. Checklist & Quizzes';
     announceToScreenReader(`Exploration completed for ${cleanTitle}. Progress updated.`);
   }
 }

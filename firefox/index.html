@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Firefox and Web Browser History Interactive Guide</title>
+  <meta name="description" content="An accessible ECIM 502 interactive guide to web browser history, browser engines, installing Firefox, and completing the Firefox assignment.">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+  <div id="aria-live-announcer" class="sr-only" aria-live="polite" aria-atomic="true"></div>
+
+  <header class="a11y-header-bar">
+    <div class="app-title-group">
+      <h1>Firefox Interactive Guide</h1>
+      <span class="subhead">An interactive web tool for ECIM 502</span>
+    </div>
+
+    <div class="a11y-controls" role="region" aria-label="Accessibility settings">
+      <div class="font-slider-container">
+        <label for="font-scaler-slider">Text Size:</label>
+        <input type="range" id="font-scaler-slider" min="0.9" max="1.4" step="0.05" value="1" aria-label="Adjust text size scale">
+        <output id="font-size-indicator" for="font-scaler-slider">100%</output>
+      </div>
+
+      <div class="control-item" role="group" aria-label="Quick text presets">
+        <button type="button" class="btn-a11y active" id="btn-font-normal" data-font-scale="1" aria-pressed="true">Normal</button>
+        <button type="button" class="btn-a11y" id="btn-font-large" data-font-scale="1.18" aria-pressed="false">Large</button>
+        <button type="button" class="btn-a11y" id="btn-font-xlarge" data-font-scale="1.35" aria-pressed="false">Extra Large</button>
+      </div>
+
+      <div class="control-item">
+        <label for="theme-select">Contrast Theme:</label>
+        <select id="theme-select" class="btn-a11y" aria-label="Select color contrast theme">
+          <option value="default">Default Light</option>
+          <option value="dark">High Contrast Dark</option>
+          <option value="high-contrast-light">High Contrast B&amp;W</option>
+        </select>
+      </div>
+    </div>
+  </header>
+
+  <nav class="main-nav" aria-label="Firefox interactive sections">
+    <div class="tab-nav-header">
+      <div class="progress-indicator-pill" role="status" aria-live="polite">
+        Exploration Progress: <strong id="exploration-count">0 of 6 Tabs Explored</strong>
+        <span id="exploration-percent-badge" class="progress-badge">0%</span>
+      </div>
+      <div class="progress-actions">
+        <button type="button" class="btn-claim-certificate" id="claim-certificate" hidden>Claim Certificate</button>
+        <button type="button" class="btn-reset-progress" id="reset-progress">Reset Exploration</button>
+      </div>
+    </div>
+
+    <ul class="tab-list" role="tablist" aria-label="Learning sections">
+      <li role="presentation">
+        <button role="tab" id="tab-basics" aria-selected="true" aria-controls="panel-basics" class="tab-button" tabindex="0">
+          1. Browser Basics
+          <span class="tab-check-badge"><span aria-hidden="true">✅</span><span class="sr-only"> Explored</span></span>
+        </button>
+      </li>
+      <li role="presentation">
+        <button role="tab" id="tab-history" aria-selected="false" aria-controls="panel-history" class="tab-button" tabindex="-1">
+          2. Browser History
+          <span class="tab-check-badge"><span aria-hidden="true">✅</span><span class="sr-only"> Explored</span></span>
+        </button>
+      </li>
+      <li role="presentation">
+        <button role="tab" id="tab-families" aria-selected="false" aria-controls="panel-families" class="tab-button" tabindex="-1">
+          3. Browser Families
+          <span class="tab-check-badge"><span aria-hidden="true">✅</span><span class="sr-only"> Explored</span></span>
+        </button>
+      </li>
+      <li role="presentation">
+        <button role="tab" id="tab-install" aria-selected="false" aria-controls="panel-install" class="tab-button" tabindex="-1">
+          4. Install Firefox
+          <span class="tab-check-badge"><span aria-hidden="true">✅</span><span class="sr-only"> Explored</span></span>
+        </button>
+      </li>
+      <li role="presentation">
+        <button role="tab" id="tab-assignment" aria-selected="false" aria-controls="panel-assignment" class="tab-button" tabindex="-1">
+          5. Complete Assignment
+          <span class="tab-check-badge"><span aria-hidden="true">✅</span><span class="sr-only"> Explored</span></span>
+        </button>
+      </li>
+      <li role="presentation">
+        <button role="tab" id="tab-glossary" aria-selected="false" aria-controls="panel-glossary" class="tab-button" tabindex="-1">
+          6. Glossary
+          <span class="tab-check-badge"><span aria-hidden="true">✅</span><span class="sr-only"> Explored</span></span>
+        </button>
+      </li>
+    </ul>
+  </nav>
+
+  <main id="main-content" class="app-container">
+    <section id="panel-basics" class="tab-panel active" role="tabpanel" aria-labelledby="tab-basics">
+      <h2 class="section-heading">Browser Basics: The Program That Opens the Web</h2>
+
+      <div class="callout-box info" role="region" aria-label="Browser definition">
+        <div class="callout-title">The main idea</div>
+        <p>A <strong>web browser</strong> is an application that retrieves, interprets, and displays websites. Firefox, Chrome, Safari, and Edge are browsers.</p>
+      </div>
+
+      <div class="card-grid">
+        <article class="info-card">
+          <h3>Retrieves information</h3>
+          <p>When you enter a web address or select a link, the browser requests files from a web server.</p>
+        </article>
+        <article class="info-card">
+          <h3>Builds the page</h3>
+          <p>The browser interprets HTML for structure, CSS for appearance, and JavaScript for behavior.</p>
+        </article>
+        <article class="info-card">
+          <h3>Helps you navigate</h3>
+          <p>Tabs, bookmarks, history, downloads, passwords, privacy settings, and accessibility tools help you use the web.</p>
+        </article>
+      </div>
+
+      <h3 class="subsection-heading">Browser or search engine?</h3>
+      <div class="data-table-container">
+        <table class="emeritus-table">
+          <caption>Two tools that work together but do different jobs</caption>
+          <thead>
+            <tr>
+              <th scope="col">Tool</th>
+              <th scope="col">What it does</th>
+              <th scope="col">Examples</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">Web browser</th>
+              <td>Opens, displays, and lets you interact with websites.</td>
+              <td>Firefox, Chrome, Safari, Edge</td>
+            </tr>
+            <tr>
+              <th scope="row">Search engine</th>
+              <td>Finds web pages that may answer a question.</td>
+              <td>Google, Bing, DuckDuckGo</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3 class="subsection-heading">A simple way to remember</h3>
+      <p>The browser is the vehicle. A search engine is one destination you can visit with it. You can use several search engines inside the same browser.</p>
+    </section>
+
+    <section id="panel-history" class="tab-panel" role="tabpanel" aria-labelledby="tab-history">
+      <h2 class="section-heading">Browser History: From One Browser to Many</h2>
+      <p>Select a year or period to explore a milestone. The timeline distinguishes when the first browser was written from when web software became more widely available.</p>
+
+      <div class="timeline-layout">
+        <div class="timeline-controls" role="group" aria-label="Browser history timeline">
+          <button type="button" class="timeline-button active" data-timeline-index="0" aria-pressed="true"><span>1990</span> WorldWideWeb</button>
+          <button type="button" class="timeline-button" data-timeline-index="1" aria-pressed="false"><span>1991</span> Web release</button>
+          <button type="button" class="timeline-button" data-timeline-index="2" aria-pressed="false"><span>1993</span> Mosaic</button>
+          <button type="button" class="timeline-button" data-timeline-index="3" aria-pressed="false"><span>1994–1995</span> Netscape</button>
+          <button type="button" class="timeline-button" data-timeline-index="4" aria-pressed="false"><span>Late 1990s</span> Internet Explorer</button>
+          <button type="button" class="timeline-button" data-timeline-index="5" aria-pressed="false"><span>2003–2004</span> Safari and Firefox</button>
+          <button type="button" class="timeline-button" data-timeline-index="6" aria-pressed="false"><span>2008</span> Chrome</button>
+          <button type="button" class="timeline-button" data-timeline-index="7" aria-pressed="false"><span>2013</span> Blink</button>
+          <button type="button" class="timeline-button" data-timeline-index="8" aria-pressed="false"><span>2020</span> Chromium Edge</button>
+        </div>
+
+        <article class="timeline-detail" id="timeline-detail" tabindex="-1" aria-live="polite">
+          <p class="timeline-year" id="timeline-year">1990</p>
+          <h3 id="timeline-title">WorldWideWeb, the first browser-editor</h3>
+          <p id="timeline-description">Tim Berners-Lee wrote the first web browser and editor at CERN on a NeXT computer. It was later renamed Nexus to avoid confusion with the World Wide Web itself.</p>
+          <p id="timeline-importance"><strong>Why it matters:</strong> The earliest browser could both view and edit web documents.</p>
+        </article>
+      </div>
+
+      <div class="callout-box info" role="region" aria-label="Primary history sources">
+        <div class="callout-title">Check the historical record</div>
+        <p>Read the <a href="https://www.w3.org/History.html" target="_blank" rel="noopener noreferrer">W3C history of the web</a> or see the <a href="https://www.w3.org/People/Berners-Lee/WorldWideWeb.html" target="_blank" rel="noopener noreferrer">first WorldWideWeb browser description</a>.</p>
+      </div>
+
+      <h3 class="subsection-heading">Browsers today: a dated snapshot</h3>
+      <div class="callout-box warning" role="region" aria-label="Time-sensitive browser information">
+        <div class="callout-title">Time-sensitive material — reviewed 8/10/26</div>
+        <p>Some browsers now include AI assistants or are designed around AI-assisted browsing. Current examples include <a href="https://www.google.com/chrome/ai-innovations/" target="_blank" rel="noopener noreferrer">Gemini in Chrome</a>, <a href="https://www.microsoft.com/en-us/edge/copilot" target="_blank" rel="noopener noreferrer">Copilot in Edge</a>, <a href="https://www.perplexity.ai/comet" target="_blank" rel="noopener noreferrer">Perplexity Comet</a>, and <a href="https://www.diabrowser.com/" target="_blank" rel="noopener noreferrer">Dia</a>. Features, availability, and privacy controls can change.</p>
+      </div>
+    </section>
+
+    <section id="panel-families" class="tab-panel" role="tabpanel" aria-labelledby="tab-families">
+      <h2 class="section-heading">Browser Families: What Works Behind the Window</h2>
+
+      <div class="callout-box info" role="region" aria-label="Engine explanation">
+        <div class="callout-title">A browser uses more than one engine</div>
+        <p>A <strong>rendering engine</strong> turns page code into the layout you see. A <strong>JavaScript engine</strong> runs JavaScript instructions. The names are related, but they are not interchangeable.</p>
+      </div>
+
+      <div class="data-table-container">
+        <table class="emeritus-table">
+          <caption>Common browser families and their engines</caption>
+          <thead>
+            <tr>
+              <th scope="col">Browser family</th>
+              <th scope="col">Common examples</th>
+              <th scope="col">Rendering engine</th>
+              <th scope="col">JavaScript engine</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">Chromium on desktop and Android</th>
+              <td>Chrome, Edge, Brave, Opera, Vivaldi</td>
+              <td>Blink</td>
+              <td>V8</td>
+            </tr>
+            <tr>
+              <th scope="row">Safari</th>
+              <td>Safari and Apple web technology</td>
+              <td>WebKit</td>
+              <td>JavaScriptCore</td>
+            </tr>
+            <tr>
+              <th scope="row">Firefox desktop and Android</th>
+              <td>Firefox</td>
+              <td>Gecko</td>
+              <td>SpiderMonkey</td>
+            </tr>
+            <tr>
+              <th scope="row">Firefox on iPhone and iPad</th>
+              <td>Firefox interface on iOS/iPadOS</td>
+              <td>WKWebKit</td>
+              <td>JavaScriptCore</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="callout-box warning" role="region" aria-label="Firefox iOS exception">
+        <div class="callout-title">Important platform exception</div>
+        <p>Firefox uses Gecko on desktop and Android. On iPhone and iPad, Firefox uses Apple’s WKWebKit to display web content. The Firefox interface and account features remain Mozilla products.</p>
+      </div>
+
+      <h3 class="subsection-heading">Why Firefox matters</h3>
+      <p>Most major desktop browsers use Chromium and Blink. Firefox maintains a separate general-purpose engine, Gecko. Multiple independently developed engines help web standards get tested across more than one implementation.</p>
+
+      <h3 class="subsection-heading">Match each browser to its rendering engine</h3>
+      <form id="engine-match-form" class="activity-card" aria-describedby="engine-match-instructions">
+        <p id="engine-match-instructions">Drag each browser card to an engine. For keyboard, touch, or click use, select a browser card and then select <strong>Place Here</strong> under an engine. A card can be selected again to move it.</p>
+
+        <div class="browser-bank">
+          <h4>Browser cards</h4>
+          <div class="browser-card-list" id="browser-card-pool" aria-label="Browser cards not yet matched">
+            <button type="button" class="browser-card" id="browser-chrome" data-browser="chrome" data-answer="blink" data-label="Chrome on Windows, Mac, or Android" draggable="true" aria-pressed="false">Chrome on Windows, Mac, or Android</button>
+            <button type="button" class="browser-card" id="browser-safari" data-browser="safari" data-answer="webkit" data-label="Safari" draggable="true" aria-pressed="false">Safari</button>
+            <button type="button" class="browser-card" id="browser-firefox" data-browser="firefox" data-answer="gecko" data-label="Firefox on Windows, Mac, or Android" draggable="true" aria-pressed="false">Firefox on Windows, Mac, or Android</button>
+            <button type="button" class="browser-card" id="browser-firefox-ios" data-browser="firefox-ios" data-answer="webkit" data-label="Firefox on iPhone or iPad" draggable="true" aria-pressed="false">Firefox on iPhone or iPad</button>
+          </div>
+        </div>
+
+        <div class="engine-target-grid" aria-label="Rendering engine destinations">
+          <article class="engine-target" data-engine-target="blink">
+            <h4>Blink</h4>
+            <button type="button" class="engine-drop-button" data-engine="blink" aria-label="Place selected browser with Blink">Place Here</button>
+            <div class="assigned-card-list" data-engine-list="blink" aria-label="Browsers matched with Blink"></div>
+          </article>
+          <article class="engine-target" data-engine-target="webkit">
+            <h4>WebKit or WKWebKit</h4>
+            <button type="button" class="engine-drop-button" data-engine="webkit" aria-label="Place selected browser with WebKit or WKWebKit">Place Here</button>
+            <div class="assigned-card-list" data-engine-list="webkit" aria-label="Browsers matched with WebKit or WKWebKit"></div>
+          </article>
+          <article class="engine-target" data-engine-target="gecko">
+            <h4>Gecko</h4>
+            <button type="button" class="engine-drop-button" data-engine="gecko" aria-label="Place selected browser with Gecko">Place Here</button>
+            <div class="assigned-card-list" data-engine-list="gecko" aria-label="Browsers matched with Gecko"></div>
+          </article>
+        </div>
+
+        <div class="activity-actions">
+          <button type="submit" class="btn-primary">Check Matches</button>
+          <button type="button" class="btn-secondary" id="reset-engine-matches">Reset Matches</button>
+        </div>
+        <div id="engine-match-feedback" class="feedback-box" role="status" aria-live="polite"></div>
+      </form>
+
+      <p class="source-note">Sources: <a href="https://firefox-source-docs.mozilla.org/overview/gecko.html" target="_blank" rel="noopener noreferrer">Mozilla Gecko documentation</a>, <a href="https://firefox-source-docs.mozilla.org/overview/ios.html" target="_blank" rel="noopener noreferrer">Firefox for iOS architecture</a>, and the <a href="https://blog.chromium.org/2013/04/blink-rendering-engine-for-chromium.html" target="_blank" rel="noopener noreferrer">Chromium Blink announcement</a>.</p>
+    </section>
+
+    <section id="panel-install" class="tab-panel" role="tabpanel" aria-labelledby="tab-install">
+      <h2 class="section-heading">Install Firefox: Choose Your Device</h2>
+      <p>Select the device you will use for the assignment. The instructions below come from Mozilla’s current support guidance.</p>
+
+      <div class="device-selector" role="group" aria-label="Choose your device">
+        <button type="button" class="device-button" data-device="windows" aria-pressed="false">Windows</button>
+        <button type="button" class="device-button" data-device="mac" aria-pressed="false">Mac</button>
+        <button type="button" class="device-button" data-device="ios" aria-pressed="false">iPhone or iPad</button>
+        <button type="button" class="device-button" data-device="android" aria-pressed="false">Android</button>
+        <button type="button" class="device-button" data-device="chromebook" aria-pressed="false">Chromebook</button>
+      </div>
+
+      <p id="device-prompt" class="empty-state">Choose a device to display its instructions.</p>
+
+      <article class="device-panel" id="device-windows" data-device-panel="windows" hidden>
+        <h3>Install Firefox on Windows</h3>
+        <ol>
+          <li>Open <a href="https://www.firefox.com/" target="_blank" rel="noopener noreferrer">the official Firefox download page</a>.</li>
+          <li>Select <strong>Get Firefox</strong> or <strong>Download Firefox</strong>.</li>
+          <li>Open the downloaded installer. If Windows asks whether the installer may make changes, confirm only after checking that the publisher and source are Mozilla.</li>
+          <li>Wait for installation to finish, then open Firefox.</li>
+        </ol>
+        <p><strong>Other official option:</strong> Windows 10 or 11 users may install Mozilla Firefox from the Microsoft Store. Windows in S mode can block installers that do not come from the Store.</p>
+        <p><a href="https://support.mozilla.org/en-US/kb/how-install-firefox-windows" target="_blank" rel="noopener noreferrer">Mozilla’s Windows installation help</a></p>
+      </article>
+
+      <article class="device-panel" id="device-mac" data-device-panel="mac" hidden>
+        <h3>Install Firefox on Mac</h3>
+        <ol>
+          <li>Open <a href="https://www.firefox.com/" target="_blank" rel="noopener noreferrer">the official Firefox download page</a>.</li>
+          <li>Download Firefox and open <strong>Firefox.dmg</strong>.</li>
+          <li>Drag the Firefox icon into the Applications folder.</li>
+          <li>Eject the Firefox disk image, then open Firefox from Applications. Select <strong>Open</strong> if macOS displays its first-launch confirmation.</li>
+        </ol>
+        <p>Do not run Firefox permanently from the downloaded disk image. Move it to Applications first.</p>
+        <p><a href="https://support.mozilla.org/en-US/kb/how-download-and-install-firefox-mac" target="_blank" rel="noopener noreferrer">Mozilla’s Mac installation help</a></p>
+      </article>
+
+      <article class="device-panel" id="device-ios" data-device-panel="ios" hidden>
+        <h3>Install Firefox on iPhone or iPad</h3>
+        <ol>
+          <li>Open the Apple App Store.</li>
+          <li>Search for <strong>Firefox</strong>.</li>
+          <li>Confirm that the developer is <strong>Mozilla</strong>. Product subtitles can change.</li>
+          <li>Select <strong>Get</strong>, complete the App Store confirmation, and open Firefox.</li>
+        </ol>
+        <p>Current Mozilla guidance requires iOS 15 or later. Firefox on iPhone and iPad uses WKWebKit rather than Gecko.</p>
+        <p><a href="https://support.mozilla.org/en-US/kb/install-firefox-your-phone-or-tablet" target="_blank" rel="noopener noreferrer">Mozilla’s mobile installation help</a></p>
+      </article>
+
+      <article class="device-panel" id="device-android" data-device-panel="android" hidden>
+        <h3>Install Firefox on Android</h3>
+        <ol>
+          <li>Open Google Play or another official marketplace supported by Mozilla.</li>
+          <li>Search for <strong>Firefox</strong>.</li>
+          <li>Confirm that the developer is <strong>Mozilla</strong>.</li>
+          <li>Select <strong>Install</strong>, then open Firefox.</li>
+        </ol>
+        <p>Current Mozilla guidance requires Android 8.0 or later. If Firefox does not appear in Google Play, the device may not be compatible.</p>
+        <p><a href="https://support.mozilla.org/en-US/kb/install-firefox-your-phone-or-tablet" target="_blank" rel="noopener noreferrer">Mozilla’s mobile installation help</a></p>
+      </article>
+
+      <article class="device-panel" id="device-chromebook" data-device-panel="chromebook" hidden>
+        <h3>Install Firefox on a Chromebook</h3>
+        <div class="callout-box warning">
+          <div class="callout-title">This is an advanced installation</div>
+          <p>Mozilla’s current desktop Firefox method for ChromeOS is not the same as the ordinary Android installation.</p>
+        </div>
+        <ol>
+          <li>Confirm that the Chromebook uses an x86 processor and ChromeOS 80 or later.</li>
+          <li>Enable Linux support in ChromeOS settings.</li>
+          <li>Follow Mozilla’s current instructions to install the recommended DEB package or use Flatpak.</li>
+        </ol>
+        <p>Because these steps use Linux commands and system settings, ask for assistance if you are not comfortable making those changes.</p>
+        <p><a href="https://support.mozilla.org/en-US/kb/run-firefox-chromeos" target="_blank" rel="noopener noreferrer">Mozilla’s ChromeOS installation help</a></p>
+      </article>
+
+      <div class="review-checklist" id="install-review" hidden>
+        <h3>Confirm that you reviewed your installation path</h3>
+        <label><input type="checkbox" class="install-review-check"> I checked that my device meets the stated requirements.</label>
+        <label><input type="checkbox" class="install-review-check"> I know which official download page or marketplace to use.</label>
+        <label><input type="checkbox" class="install-review-check"> I reviewed the steps and know where to find official troubleshooting help.</label>
+        <p id="install-review-feedback" class="feedback-box" role="status" aria-live="polite"></p>
+      </div>
+    </section>
+
+    <section id="panel-assignment" class="tab-panel" role="tabpanel" aria-labelledby="tab-assignment">
+      <h2 class="section-heading">Complete the Firefox Assignment</h2>
+
+      <div class="callout-box info" role="region" aria-label="Assignment goal">
+        <div class="callout-title">Your goal</div>
+        <p>Install Firefox on one device, open the Emeritus website in Firefox, and submit a privacy-safe screenshot showing the site in Firefox.</p>
+      </div>
+
+      <h3 class="subsection-heading">Optional: Mozilla account and Sync</h3>
+      <p>Creating or signing in to a Mozilla account is <strong>optional</strong>. You only need an account if you choose to use features such as Firefox Sync.</p>
+      <p>If you choose to use Sync:</p>
+      <ol>
+        <li>Open Firefox and locate the account or Sync option.</li>
+        <li>Enter your email address and follow the current prompts. Depending on the service and account, Mozilla may offer an email code, password, Google, or Apple sign-in.</li>
+        <li>Firefox Sync still requires a password because it uses end-to-end encryption to protect synchronized data.</li>
+        <li>Never share your password or one-time confirmation code.</li>
+      </ol>
+      <p><a href="https://support.mozilla.org/en-US/kb/access-mozilla-services-firefox-account" target="_blank" rel="noopener noreferrer">Mozilla account help</a></p>
+
+      <h3 class="subsection-heading">Assignment checklist</h3>
+      <div class="assignment-checklist" id="assignment-checklist">
+        <label><input type="checkbox" class="assignment-check"> Firefox is installed and opens on my chosen device.</label>
+        <label><input type="checkbox" class="assignment-check"> I opened <a href="https://cantus.us/emeritus/" target="_blank" rel="noopener noreferrer">cantus.us/emeritus</a> in Firefox.</label>
+        <label><input type="checkbox" class="assignment-check"> My screenshot shows the Emeritus site in Firefox and does not reveal a password, confirmation code, or private account details.</label>
+      </div>
+
+      <h3 class="subsection-heading">Final knowledge check</h3>
+      <form id="assignment-quiz" class="quiz-stack">
+        <fieldset class="quiz-question-box">
+          <legend>1. Which download source is the safest choice for desktop Firefox?</legend>
+          <label><input type="radio" name="question-1" value="ad"> The first download advertisement in search results</label>
+          <label><input type="radio" name="question-1" value="official"> Firefox.com or an official operating-system marketplace</label>
+          <label><input type="radio" name="question-1" value="attachment"> An installer attached to an unexpected email</label>
+        </fieldset>
+
+        <fieldset class="quiz-question-box">
+          <legend>2. What should be visible in the assignment screenshot?</legend>
+          <label><input type="radio" name="question-2" value="password"> The Mozilla password and confirmation code</label>
+          <label><input type="radio" name="question-2" value="site"> The Emeritus site open in Firefox, without private sign-in details</label>
+          <label><input type="radio" name="question-2" value="desktop"> Only the desktop background</label>
+        </fieldset>
+
+        <fieldset class="quiz-question-box">
+          <legend>3. Which statement about browser engines is accurate?</legend>
+          <label><input type="radio" name="question-3" value="all-gecko"> Firefox uses Gecko on every platform without exception</label>
+          <label><input type="radio" name="question-3" value="exception"> Firefox uses Gecko on desktop and Android, while Firefox on iPhone and iPad uses WKWebKit</label>
+          <label><input type="radio" name="question-3" value="search"> A search engine and rendering engine are the same thing</label>
+        </fieldset>
+
+        <button type="submit" class="btn-primary">Check My Answers</button>
+        <div id="assignment-feedback" class="feedback-box" role="status" aria-live="polite"></div>
+      </form>
+
+      <div id="completion-summary" class="callout-box success" role="status" tabindex="-1" hidden>
+        <div class="callout-title">Learning sequence completed</div>
+        <p>You have completed the interactive learning checks. Submit the required screenshot through the course assignment area.</p>
+      </div>
+
+      <div id="certificate-section" class="certificate-wrapper-card" role="region" aria-labelledby="certificate-heading" hidden>
+        <div class="no-print">
+          <h3 class="subsection-heading" id="certificate-heading">Your Certificate of Completion</h3>
+          <p>Enter your name to personalize the certificate, then print it or save it as a PDF.</p>
+          <div class="certificate-controls">
+            <label for="student-name-input">Your Full Name:</label>
+            <input type="text" id="student-name-input" class="certificate-name-input" autocomplete="name" placeholder="Example: Jane Doe">
+            <button type="button" class="btn-primary" id="print-certificate">Print or Save Certificate</button>
+          </div>
+        </div>
+
+        <div class="certificate-printable-frame" id="printable-certificate">
+          <div class="cert-border-outer">
+            <div class="cert-border-inner">
+              <div class="cert-header">
+                <p class="cert-institution">Emeritus Institute</p>
+                <p class="cert-title">Certificate of Completion</p>
+              </div>
+
+              <div class="cert-body">
+                <p class="cert-text-lead">This certificate is awarded to</p>
+                <p class="cert-student-name" id="cert-display-name">Emeritus Student</p>
+                <p class="cert-text-desc">for completing the <strong>Firefox and Web Browser History Interactive Guide</strong>, exploring browser history and browser engines, reviewing Firefox installation steps, and completing the assignment readiness checks.</p>
+              </div>
+
+              <div class="cert-footer">
+                <div class="cert-sig-block">
+                  <p class="cert-sig-line">Professor Sable</p>
+                  <p class="cert-sig-title">Emeritus Institute</p>
+                </div>
+                <div class="cert-date-block">
+                  <p class="cert-date-line" id="cert-display-date">August 10, 2026</p>
+                  <p class="cert-date-label">Date Awarded</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="panel-glossary" class="tab-panel" role="tabpanel" aria-labelledby="tab-glossary">
+      <h2 class="section-heading">Web Browser Glossary</h2>
+      <p>Search or browse the terms used in this guide.</p>
+
+      <div class="search-bar-container">
+        <label for="glossary-search-input">Search glossary terms</label>
+        <input type="search" id="glossary-search-input" class="glossary-search-input" placeholder="Try browser, Gecko, Sync, or tab">
+      </div>
+
+      <p id="glossary-result-count" role="status" aria-live="polite"></p>
+      <div id="glossary-card-container" class="glossary-card-grid"></div>
+    </section>
+  </main>
+
+  <footer class="app-footer">
+    <p><a href="https://cantus.us/emeritus/" target="_blank" rel="noopener noreferrer">Professor Sable. Emeritus Institute.</a></p>
+    <p>Browser history is supported by <a href="https://www.w3.org/History.html" target="_blank" rel="noopener noreferrer">W3C historical materials</a>. Installation and platform guidance is based on <a href="https://support.mozilla.org/" target="_blank" rel="noopener noreferrer">Mozilla Support</a>. Links open in a new tab.</p>
+    <p>Last Updated: 8/10/26</p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
