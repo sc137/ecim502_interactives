@@ -967,8 +967,7 @@ button, select, input[type="checkbox"], input[type="radio"], input[type="range"]
   color: #0a4f70;
   font-size: 1.4rem;
   font-weight: 850;
-  letter-spacing: 2px;
-  text-transform: uppercase;
+  letter-spacing: 1px;
 }
 
 .cert-title {

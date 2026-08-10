@@ -267,6 +267,8 @@ Use tool-specific `localStorage` keys. Do not reuse the Zoom keys unchanged in a
 Full-sequence ECIM 502 interactive tools should include a completion certificate unless the course requirements explicitly exclude it. The certificate should:
 
 - use the standard **Claim Certificate** control without decorative emoji;
+- display **Intermediate Life & Technology Integration** at the top of the printable certificate;
+- display the certificate attribution on two lines: **Professor Sable**, then **Emeritus Institute**;
 - remain unavailable until exploration reaches 100%;
 - allow the learner to enter a name safely using `textContent`, never unsanitized `innerHTML`;
 - display the award date;

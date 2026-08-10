@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Canvas LMS Interactive Guide: Emeritus Student Orientation</title>
+  <meta name="description" content="An accessible interactive guide for ECIM 502 students to explore Canvas LMS, choose notification preferences, update a profile photo, and submit the profile-photo assignment.">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+  <div id="aria-live-announcer" class="sr-only" aria-live="polite" aria-atomic="true"></div>
+
+  <header class="a11y-header-bar">
+    <div class="app-title-group">
+      <h1>Canvas LMS Interactive Guide</h1>
+      <span class="subhead">An interactive web tool for ECIM 502</span>
+    </div>
+    <div class="a11y-controls" role="region" aria-label="Accessibility settings">
+      <div class="font-slider-container">
+        <label for="font-scaler-slider">Text Size:</label>
+        <input type="range" id="font-scaler-slider" min="0.9" max="1.4" step="0.05" value="1" aria-label="Adjust text size scale">
+        <span id="font-size-indicator">100%</span>
+      </div>
+      <div class="control-item" role="group" aria-label="Quick text presets">
+        <button type="button" class="btn-a11y" data-font-scale="1" aria-pressed="true">Normal</button>
+        <button type="button" class="btn-a11y" data-font-scale="1.18" aria-pressed="false">Large</button>
+        <button type="button" class="btn-a11y" data-font-scale="1.35" aria-pressed="false">Extra Large</button>
+      </div>
+      <div class="control-item">
+        <label for="theme-select">Contrast Theme:</label>
+        <select id="theme-select" class="btn-a11y">
+          <option value="default">Default Light</option>
+          <option value="dark">High Contrast Dark</option>
+          <option value="high-contrast-light">High Contrast B&amp;W</option>
+        </select>
+      </div>
+    </div>
+  </header>
+
+  <nav class="main-nav" aria-label="Interactive navigation tabs">
+    <div class="tab-nav-header">
+      <div class="progress-indicator-pill" role="status">
+        Exploration Progress: <strong id="exploration-count">0 of 6 Tabs Explored</strong>
+        <span id="exploration-percent-badge" class="progress-badge">0%</span>
+      </div>
+      <div class="progress-actions">
+        <button type="button" class="btn-claim-certificate" id="claim-certificate" aria-controls="certificate-section" aria-expanded="false" hidden>Claim Certificate</button>
+        <button type="button" class="btn-reset-progress" id="reset-progress">Reset Exploration</button>
+      </div>
+    </div>
+    <ul class="tab-list" role="tablist">
+      <li role="presentation"><button role="tab" id="tab-basics" aria-selected="true" aria-controls="panel-basics" class="tab-button" tabindex="0">1. Canvas Basics <span class="tab-check-badge"><span aria-hidden="true">✅</span><span class="sr-only"> Explored</span></span></button></li>
+      <li role="presentation"><button role="tab" id="tab-navigation" aria-selected="false" aria-controls="panel-navigation" class="tab-button" tabindex="-1">2. Navigation Practice <span class="tab-check-badge"><span aria-hidden="true">✅</span><span class="sr-only"> Explored</span></span></button></li>
+      <li role="presentation"><button role="tab" id="tab-notifications" aria-selected="false" aria-controls="panel-notifications" class="tab-button" tabindex="-1">3. Notifications <span class="tab-check-badge"><span aria-hidden="true">✅</span><span class="sr-only"> Explored</span></span></button></li>
+      <li role="presentation"><button role="tab" id="tab-profile" aria-selected="false" aria-controls="panel-profile" class="tab-button" tabindex="-1">4. Profile Photo <span class="tab-check-badge"><span aria-hidden="true">✅</span><span class="sr-only"> Explored</span></span></button></li>
+      <li role="presentation"><button role="tab" id="tab-readiness" aria-selected="false" aria-controls="panel-readiness" class="tab-button" tabindex="-1">5. Readiness Check <span class="tab-check-badge"><span aria-hidden="true">✅</span><span class="sr-only"> Explored</span></span></button></li>
+      <li role="presentation"><button role="tab" id="tab-glossary" aria-selected="false" aria-controls="panel-glossary" class="tab-button" tabindex="-1">6. Glossary &amp; Help <span class="tab-check-badge"><span aria-hidden="true">✅</span><span class="sr-only"> Explored</span></span></button></li>
+    </ul>
+  </nav>
+
+  <main id="main-content" class="app-container">
+    <section id="panel-basics" class="tab-panel active" role="tabpanel" aria-labelledby="tab-basics">
+      <h2 class="section-heading">Canvas Basics: One Place for Your Course Work</h2>
+      <div class="callout-box info" role="region" aria-label="Canvas big idea">
+        <div class="callout-title">Big idea: global tools and course tools are different</div>
+        <p><strong>Global Navigation</strong> stays on the left side of Canvas and connects you to information across all your courses. <strong>Course Navigation</strong> appears after you open a course and connects you to that course’s Modules, Assignments, Discussions, Grades, and other tools selected by the instructor.</p>
+      </div>
+
+      <div class="card-grid">
+        <article class="info-card"><h3>Dashboard</h3><p>Your landing page. Depending on your Canvas setup, it may show course cards, a list, recent activity, or a customizable view.</p></article>
+        <article class="info-card"><h3>Courses</h3><p>Opens favorite courses and the All Courses list. A course may not appear until it is published or your enrollment becomes active.</p></article>
+        <article class="info-card"><h3>Calendar</h3><p>Combines dated items from courses you can access. Always read the assignment page because its directions are more complete than a calendar entry.</p></article>
+        <article class="info-card"><h3>Inbox</h3><p>Canvas Conversations for course messages. It is not the same as a personal email inbox.</p></article>
+        <article class="info-card"><h3>Account</h3><p>Opens settings, notifications, personal files, profile options when enabled, and logout.</p></article>
+        <article class="info-card"><h3>Help</h3><p>Shows the support choices configured by your institution. The available choices can differ from another school’s Canvas site.</p></article>
+      </div>
+
+      <h3 class="subsection-heading">A reliable weekly routine</h3>
+      <ol>
+        <li>Open the course and begin with the current Module or course Home page.</li>
+        <li>Read the complete assignment instructions, due date, allowed submission type, and available attempts.</li>
+        <li>Use the Dashboard To Do list and Calendar as reminders, not as replacements for the course instructions.</li>
+        <li>Check Inbox, Announcements, Grades, submission comments, and recent feedback.</li>
+        <li>After submitting, verify that Canvas displays the submission details.</li>
+      </ol>
+
+      <div class="callout-box warning">
+        <div class="callout-title">Your screen may look different</div>
+        <p>Institutions and instructors can enable, disable, rename, or reorder some tools. The Canvas Student mobile app also has a different layout. Ask your instructor or use your institution’s Help menu when a required option is missing.</p>
+      </div>
+    </section>
+
+    <section id="panel-navigation" class="tab-panel" role="tabpanel" aria-labelledby="tab-navigation">
+      <h2 class="section-heading">Safe Canvas Navigation Practice</h2>
+      <p>This practice screen does not connect to a real Canvas account. Follow each prompt by selecting the Global Navigation item that would help.</p>
+
+      <div class="canvas-demo">
+        <div class="canvas-demo-header">Canvas practice environment — no real account data</div>
+        <div class="canvas-demo-layout">
+          <div class="canvas-global-nav" aria-label="Simulated Canvas Global Navigation">
+            <h3>Global Navigation</h3>
+            <button type="button" class="canvas-nav-button" data-destination="account">Account</button>
+            <button type="button" class="canvas-nav-button" data-destination="dashboard">Dashboard</button>
+            <button type="button" class="canvas-nav-button" data-destination="courses">Courses</button>
+            <button type="button" class="canvas-nav-button" data-destination="calendar">Calendar</button>
+            <button type="button" class="canvas-nav-button" data-destination="inbox">Inbox</button>
+            <button type="button" class="canvas-nav-button" data-destination="help">Help</button>
+          </div>
+          <div class="canvas-demo-content">
+            <div id="navigation-task" class="practice-task" role="status">Task 1 of 6: Where would you go to see activity across your courses?</div>
+            <h3 id="navigation-result-title">Select a navigation item</h3>
+            <p id="navigation-result-text">Feedback will appear here. You can safely try again after an incorrect choice.</p>
+            <div id="navigation-feedback" class="feedback-box" role="status" aria-live="polite"></div>
+            <button type="button" id="restart-navigation" class="btn-secondary">Restart Practice</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="panel-notifications" class="tab-panel" role="tabpanel" aria-labelledby="tab-notifications">
+      <h2 class="section-heading">Choose Canvas Notification Preferences</h2>
+      <p>In Canvas, open <strong>Account → Notifications</strong>. Email notification choices are <strong>Notify immediately</strong>, <strong>Daily summary</strong>, <strong>Weekly summary</strong>, and <strong>Notifications off</strong>. A change takes effect immediately.</p>
+
+      <div class="callout-box info">
+        <div class="callout-title">Choose a sustainable pattern</div>
+        <p>There is no single correct schedule for every learner. Time-sensitive course announcements, instructor submission comments, and Inbox conversations are often useful sooner. High-volume discussion activity may be easier to manage as a summary. This practice lets you choose.</p>
+      </div>
+
+      <form id="notification-form">
+        <div class="notification-simulator">
+          <div class="notification-row">
+            <label for="notify-announcement"><strong>Announcement</strong><small>A new course announcement is posted.</small></label>
+            <select id="notify-announcement" class="notification-select" data-notification required><option value="">Choose a frequency</option><option>Notify immediately</option><option>Daily summary</option><option>Weekly summary</option><option>Notifications off</option></select>
+          </div>
+          <div class="notification-row">
+            <label for="notify-due"><strong>Due Date</strong><small>An assignment, quiz, or discussion due date changes.</small></label>
+            <select id="notify-due" class="notification-select" data-notification required><option value="">Choose a frequency</option><option>Notify immediately</option><option>Daily summary</option><option>Weekly summary</option><option>Notifications off</option></select>
+          </div>
+          <div class="notification-row">
+            <label for="notify-comment"><strong>Submission Comment</strong><small>An instructor leaves a comment on submitted work.</small></label>
+            <select id="notify-comment" class="notification-select" data-notification required><option value="">Choose a frequency</option><option>Notify immediately</option><option>Daily summary</option><option>Weekly summary</option><option>Notifications off</option></select>
+          </div>
+          <div class="notification-row">
+            <label for="notify-message"><strong>Conversation Message</strong><small>A message arrives in Canvas Inbox.</small></label>
+            <select id="notify-message" class="notification-select" data-notification required><option value="">Choose a frequency</option><option>Notify immediately</option><option>Daily summary</option><option>Weekly summary</option><option>Notifications off</option></select>
+          </div>
+          <div class="notification-row">
+            <label for="notify-discussion"><strong>Discussion New Reply</strong><small>A reply is added to a discussion you follow.</small></label>
+            <select id="notify-discussion" class="notification-select" data-notification required><option value="">Choose a frequency</option><option>Notify immediately</option><option>Daily summary</option><option>Weekly summary</option><option>Notifications off</option></select>
+          </div>
+        </div>
+
+        <div class="review-checklist">
+          <h3>Before applying your choices in Canvas</h3>
+          <label><input type="checkbox" class="notification-check"> <span>I will confirm that my email or other contact method is confirmed.</span></label>
+          <label><input type="checkbox" class="notification-check"> <span>I understand that account choices apply to all courses unless a course-specific choice overrides them.</span></label>
+          <label><input type="checkbox" class="notification-check"> <span>I will still check Canvas directly; a notification can be delayed or missed outside Canvas.</span></label>
+        </div>
+        <button type="submit" class="btn-primary">Review My Notification Plan</button>
+        <div id="notification-feedback" class="feedback-box" role="status" aria-live="polite"></div>
+      </form>
+
+      <div class="callout-box warning">
+        <div class="callout-title">Mobile push notifications work differently</div>
+        <p>Push notifications support immediate delivery or off, not daily or weekly summaries. Settings changed inside the Canvas Student app can override browser notification settings. Available contact-method columns depend on your account and institution.</p>
+      </div>
+    </section>
+
+    <section id="panel-profile" class="tab-panel" role="tabpanel" aria-labelledby="tab-profile">
+      <h2 class="section-heading">Update Your Canvas Profile Photo</h2>
+      <p>A profile image can help classmates and the instructor recognize your posts and messages. It does not need to be formal, and it does not need to show your face.</p>
+
+      <h3 class="subsection-heading">Choose an image you are comfortable sharing</h3>
+      <div class="choice-grid" role="group" aria-label="Profile image choices">
+        <button type="button" class="choice-button" data-photo-choice="A current photo of yourself" aria-pressed="false">A current photo of yourself<br><small>Only if you are comfortable using your face.</small></button>
+        <button type="button" class="choice-button" data-photo-choice="A favorite photo that represents you" aria-pressed="false">A favorite photo that represents you<br><small>Choose an appropriate classroom image.</small></button>
+        <button type="button" class="choice-button" data-photo-choice="A simple image or avatar" aria-pressed="false">A simple image or avatar<br><small>A face photo is not required for this assignment.</small></button>
+      </div>
+      <div id="photo-choice-feedback" class="feedback-box" role="status" aria-live="polite"></div>
+
+      <h3 class="subsection-heading">Current browser steps</h3>
+      <ol class="step-list">
+        <li>Log in to your institution’s Canvas website.</li>
+        <li>In Global Navigation, select <strong>Account</strong>, then <strong>Settings</strong>.</li>
+        <li>Select the profile-picture icon. If it is missing, your institution has not enabled profile-picture changes.</li>
+        <li>Choose <strong>Upload a Picture</strong>, <strong>Take a Picture</strong>, or <strong>From Gravatar</strong>, if those choices are available.</li>
+        <li>For an upload, choose the image, adjust the crop so the important part fits the square, and select <strong>Save</strong>.</li>
+        <li>Confirm that the new image appears. Canvas stores uploaded profile images in your personal user files.</li>
+      </ol>
+
+      <div class="callout-box info">
+        <div class="callout-title">Why the assignment may say Account → Profile</div>
+        <p>If your institution enables the broader <strong>Profiles</strong> feature, Account may also include Profile and an Edit Profile button. Canvas treats that feature and permission to change a profile picture separately. The dedicated current profile-picture guide uses <strong>Account → Settings</strong>.</p>
+      </div>
+
+      <h3 class="subsection-heading">Submit the profile-photo assignment</h3>
+      <ol class="step-list">
+        <li>Open your Canvas profile or settings page after the updated image is visible.</li>
+        <li>Take a screenshot that shows the updated image but excludes unrelated personal information.</li>
+        <li>Open the course assignment and read its submission instructions and allowed file types.</li>
+        <li>Select <strong>Start Assignment</strong>, add or upload the screenshot, then select <strong>Submit Assignment</strong>.</li>
+        <li>Verify the submission details appear. If your course uses Assignment Enhancements, button names or placement may differ.</li>
+      </ol>
+
+      <div class="assignment-checklist">
+        <label><input type="checkbox" class="profile-check"> <span>I chose an appropriate image I am comfortable sharing.</span></label>
+        <label><input type="checkbox" class="profile-check"> <span>I know to use Account → Settings for the dedicated current profile-picture route.</span></label>
+        <label><input type="checkbox" class="profile-check"> <span>I will crop the screenshot so it excludes unrelated personal information.</span></label>
+        <label><input type="checkbox" class="profile-check"> <span>I will verify that Canvas displays submission details after I submit.</span></label>
+      </div>
+      <div id="profile-feedback" class="feedback-box" role="status" aria-live="polite"></div>
+    </section>
+
+    <section id="panel-readiness" class="tab-panel" role="tabpanel" aria-labelledby="tab-readiness">
+      <h2 class="section-heading">Canvas Readiness Check</h2>
+      <p>Answer every question correctly to complete this section. You can review and try again.</p>
+      <form id="readiness-quiz" class="quiz-stack">
+        <fieldset class="quiz-question-box">
+          <legend>1. Where do you change account-wide Canvas notification settings?</legend>
+          <label><input type="radio" name="q1" value="course"> <span>Course → Grades</span></label>
+          <label><input type="radio" name="q1" value="account"> <span>Account → Notifications</span></label>
+          <label><input type="radio" name="q1" value="calendar"> <span>Calendar → Settings</span></label>
+        </fieldset>
+        <fieldset class="quiz-question-box">
+          <legend>2. What happens when a course has its own notification setting?</legend>
+          <label><input type="radio" name="q2" value="ignored"> <span>Canvas ignores it.</span></label>
+          <label><input type="radio" name="q2" value="override"> <span>It overrides the account setting for that course.</span></label>
+          <label><input type="radio" name="q2" value="all"> <span>It changes every course.</span></label>
+        </fieldset>
+        <fieldset class="quiz-question-box">
+          <legend>3. Which profile image meets the assignment directions?</legend>
+          <label><input type="radio" name="q3" value="face"> <span>Only a formal face photo</span></label>
+          <label><input type="radio" name="q3" value="choice"> <span>An appropriate face photo, representative image, or avatar I am comfortable sharing</span></label>
+          <label><input type="radio" name="q3" value="personal"> <span>Any image containing personal information</span></label>
+        </fieldset>
+        <fieldset class="quiz-question-box">
+          <legend>4. How do you know an online assignment was submitted?</legend>
+          <label><input type="radio" name="q4" value="closed"> <span>Close the browser immediately after selecting the file.</span></label>
+          <label><input type="radio" name="q4" value="details"> <span>After Submit Assignment, verify that submission details appear.</span></label>
+          <label><input type="radio" name="q4" value="todo"> <span>Assume the To Do list is always proof.</span></label>
+        </fieldset>
+        <button type="submit" class="btn-primary">Check My Answers</button>
+        <div id="readiness-feedback" class="feedback-box" role="status" aria-live="polite"></div>
+      </form>
+    </section>
+
+    <section id="panel-glossary" class="tab-panel" role="tabpanel" aria-labelledby="tab-glossary">
+      <h2 class="section-heading">Canvas Glossary, Official Guides, and Help</h2>
+      <div class="search-bar-container">
+        <label for="glossary-search-input">Search terms such as module, inbox, notification, or submission:</label>
+        <input type="search" id="glossary-search-input" class="glossary-search-input" autocomplete="off">
+      </div>
+      <p id="glossary-result-count" role="status" aria-live="polite"></p>
+      <div id="glossary-card-container" class="glossary-card-grid"></div>
+
+      <h3 class="subsection-heading">Official Instructure Student Guides reviewed</h3>
+      <ul class="source-list">
+        <li><a href="https://community.instructure.com/en/kb/articles/662894-how-do-i-manage-my-canvas-notification-setting" target="_blank" rel="noopener noreferrer">Manage Canvas notification settings (opens in a new tab)</a></li>
+        <li><a href="https://community.instructure.com/en/kb/articles/662885-unknown" target="_blank" rel="noopener noreferrer">Add a profile picture (opens in a new tab)</a></li>
+        <li><a href="https://community.instructure.com/en/kb/articles/662892-how-do-i-edit-my-profile-in-my-user-account" target="_blank" rel="noopener noreferrer">Edit a Canvas profile (opens in a new tab)</a></li>
+        <li><a href="https://community.instructure.com/en/kb/articles/661210-how-do-i-submit-an-online-assignment" target="_blank" rel="noopener noreferrer">Submit an online assignment (opens in a new tab)</a></li>
+        <li><a href="https://community.instructure.com/t5/Instructor-Guide/How-do-I-use-the-Global-Navigation-Menu-as-an-instructor/ta-p/806" target="_blank" rel="noopener noreferrer">Use Global Navigation as a student (opens in a new tab)</a></li>
+      </ul>
+
+      <div id="completion-summary" class="callout-box success" hidden>
+        <div class="callout-title">All sections completed</div>
+        <p>You can now claim and personalize the completion certificate.</p>
+      </div>
+
+      <section id="certificate-section" class="certificate-wrapper-card" aria-labelledby="certificate-heading" hidden>
+        <h3 id="certificate-heading">Canvas LMS Interactive Guide Certificate</h3>
+        <div class="certificate-controls">
+          <label for="student-name-input">Name for certificate:</label>
+          <input type="text" id="student-name-input" class="certificate-name-input" maxlength="80" autocomplete="name">
+          <button type="button" id="print-certificate" class="btn-primary">Print or Save as PDF</button>
+        </div>
+        <div class="certificate-printable-frame" id="certificate-print-area">
+          <div class="cert-border-outer"><div class="cert-border-inner">
+            <div class="cert-header"><p class="cert-institution">Intermediate Life &amp; Technology Integration</p><h2 class="cert-title">Certificate of Exploration</h2></div>
+            <div class="cert-body"><p>This certificate recognizes</p><p class="cert-student-name" id="cert-display-name">Emeritus Student</p><p>for completing the <strong>Canvas LMS Interactive Guide</strong>, including Canvas navigation, notification preferences, profile-photo choices, privacy, and assignment submission readiness.</p></div>
+            <div class="cert-footer"><p>Awarded <span id="cert-display-date"></span></p><p>Professor Sable<br>Emeritus Institute</p></div>
+          </div></div>
+        </div>
+      </section>
+    </section>
+  </main>
+
+  <footer class="app-footer" role="contentinfo">
+    <p><a href="https://sablecantus.com/" target="_blank" rel="noopener noreferrer">Professor Sable</a> · Emeritus Institute</p>
+    <p>Information reviewed against current official Instructure Canvas LMS student and basics guides.</p>
+    <p>Last Updated: 8/10/26</p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

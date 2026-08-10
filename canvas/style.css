@@ -1,0 +1,217 @@
+@import url("../firefox/style.css");
+
+/* Canvas-specific components. Shared page, accessibility, certificate, and
+   responsive rules come from the ECIM 502 Firefox reference implementation. */
+
+.canvas-demo {
+  margin: 24px 0;
+  overflow: hidden;
+  border: 3px solid var(--border-color);
+  border-radius: 12px;
+  background: var(--bg-card);
+  box-shadow: var(--shadow-card);
+}
+
+.canvas-demo-header {
+  padding: 12px 18px;
+  background: #b3261e;
+  color: #ffffff;
+  font-weight: 850;
+}
+
+.canvas-demo-layout {
+  display: grid;
+  grid-template-columns: minmax(205px, 0.34fr) minmax(0, 1fr);
+  min-height: 430px;
+}
+
+.canvas-global-nav {
+  padding: 16px;
+  background: #2d2d2d;
+  color: #ffffff;
+}
+
+.canvas-global-nav h3 {
+  margin: 0 0 12px;
+  color: #ffffff;
+  font-size: 1rem;
+}
+
+.canvas-nav-button {
+  width: 100%;
+  min-height: 48px;
+  margin: 0 0 8px;
+  padding: 8px 12px;
+  border: 2px solid #ffffff;
+  border-radius: 5px;
+  background: #2d2d2d;
+  color: #ffffff;
+  font-weight: 800;
+  text-align: left;
+}
+
+.canvas-nav-button:hover,
+.canvas-nav-button.visited {
+  background: #ffffff;
+  color: #222222;
+}
+
+.canvas-nav-button.current {
+  outline: 4px solid #ffda66;
+  outline-offset: 1px;
+}
+
+.canvas-demo-content {
+  padding: 22px;
+}
+
+.canvas-demo-content h3 {
+  margin-top: 0;
+  color: var(--primary-blue);
+}
+
+.practice-task {
+  margin-bottom: 18px;
+  padding: 14px 16px;
+  border-left: 7px solid var(--primary-blue);
+  background: var(--info-bg);
+  color: var(--info-text);
+  font-weight: 750;
+}
+
+.notification-simulator {
+  margin: 24px 0;
+  overflow-x: auto;
+  border: 2px solid var(--border-subtle);
+  border-radius: 10px;
+  background: var(--bg-card);
+  box-shadow: var(--shadow-card);
+}
+
+.notification-row {
+  display: grid;
+  grid-template-columns: minmax(220px, 1.25fr) minmax(230px, 0.8fr);
+  gap: 18px;
+  align-items: center;
+  padding: 16px;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.notification-row:last-child {
+  border-bottom: 0;
+}
+
+.notification-row strong,
+.notification-row small {
+  display: block;
+}
+
+.notification-row small {
+  margin-top: 3px;
+  color: var(--text-muted);
+}
+
+.notification-select {
+  width: 100%;
+  min-height: 50px;
+  padding: 8px 10px;
+  border: 3px solid var(--border-color);
+  border-radius: 7px;
+  background: var(--bg-card);
+  color: var(--text-main);
+}
+
+.choice-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  margin: 20px 0;
+}
+
+.choice-button {
+  min-height: 120px;
+  padding: 16px;
+  border: 3px solid var(--primary-blue);
+  border-radius: 10px;
+  background: var(--bg-card);
+  color: var(--text-main);
+  font-weight: 800;
+  text-align: left;
+}
+
+.choice-button:hover,
+.choice-button[aria-pressed="true"] {
+  background: var(--info-bg);
+  color: var(--info-text);
+}
+
+.step-list {
+  display: grid;
+  gap: 14px;
+  margin: 24px 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: canvas-steps;
+}
+
+.step-list li {
+  position: relative;
+  min-height: 64px;
+  padding: 14px 16px 14px 66px;
+  border: 2px solid var(--border-subtle);
+  border-radius: 9px;
+  background: var(--bg-card);
+  counter-increment: canvas-steps;
+}
+
+.step-list li::before {
+  position: absolute;
+  top: 11px;
+  left: 13px;
+  display: grid;
+  width: 40px;
+  height: 40px;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--primary-blue);
+  color: #ffffff;
+  content: counter(canvas-steps);
+  font-weight: 900;
+}
+
+.source-list li {
+  margin-bottom: 10px;
+}
+
+@media (max-width: 768px) {
+  .canvas-demo-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .canvas-global-nav {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+  }
+
+  .canvas-global-nav h3 {
+    grid-column: 1 / -1;
+  }
+
+  .canvas-nav-button {
+    margin: 0;
+  }
+
+  .notification-row,
+  .choice-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media print {
+  body.print-certificate .canvas-demo,
+  body.print-certificate .notification-simulator,
+  body.print-certificate .choice-grid {
+    display: none !important;
+  }
+}
