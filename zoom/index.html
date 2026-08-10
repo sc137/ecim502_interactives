@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Zoom Workplace & What's New: Emeritus Student Interactive Guide</title>
+  <meta name="description" content="An accessible, interactive guide for Emeritus learners to explore Zoom Workplace basics and the newest Zoom AI features like ZoomMate, My Notes, and Zoom Canvas.">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Skip to Main Content Link for Keyboard & Screen Reader Users -->
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <!-- ARIA Live Region for Immediate Screen Reader Feedback -->
+  <div id="aria-live-announcer" class="sr-only" aria-live="polite" aria-atomic="true"></div>
+
+  <!-- Top Accessibility Controls Bar -->
+  <header class="a11y-header-bar" role="banner">
+    <div class="app-title-group">
+      <h1>
+        <span aria-hidden="true">💻</span> Zoom Workplace Interactive Guide
+      </h1>
+      <span class="subhead">Designed for Emeritus Learners • WCAG 2.1 AA Accessible</span>
+    </div>
+
+    <div class="a11y-controls" role="region" aria-label="Accessibility Settings">
+      <!-- Font Resizer Control -->
+      <div class="font-slider-container">
+        <label for="font-scaler-slider" class="control-item">
+          <span>Text Size:</span>
+        </label>
+        <input type="range" id="font-scaler-slider" min="0.9" max="1.4" step="0.05" value="1.0" aria-label="Adjust text size scale">
+        <span id="font-size-indicator" style="font-weight: bold; min-width: 48px;">100%</span>
+      </div>
+
+      <!-- Quick Text Size Buttons -->
+      <div class="control-item" role="group" aria-label="Quick Text Presets">
+        <button type="button" class="btn-a11y active" id="btn-font-normal" onclick="setFontScale(1.0)">Normal</button>
+        <button type="button" class="btn-a11y" id="btn-font-large" onclick="setFontScale(1.18)">Large</button>
+        <button type="button" class="btn-a11y" id="btn-font-xlarge" onclick="setFontScale(1.35)">Extra Large</button>
+      </div>
+
+      <!-- High Contrast Theme Switcher -->
+      <div class="control-item">
+        <label for="theme-select">Contrast Theme:</label>
+        <select id="theme-select" class="btn-a11y" onchange="changeTheme(this.value)" aria-label="Select color contrast theme">
+          <option value="default">Default Light</option>
+          <option value="dark">High Contrast Dark</option>
+          <option value="high-contrast-light">High Contrast B&W</option>
+        </select>
+      </div>
+    </div>
+  </header>
+
+  <!-- Accessible Main Navigation Tabs & Exploration Progress Tracker -->
+  <nav class="main-nav" aria-label="Interactive Navigation Tabs">
+    <div class="tab-nav-header">
+      <div class="progress-indicator-pill" role="status" aria-live="polite">
+        <span aria-hidden="true">🎯</span> Exploration Progress: <strong id="exploration-count">0 of 6 Tabs Explored</strong>
+        <span id="exploration-percent-badge" class="progress-badge">0%</span>
+      </div>
+      <div style="display: flex; gap: 8px; align-items: center;">
+        <button type="button" class="btn-claim-certificate" id="btn-claim-cert" onclick="openCertificateSection()" style="display:none;" aria-label="Claim your completion certificate">
+          🏆 Claim Certificate
+        </button>
+        <button type="button" class="btn-reset-progress" onclick="resetExplorationProgress()" aria-label="Reset your tab exploration progress">
+          🔄 Reset Exploration
+        </button>
+      </div>
+    </div>
+
+    <ul class="tab-list" role="tablist">
+      <li role="presentation">
+        <button role="tab" id="tab-basics" aria-selected="true" aria-controls="panel-basics" class="tab-button" tabindex="0">
+          <span aria-hidden="true">📘</span> 1. Zoom Basics
+          <span class="tab-check-badge" id="check-tab-basics" aria-label="Explored">✅</span>
+        </button>
+      </li>
+      <li role="presentation">
+        <button role="tab" id="tab-simulator" aria-selected="false" aria-controls="panel-simulator" class="tab-button" tabindex="-1">
+          <span aria-hidden="true">🎛️</span> 2. Toolbar Practice
+          <span class="tab-check-badge" id="check-tab-simulator" aria-label="Explored">✅</span>
+        </button>
+      </li>
+      <li role="presentation">
+        <button role="tab" id="tab-whats-new" aria-selected="false" aria-controls="panel-whats-new" class="tab-button" tabindex="-1">
+          <span aria-hidden="true">✨</span> 3. What's New & AI
+          <span class="tab-check-badge" id="check-tab-whats-new" aria-label="Explored">✅</span>
+        </button>
+      </li>
+      <li role="presentation">
+        <button role="tab" id="tab-privacy-tree" aria-selected="false" aria-controls="panel-privacy-tree" class="tab-button" tabindex="-1">
+          <span aria-hidden="true">🛡️</span> 4. AI Privacy Evaluator
+          <span class="tab-check-badge" id="check-tab-privacy-tree" aria-label="Explored">✅</span>
+        </button>
+      </li>
+      <li role="presentation">
+        <button role="tab" id="tab-quizzes" aria-selected="false" aria-controls="panel-quizzes" class="tab-button" tabindex="-1">
+          <span aria-hidden="true">📝</span> 5. Checklist & Quizzes
+          <span class="tab-check-badge" id="check-tab-quizzes" aria-label="Explored">✅</span>
+        </button>
+      </li>
+      <li role="presentation">
+        <button role="tab" id="tab-glossary" aria-selected="false" aria-controls="panel-glossary" class="tab-button" tabindex="-1">
+          <span aria-hidden="true">📖</span> 6. Terminology Glossary
+          <span class="tab-check-badge" id="check-tab-glossary" aria-label="Explored">✅</span>
+        </button>
+      </li>
+    </ul>
+  </nav>
+
+  <!-- Main Content Container -->
+  <main id="main-content" class="app-container" role="main">
+
+    <!-- ==========================================================================
+         PANEL 1: ZOOM BASICS
+         ========================================================================== -->
+    <section id="panel-basics" class="tab-panel active" role="tabpanel" aria-labelledby="tab-basics">
+      <h2 class="section-heading">Zoom Workplace Basics: What Every Student Should Know</h2>
+
+      <div class="callout-box info" role="region" aria-label="Big Idea Summary">
+        <div class="callout-title">💡 Big Idea: Zoom is More Than a Meeting Link</div>
+        <p><strong>Zoom Workplace</strong> is Zoom's complete collaboration platform. It includes familiar video meeting tools, plus connected tools for team chat, document sharing, whiteboards, short videos, notes, tasks, and scheduling.</p>
+        <p style="margin-bottom: 0;">For class, the most essential skills are joining class meetings, managing your microphone and camera, using chat, viewing or sharing screens, and knowing when desktop or mobile is best.</p>
+      </div>
+
+      <!-- Core Tools Table -->
+      <h3 class="subsection-heading">Core Zoom Workplace Tools</h3>
+      <div class="data-table-container">
+        <table class="emeritus-table">
+          <caption>Overview of primary Zoom Workplace features</caption>
+          <thead>
+            <tr>
+              <th scope="col">Tool Name</th>
+              <th scope="col">What it is for</th>
+              <th scope="col">What students should recognize</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="font-weight: bold;">📹 Meetings</td>
+              <td>Live video, audio, screen sharing, live captions, reactions, and class sessions.</td>
+              <td>This is the part most people mean when they say "Join Zoom."</td>
+            </tr>
+            <tr>
+              <td style="font-weight: bold;">💬 Team Chat</td>
+              <td>Messages, files, group conversations, and follow-up between meetings.</td>
+              <td>Zoom has chat inside meetings, plus ongoing chat outside meetings in Zoom Workplace.</td>
+            </tr>
+            <tr>
+              <td style="font-weight: bold;">🎨 Whiteboard</td>
+              <td>A shared visual canvas for brainstorming, sticky notes, diagrams, and group planning.</td>
+              <td>Can be used live during a meeting or opened later for group work.</td>
+            </tr>
+            <tr>
+              <td style="font-weight: bold;">🎬 Clips</td>
+              <td>Short video or screen recordings shared without holding another live meeting.</td>
+              <td>Useful when someone wants to explain a process or show a screen update quickly.</td>
+            </tr>
+            <tr>
+              <td style="font-weight: bold;">📑 Docs, Notes & Tasks</td>
+              <td>Written work, meeting notes, action items, and follow-up planning.</td>
+              <td>Helps turn a live discussion into action items you can review later.</td>
+            </tr>
+            <tr>
+              <td style="font-weight: bold;">📅 Calendar & Scheduler</td>
+              <td>Meeting planning, booking pages, reminders, and calendar connections.</td>
+              <td>Availability depends on your specific account and connected services.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Meeting Controls Breakdown -->
+      <h3 class="subsection-heading">Essential Classroom Meeting Controls</h3>
+      <div class="card-grid">
+        <div class="info-card">
+          <h4>🎤 Mute / Unmute</h4>
+          <p>Turns your microphone off or on. Keep yourself muted when not speaking to reduce background noise for your classmates.</p>
+        </div>
+        <div class="info-card">
+          <h4>📹 Start / Stop Video</h4>
+          <p>Turns your camera off or on. Choose whether your background and face are visible to the class.</p>
+        </div>
+        <div class="info-card">
+          <h4>👥 Participants</h4>
+          <p>Opens a panel showing everyone who is currently in the Zoom meeting room.</p>
+        </div>
+        <div class="info-card">
+          <h4>💬 Chat</h4>
+          <p>Opens the meeting chat window so you can type questions, read links, or respond to the instructor.</p>
+        </div>
+        <div class="info-card">
+          <h4>🖥️ Share Screen</h4>
+          <p>Lets you show a document, browser tab, or your whole screen to the class if the host allows it.</p>
+        </div>
+        <div class="info-card">
+          <h4>✋ Reactions</h4>
+          <p>Lets you raise your hand virtually or give quick visual feedback (thumbs up, applause) without interrupting.</p>
+        </div>
+        <div class="info-card">
+          <h4>CC Captions</h4>
+          <p>Displays spoken words as text at the bottom of your screen when enabled by the host.</p>
+        </div>
+        <div class="info-card">
+          <h4>⚙️ More Options</h4>
+          <p>Opens extra controls such as audio settings, full screen mode, or background filters.</p>
+        </div>
+      </div>
+
+      <!-- Desktop vs Mobile vs Web Comparison Slider -->
+      <h3 class="subsection-heading">Compare Zoom Across Devices</h3>
+      <div class="slider-card">
+        <div class="slider-control-group">
+          <div class="slider-label-row">
+            <label for="device-slider">Drag Slider to Compare Devices:</label>
+            <span id="device-slider-label" style="color: var(--primary-blue); font-size: 1.2rem;">Desktop App</span>
+          </div>
+          <input type="range" id="device-slider" class="emeritus-slider" min="1" max="3" step="1" value="1" oninput="updateDeviceView(this.value)" aria-label="Select device type: 1 for Desktop, 2 for Mobile, 3 for Web Browser">
+        </div>
+
+        <div id="device-slider-output" class="slider-output-display" role="region" aria-live="polite">
+          <!-- Dynamic Content Rendered via JS -->
+        </div>
+      </div>
+
+      <!-- Privacy & Etiquette -->
+      <div class="callout-box warning">
+        <div class="callout-title">🔒 Classroom Privacy & Etiquette Basics</div>
+        <ul>
+          <li><strong>Mute when not speaking:</strong> Protects class audio quality from pets, fans, or household noise.</li>
+          <li><strong>Share only what you intend:</strong> When sharing your screen, select a specific window or tab instead of your entire desktop.</li>
+          <li><strong>Check your background:</strong> Use a tidy space or a virtual background if you prefer to keep your personal room private.</li>
+          <li><strong>Keep Zoom updated:</strong> Regular updates ensure you have security patches and the latest accessible tools.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         PANEL 2: TOOLBAR SIMULATOR (HANDS-ON PRACTICE)
+         ========================================================================== -->
+    <section id="panel-simulator" class="tab-panel" role="tabpanel" aria-labelledby="tab-simulator">
+      <h2 class="section-heading">Interactive Zoom Toolbar Practice Simulator</h2>
+
+      <p>Try clicking or tapping the Zoom meeting controls below to practice using them! This safe practice toolbar simulates a live Zoom classroom meeting without turning on your real camera or microphone.</p>
+
+      <div class="simulator-container" role="region" aria-label="Interactive Meeting Simulator">
+        <!-- Visual Screen Display -->
+        <div class="simulator-screen-viewport">
+          <div class="sim-video-avatar" id="sim-avatar">ES</div>
+          <div style="font-weight: bold; font-size: 1.2rem;">Emeritus Student (You)</div>
+          <div id="sim-status" class="sim-status-banner">
+            Microphone: Muted • Camera: Off • Captions: Off
+          </div>
+        </div>
+
+        <!-- Interactive Control Bar -->
+        <div class="sim-toolbar" role="toolbar" aria-label="Practice Meeting Controls">
+          <button type="button" class="sim-btn danger-state" id="sim-btn-mute" onclick="toggleSimControl('mute')" aria-label="Toggle Microphone (Currently Muted)">
+            <span class="sim-btn-icon" aria-hidden="true">🎤</span>
+            <span id="sim-label-mute">Unmute</span>
+          </button>
+
+          <button type="button" class="sim-btn danger-state" id="sim-btn-video" onclick="toggleSimControl('video')" aria-label="Toggle Camera (Currently Off)">
+            <span class="sim-btn-icon" aria-hidden="true">📹</span>
+            <span id="sim-label-video">Start Video</span>
+          </button>
+
+          <button type="button" class="sim-btn" id="sim-btn-participants" onclick="toggleSimControl('participants')" aria-label="View Participants Panel">
+            <span class="sim-btn-icon" aria-hidden="true">👥</span>
+            <span>Participants</span>
+          </button>
+
+          <button type="button" class="sim-btn" id="sim-btn-chat" onclick="toggleSimControl('chat')" aria-label="Toggle Classroom Chat Panel">
+            <span class="sim-btn-icon" aria-hidden="true">💬</span>
+            <span>Chat</span>
+          </button>
+
+          <button type="button" class="sim-btn" id="sim-btn-share" onclick="toggleSimControl('share')" aria-label="Share Screen Options">
+            <span class="sim-btn-icon" aria-hidden="true">🖥️</span>
+            <span>Share Screen</span>
+          </button>
+
+          <button type="button" class="sim-btn" id="sim-btn-reactions" onclick="toggleSimControl('reactions')" aria-label="Raise Hand or Give Reaction">
+            <span class="sim-btn-icon" aria-hidden="true">✋</span>
+            <span>Reactions</span>
+          </button>
+
+          <button type="button" class="sim-btn" id="sim-btn-captions" onclick="toggleSimControl('captions')" aria-label="Toggle Live Captions">
+            <span class="sim-btn-icon" aria-hidden="true">CC</span>
+            <span>Captions</span>
+          </button>
+
+          <button type="button" class="sim-btn" id="sim-btn-ai" onclick="toggleSimControl('ai')" aria-label="Explore ZoomMate AI Assistant">
+            <span class="sim-btn-icon" aria-hidden="true">✨</span>
+            <span>ZoomMate AI</span>
+          </button>
+        </div>
+
+        <!-- Simulator Information Drawer -->
+        <div id="sim-drawer" class="sim-drawer" role="region" aria-live="polite">
+          <h4 id="sim-drawer-title">👉 Click any button on the toolbar above!</h4>
+          <p id="sim-drawer-body">Tap any control button to see what it does, practice toggling it, and learn classroom etiquette tips.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         PANEL 3: WHAT'S NEW & AI
+         ========================================================================== -->
+    <section id="panel-whats-new" class="tab-panel" role="tabpanel" aria-labelledby="tab-whats-new">
+      <h2 class="section-heading">What's New with Zoom: The AI Workplace Evolution</h2>
+
+      <div class="callout-box info">
+        <div class="callout-title">🚀 The Big Shift in Zoom</div>
+        <p>Zoom is expanding from "a place to hold live video calls" into an <strong>AI-supported workspace</strong>. The newest features focus on capturing what happened in class, summarizing discussions, finding information across docs, and creating follow-up notes, documents, slides, and sheets.</p>
+      </div>
+
+      <!-- Zoom Evolution Timeline Slider -->
+      <h3 class="subsection-heading">Interactive Timeline: How Zoom Has Evolved</h3>
+      <div class="slider-card">
+        <div class="slider-control-group">
+          <div class="slider-label-row">
+            <label for="timeline-slider">Drag Timeline Slider (2020 - 2026):</label>
+            <span id="timeline-year-label" style="color: var(--primary-blue); font-size: 1.2rem;">2020: Basic Video Meetings</span>
+          </div>
+          <input type="range" id="timeline-slider" class="emeritus-slider" min="1" max="4" step="1" value="4" oninput="updateTimelineView(this.value)" aria-label="Select year on Zoom evolution timeline: 1 for 2020, 2 for 2022, 3 for 2024, 4 for 2026">
+        </div>
+
+        <div id="timeline-slider-output" class="slider-output-display" role="region" aria-live="polite">
+          <!-- Dynamic Content via JS -->
+        </div>
+      </div>
+
+      <!-- Naming Note Callout -->
+      <div class="callout-box warning">
+        <div class="callout-title">⚠️ Current Zoom AI Names: ZoomMate & AI Companion</div>
+        <p><strong>Important Naming Note:</strong> Zoom's newest AI features are labeled as <strong>ZoomMate</strong> on newer product pages, while older release notes and installed app screens may still refer to <strong>AI Companion</strong>.</p>
+        <p style="margin-bottom: 0;">For your Emeritus classes, treat these as the same underlying Zoom AI assistant tools. Always check what permissions an AI feature asks for before turning it on.</p>
+      </div>
+
+      <!-- AI Features Table -->
+      <h3 class="subsection-heading">Newest Zoom AI Features to Know</h3>
+      <div class="card-grid">
+        <div class="info-card">
+          <h4>🤖 ZoomMate / AI Companion</h4>
+          <p>Acts as Zoom's built-in assistant for summarizing discussions, drafting notes, searching records, and creating follow-up actions.</p>
+        </div>
+        <div class="info-card">
+          <h4>📝 My Notes & Mobile Notes</h4>
+          <p>Captures notes, summaries, and transcripts from Zoom meetings, mobile phone conversations, and even external platforms like Teams or Google Meet when enabled.</p>
+        </div>
+        <div class="info-card">
+          <h4>⚡ Meeting Workflows</h4>
+          <p>Turns discussion notes into follow-up tasks, emails, or action items automatically, moving from "summarizing" to "doing next steps."</p>
+        </div>
+        <div class="info-card">
+          <h4>🔎 Agentic Search</h4>
+          <p>Searches across your Zoom meetings, chats, documents, and connected cloud drives (Google Drive, OneDrive) to answer questions in natural language.</p>
+        </div>
+      </div>
+
+      <!-- Zoom AI Productivity Suite -->
+      <h3 class="subsection-heading">Zoom AI Productivity Suite (Office Tools)</h3>
+      <div class="data-table-container">
+        <table class="emeritus-table">
+          <caption>Zoom's built-in document and productivity apps</caption>
+          <thead>
+            <tr>
+              <th scope="col">Product Tool</th>
+              <th scope="col">Student-Friendly Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="font-weight: bold;">🎨 Zoom Canvas</td>
+              <td>An AI workspace that turns spoken conversations or prompts into living docs, tables, wikis, and visual work surfaces.</td>
+            </tr>
+            <tr>
+              <td style="font-weight: bold;">📊 Zoom Slides</td>
+              <td>Creates slide presentations directly from meeting transcripts or notes, with export options to Microsoft PowerPoint.</td>
+            </tr>
+            <tr>
+              <td style="font-weight: bold;">📈 Zoom Sheets</td>
+              <td>Uses typed prompts to generate, analyze, clean, and ask questions about spreadsheet data.</td>
+            </tr>
+            <tr>
+              <td style="font-weight: bold;">📄 Zoom Paper</td>
+              <td>Refines polished written documents with support for importing and exporting Word and Google Docs files.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Avatar Caution -->
+      <div class="callout-box danger">
+        <div class="callout-title">🔴 Avatar & Clips Transparency Caution</div>
+        <p>Zoom now offers <strong>AI Avatars</strong> and AI-generated video backgrounds for Clips. While polished, AI avatars blur the line between real human recordings and generated media.</p>
+        <p style="margin-bottom: 0;"><strong>Emeritus Guidance:</strong> Always maintain transparency. For educational, health, legal, or personal financial conversations, ensure participants know when AI-generated audio or video is being used.</p>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         PANEL 4: AI PRIVACY & SAFETY EVALUATOR
+         ========================================================================== -->
+    <section id="panel-privacy-tree" class="tab-panel" role="tabpanel" aria-labelledby="tab-privacy-tree">
+      <h2 class="section-heading">AI Privacy & Safety Decision Evaluator</h2>
+
+      <p>Before turning on AI Companion or ZoomMate features, use this interactive decision tool to evaluate privacy, data storage, and consent requirements for your specific situation.</p>
+
+      <div class="evaluator-box">
+        <h3 style="margin-top:0; color: var(--primary-blue);">Step 1: Choose Your Meeting Scenario</h3>
+        
+        <div class="scenario-select-grid" role="group" aria-label="Meeting Scenarios">
+          <button type="button" class="scenario-btn" id="scen-class" onclick="evaluateScenario('class')">
+            <span aria-hidden="true">🎓</span> Emeritus Class Discussion
+          </button>
+          <button type="button" class="scenario-btn" id="scen-health" onclick="evaluateScenario('health')">
+            <span aria-hidden="true">🩺</span> Private Doctor / Health Visit
+          </button>
+          <button type="button" class="scenario-btn" id="scen-group" onclick="evaluateScenario('group')">
+            <span aria-hidden="true">👥</span> Group Project / Study Session
+          </button>
+          <button type="button" class="scenario-btn" id="scen-family" onclick="evaluateScenario('family')">
+            <span aria-hidden="true">🏡</span> Family Chat / Personal Call
+          </button>
+        </div>
+
+        <div id="scenario-evaluation-result" class="slider-output-display" role="region" aria-live="polite">
+          <p style="text-align: center; font-weight: bold; color: var(--text-muted);">
+            👉 Tap one of the scenarios above to see privacy recommendations, data capture checks, and consent advice.
+          </p>
+        </div>
+      </div>
+
+      <!-- Checklist of 6 Privacy Questions -->
+      <h3 class="subsection-heading">The 6 Privacy Questions to Ask Before Turning AI On</h3>
+      <div class="card-grid">
+        <div class="info-card">
+          <h4>1. What is it capturing?</h4>
+          <p>Is it recording audio, video, chat, screen shares, shared files, or meeting transcripts?</p>
+        </div>
+        <div class="info-card">
+          <h4>2. Who can see the output?</h4>
+          <p>Will the AI summary be seen only by you, the host, all class members, or connected apps?</p>
+        </div>
+        <div class="info-card">
+          <h4>3. Where is it stored?</h4>
+          <p>Is data saved in Zoom Hub, Zoom Canvas, local cloud recording, or a shared document?</p>
+        </div>
+        <div class="info-card">
+          <h4>4. Can it take action?</h4>
+          <p>Is the AI only summarizing, or can it automatically send emails, tasks, or calendar invites?</p>
+        </div>
+        <div class="info-card">
+          <h4>5. Is the summary accurate?</h4>
+          <p>AI summaries can mistake names or miss context. Always review notes before taking action.</p>
+        </div>
+        <div class="info-card">
+          <h4>6. Is it appropriate?</h4>
+          <p>Private medical, legal, or personal calls require strict consent before enabling AI notes.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         PANEL 5: READINESS CHECKLIST & INTERACTIVE QUIZZES
+         ========================================================================== -->
+    <section id="panel-quizzes" class="tab-panel" role="tabpanel" aria-labelledby="tab-quizzes">
+      <h2 class="section-heading">Before Class Checklist & Self-Assessment Quizzes</h2>
+
+      <!-- Before Class Readiness Checklist -->
+      <h3 class="subsection-heading">Before Class Interactive Readiness Checklist</h3>
+      <div class="checklist-progress-wrapper" role="region" aria-label="Class Readiness Check">
+        <div style="display: flex; justify-content: space-between; font-weight: bold;">
+          <span>Class Readiness Level:</span>
+          <span id="checklist-percent">0% Ready</span>
+        </div>
+        <div class="progress-bar-container">
+          <div id="checklist-bar-fill" class="progress-bar-fill" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" aria-label="Class readiness progress"></div>
+        </div>
+
+        <div class="quiz-options-list" style="margin-top: 20px;">
+          <label class="quiz-option-label">
+            <input type="checkbox" class="chk-readiness" onchange="updateChecklistProgress()">
+            <span><strong>Audio Test:</strong> My speaker or headphones are plugged in and tested.</span>
+          </label>
+          <label class="quiz-option-label">
+            <input type="checkbox" class="chk-readiness" onchange="updateChecklistProgress()">
+            <span><strong>Microphone Check:</strong> My microphone is selected and I am muted until class starts.</span>
+          </label>
+          <label class="quiz-option-label">
+            <input type="checkbox" class="chk-readiness" onchange="updateChecklistProgress()">
+            <span><strong>Camera Choice:</strong> I have decided whether my camera will be on or off and checked my background.</span>
+          </label>
+          <label class="quiz-option-label">
+            <input type="checkbox" class="chk-readiness" onchange="updateChecklistProgress()">
+            <span><strong>Screen Cleanup:</strong> I closed extra apps or browser tabs before joining class.</span>
+          </label>
+          <label class="quiz-option-label">
+            <input type="checkbox" class="chk-readiness" onchange="updateChecklistProgress()">
+            <span><strong>Power & Update:</strong> My laptop is plugged into power and Zoom Workplace is updated.</span>
+          </label>
+        </div>
+
+        <div id="checklist-congrats" class="quiz-feedback-box correct" style="display: none;">
+          🎉 <strong>Awesome Job!</strong> You are 100% prepared to join your Zoom class session confidently!
+        </div>
+      </div>
+
+      <!-- Self Confidence Slider -->
+      <h3 class="subsection-heading">How Confident Do You Feel with Zoom Right Now?</h3>
+      <div class="slider-card">
+        <div class="slider-control-group">
+          <div class="slider-label-row">
+            <label for="confidence-slider">Rate Your Confidence (1 to 5):</label>
+            <span id="confidence-rating-label" style="color: var(--primary-blue); font-size: 1.2rem;">Level 3: Moderate Comfort</span>
+          </div>
+          <input type="range" id="confidence-slider" class="emeritus-slider" min="1" max="5" step="1" value="3" oninput="updateConfidenceView(this.value)" aria-label="Rate your confidence: 1 Beginner to 5 Expert">
+        </div>
+
+        <div id="confidence-slider-output" class="slider-output-display" role="region" aria-live="polite">
+          <!-- Dynamic output via JS -->
+        </div>
+      </div>
+
+      <!-- Checkbox Quiz 1: Zoom Basics -->
+      <h3 class="subsection-heading">Quiz 1: Zoom Basics & Controls</h3>
+      <div class="quiz-question-box" id="quiz-1-container">
+        <div class="quiz-question-title">Question 1: Which of the following statements about Zoom Workplace are correct? (Select all that apply)</div>
+        
+        <div class="quiz-options-list">
+          <label class="quiz-option-label">
+            <input type="checkbox" id="q1-opt1">
+            <span>A) Zoom Workplace includes tools for chat, whiteboards, notes, and clips—not just video meetings.</span>
+          </label>
+          <label class="quiz-option-label">
+            <input type="checkbox" id="q1-opt2">
+            <span>B) Tapping your phone screen once will bring meeting control buttons back if they disappear.</span>
+          </label>
+          <label class="quiz-option-label">
+            <input type="checkbox" id="q1-opt3">
+            <span>C) Keeping yourself unmuted at all times is recommended so everyone hears your home noise.</span>
+          </label>
+          <label class="quiz-option-label">
+            <input type="checkbox" id="q1-opt4">
+            <span>D) Raising your virtual hand under Reactions lets you ask a question without interrupting the speaker.</span>
+          </label>
+        </div>
+
+        <button type="button" class="btn-primary" onclick="gradeQuiz1()">Submit Quiz 1 Answers</button>
+        
+        <div id="quiz-1-feedback" class="quiz-feedback-box" style="display: none;" role="region" aria-live="polite"></div>
+      </div>
+
+      <!-- Checkbox Quiz 2: What's New & AI Safety -->
+      <h3 class="subsection-heading">Quiz 2: What's New & AI Features</h3>
+      <div class="quiz-question-box" id="quiz-2-container">
+        <div class="quiz-question-title">Question 2: Which of the following are accurate guidelines regarding Zoom AI features? (Select all that apply)</div>
+        
+        <div class="quiz-options-list">
+          <label class="quiz-option-label">
+            <input type="checkbox" id="q2-opt1">
+            <span>A) ZoomMate and AI Companion refer to Zoom's AI assistant tools.</span>
+          </label>
+          <label class="quiz-option-label">
+            <input type="checkbox" id="q2-opt2">
+            <span>B) Zoom Canvas is an AI workspace that can turn meeting notes into docs, spreadsheets, or slides.</span>
+          </label>
+          <label class="quiz-option-label">
+            <input type="checkbox" id="q2-opt3">
+            <span>C) You should always turn on AI summaries during private medical appointments without asking.</span>
+          </label>
+          <label class="quiz-option-label">
+            <input type="checkbox" id="q2-opt4">
+            <span>D) AI-generated meeting summaries should always be checked for accuracy before taking important actions.</span>
+          </label>
+        </div>
+
+        <button type="button" class="btn-primary" onclick="gradeQuiz2()">Submit Quiz 2 Answers</button>
+        
+        <div id="quiz-2-feedback" class="quiz-feedback-box" style="display: none;" role="region" aria-live="polite"></div>
+      </div>
+
+      <!-- Completion Certificate & Student Badge Generator -->
+      <h3 class="subsection-heading">🏆 Your Emeritus Certificate of Completion</h3>
+      <div class="certificate-wrapper-card" id="certificate-section" role="region" aria-label="Student Certificate Generator">
+        <div class="no-print">
+          <p style="font-size: 1.15rem; font-weight: bold; color: var(--primary-blue); margin-top: 0;">
+            🎓 Congratulations on your Zoom Workplace & AI exploration! Enter your name below to personalize your completion certificate:
+          </p>
+          <div style="display: flex; flex-wrap: wrap; gap: 14px; margin-bottom: 24px; align-items: center;">
+            <label for="student-name-input" style="font-weight: bold; font-size: 1.05rem;">Your Full Name:</label>
+            <input type="text" id="student-name-input" class="glossary-search-input" style="max-width: 340px;" placeholder="e.g. Jane Doe" oninput="updateCertificateName(this.value)" aria-label="Enter your full name for certificate">
+            <button type="button" class="btn-primary" onclick="printCertificate()"><span aria-hidden="true">🖨️</span> Print / Save Certificate PDF</button>
+          </div>
+        </div>
+
+        <!-- Printable Certificate Canvas / View -->
+        <div class="certificate-printable-frame" id="printable-certificate">
+          <div class="cert-border-outer">
+            <div class="cert-border-inner">
+              <div class="cert-header">
+                <span class="cert-seal" aria-hidden="true">🎓</span>
+                <h4 class="cert-institution">Emeritus Institute</h4>
+                <div class="cert-title">Certificate of Completion</div>
+              </div>
+
+              <div class="cert-body">
+                <p class="cert-text-lead">This certificate is proudly awarded to</p>
+                <div class="cert-student-name" id="cert-display-name">Emeritus Student</div>
+                <p class="cert-text-desc">
+                  for successfully exploring <strong>Zoom Workplace Basics</strong>, practicing live meeting controls, mastering <strong>AI Privacy & Safety guidelines</strong>, and completing interactive self-assessments.
+                </p>
+              </div>
+
+              <div class="cert-footer">
+                <div class="cert-sig-block">
+                  <div class="cert-sig-line">Professor Sable</div>
+                  <div class="cert-sig-title">Emeritus Institute • <a href="https://cantus.us/emeritus" target="_blank" rel="noopener noreferrer">cantus.us/emeritus</a></div>
+                </div>
+                <div class="cert-date-block">
+                  <div class="cert-date-line" id="cert-display-date">August 10, 2026</div>
+                  <div class="cert-date-label">Date Awarded</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         PANEL 6: TERMINOLOGY GLOSSARY & SEARCH
+         ========================================================================== -->
+    <section id="panel-glossary" class="tab-panel" role="tabpanel" aria-labelledby="tab-glossary">
+      <h2 class="section-heading">Zoom Workplace Terminology Glossary & Search</h2>
+
+      <p>Search or browse essential Zoom Workplace terms and concepts below:</p>
+
+      <div class="search-bar-container">
+        <label for="glossary-search-input" class="sr-only">Search Zoom terms</label>
+        <input type="text" id="glossary-search-input" class="glossary-search-input" placeholder="🔍 Type a term to search (e.g. Canvas, Mute, ZoomMate, Clips)..." oninput="filterGlossary(this.value)">
+      </div>
+
+      <div id="glossary-card-container" class="glossary-card-grid">
+        <!-- Glossary Cards Injected via JS -->
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Accessible Footer -->
+  <footer class="app-footer" role="contentinfo">
+    <p><a href="https://cantus.us/emeritus" target="_blank" rel="noopener noreferrer">Professor Sable. Emeritus Institute.</a></p>
+    <p>Content based on official Zoom documentation. For support visit <a href="https://support.zoom.com" target="_blank" rel="noopener noreferrer">Zoom Official Support (opens in new tab)</a>.</p>
+  </footer>
+
+  <!-- Main JavaScript File -->
+  <script src="app.js"></script>
+</body>
+</html>
