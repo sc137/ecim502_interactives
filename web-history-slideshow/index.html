@@ -407,6 +407,7 @@ slideshow about the history of the World Wide Web from 1945 through
       border-radius: 0.4rem;
       object-fit: contain;
     }
+    .popover-photo-small { max-height: 130px; }
     .popover-credit {
       display: block;
       color: var(--muted);
@@ -833,7 +834,7 @@ data-title="A Turning Point" hidden="">
 <section id="mosaic-arrived" class="milestone">
 <h3>Mosaic arrived</h3>
 <p>A graphical browser made the Web easier to use on common computers
-<span class="detail"><button class="info-button" type="button" aria-expanded="false" aria-controls="detail-note-5" aria-label="More information about Mosaic">i</button><span class="popover" id="detail-note-5" role="note" hidden>Mosaic: NCSA released its first alpha version for X in February. By September, working versions were available for X, Windows, and Macintosh.<img class="popover-photo" src="assets/marc-andreessen.jpg" alt="Marc Andreessen, a developer of the Mosaic browser"><span class="popover-credit">Marc Andreessen. Image from the W3C 10th Anniversary history presentation.</span></span></span></p>
+<span class="detail"><button class="info-button" type="button" aria-expanded="false" aria-controls="detail-note-5" aria-label="More information about Mosaic">i</button><span class="popover" id="detail-note-5" role="note" hidden>Mosaic: NCSA released its first alpha version for X in February. By September, working versions were available for X, Windows, and Macintosh.<img class="popover-photo popover-photo-small" src="assets/marc-andreessen.jpg" alt="Marc Andreessen, a developer of the Mosaic browser"><span class="popover-credit">Marc Andreessen. Image from the W3C 10th Anniversary history presentation.</span></span></span></p>
 </section>
 <section id="the-web-stayed-open" class="milestone">
 <h3>The Web stayed open</h3>
@@ -1133,16 +1134,33 @@ edited the final content.</p>
         document.querySelectorAll('.detail').forEach((detail) => {
           const button = detail.querySelector('.info-button');
           const popover = document.getElementById(button.getAttribute('aria-controls'));
+          let closeTimer = null;
+
+          const cancelPendingClose = () => {
+            if (closeTimer !== null) {
+              window.clearTimeout(closeTimer);
+              closeTimer = null;
+            }
+          };
+
+          const scheduleClose = () => {
+            cancelPendingClose();
+            closeTimer = window.setTimeout(() => {
+              button.setAttribute('aria-expanded', 'false');
+              popover.hidden = true;
+              closeTimer = null;
+            }, 250);
+          };
+
           detail.addEventListener('pointerenter', () => {
+            cancelPendingClose();
             closeAllPopovers(button);
             button.setAttribute('aria-expanded', 'true');
             popover.hidden = false;
             positionPopover(button, popover);
           });
-          detail.addEventListener('pointerleave', () => {
-            button.setAttribute('aria-expanded', 'false');
-            popover.hidden = true;
-          });
+          detail.addEventListener('pointerleave', scheduleClose);
+          popover.addEventListener('pointerenter', cancelPendingClose);
         });
       }
 
