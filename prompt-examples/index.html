@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prompt Examples Interactive Guide</title>
+  <meta name="description" content="Practice stronger AI prompts with five everyday examples for Emeritus learners. Customize, copy, and try prompts in Gemini, ChatGPT, or Claude.">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Skip to Main Content Link for Keyboard & Screen Reader Users -->
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <!-- ARIA Live Region for Immediate Screen Reader Feedback -->
+  <div id="aria-live-announcer" class="sr-only" aria-live="polite" aria-atomic="true"></div>
+
+  <!-- Top Accessibility Controls Bar -->
+  <header class="a11y-header-bar" role="banner">
+    <div class="app-title-group">
+      <h1>
+        Prompt Examples Interactive Guide
+      </h1>
+      <span class="subhead">An interactive web tool for ECIM 502</span>
+    </div>
+
+    <div class="a11y-controls" role="region" aria-label="Accessibility Settings">
+      <!-- Font Resizer Control -->
+      <div class="font-slider-container">
+        <label for="font-scaler-slider" class="control-item">
+          <span>Text Size:</span>
+        </label>
+        <input type="range" id="font-scaler-slider" min="0.9" max="1.4" step="0.01" value="1.0" aria-label="Adjust text size scale">
+        <span id="font-size-indicator" class="font-size-indicator">100%</span>
+      </div>
+
+      <!-- Quick Text Size Buttons -->
+      <div class="control-item" role="group" aria-label="Quick Text Presets">
+        <button type="button" class="btn-a11y active" id="btn-font-normal" aria-pressed="true">Normal</button>
+        <button type="button" class="btn-a11y" id="btn-font-large" aria-pressed="false">Large</button>
+        <button type="button" class="btn-a11y" id="btn-font-xlarge" aria-pressed="false">Extra Large</button>
+      </div>
+
+      <!-- High Contrast Theme Switcher -->
+      <div class="control-item">
+        <label for="theme-select">Contrast Theme:</label>
+        <select id="theme-select" class="btn-a11y" aria-label="Select color contrast theme">
+          <option value="default">Default Light</option>
+          <option value="dark">High Contrast Dark</option>
+          <option value="high-contrast-light">High Contrast B&W</option>
+        </select>
+      </div>
+    </div>
+  </header>
+
+  <nav class="main-nav" aria-label="Prompt examples navigation">
+    <div class="tab-nav-header">
+      <div class="progress-indicator-pill" role="status">Exploration Progress: <strong id="exploration-count">0 of 7 Tabs Explored</strong><span class="progress-badge" id="exploration-percent-badge">0%</span></div>
+      <div class="action-row">
+        <button type="button" class="btn-claim-certificate" id="btn-claim-cert" hidden>Claim Certificate</button>
+        <button type="button" class="btn-reset-progress" id="reset-progress">Reset Exploration</button>
+      </div>
+    </div>
+    <ul class="tab-list" role="tablist" aria-label="Prompting guide, five examples, and your own prompt">
+      <li role="presentation"><button type="button" role="tab" id="tab-basics" aria-selected="true" aria-controls="panel-basics" class="tab-button" tabindex="0">1. Start here<span class="tab-check-badge"><span aria-hidden="true">✅</span><span class="sr-only"> Explored</span></span></button></li>
+      <li role="presentation"><button type="button" role="tab" id="tab-health" aria-selected="false" aria-controls="panel-health" class="tab-button" tabindex="-1">2. Health information<span class="tab-check-badge"><span aria-hidden="true">✅</span><span class="sr-only"> Explored</span></span></button></li>
+      <li role="presentation"><button type="button" role="tab" id="tab-travel" aria-selected="false" aria-controls="panel-travel" class="tab-button" tabindex="-1">3. Travel planning<span class="tab-check-badge"><span aria-hidden="true">✅</span><span class="sr-only"> Explored</span></span></button></li>
+      <li role="presentation"><button type="button" role="tab" id="tab-finance" aria-selected="false" aria-controls="panel-finance" class="tab-button" tabindex="-1">4. Financial options<span class="tab-check-badge"><span aria-hidden="true">✅</span><span class="sr-only"> Explored</span></span></button></li>
+      <li role="presentation"><button type="button" role="tab" id="tab-garden" aria-selected="false" aria-controls="panel-garden" class="tab-button" tabindex="-1">5. Gardening<span class="tab-check-badge"><span aria-hidden="true">✅</span><span class="sr-only"> Explored</span></span></button></li>
+      <li role="presentation"><button type="button" role="tab" id="tab-medicare" aria-selected="false" aria-controls="panel-medicare" class="tab-button" tabindex="-1">6. Medicare basics<span class="tab-check-badge"><span aria-hidden="true">✅</span><span class="sr-only"> Explored</span></span></button></li>
+      <li role="presentation"><button type="button" role="tab" id="tab-custom" aria-selected="false" aria-controls="panel-custom" class="tab-button" tabindex="-1">7. Build Your Own Prompt<span class="tab-check-badge"><span aria-hidden="true">✅</span><span class="sr-only"> Explored</span></span></button></li>
+    </ul>
+  </nav>
+  <main id="main-content" class="app-container" tabindex="-1">
+    <noscript><p class="callout-box warning">Turn on JavaScript to use the tabs, customize prompts, and copy them. The completed examples below can still be selected and copied manually.</p><style>.tab-panel { display: block; }</style></noscript>
+    <section id="panel-basics" class="tab-panel active" role="tabpanel" aria-labelledby="tab-basics" tabindex="0">
+      <h2 class="section-heading">A clearer prompt gives AI a clearer job</h2>
+      <p>A <strong>prompt</strong> is the request you give an AI tool. Use this short guide, then try five everyday examples and build a prompt for your own question. You can practice here before opening an AI service.</p>
+      <div class="card-grid best-practices">
+        <div class="info-card"><h3>1. Give it a job</h3><p>State your goal and, when useful, a role: “Be a patient tutor. Explain this to a beginner.”</p></div>
+        <div class="info-card"><h3>2. Add useful background</h3><p>Describe the audience and situation. Include relevant details, but leave out passwords, account numbers, and private records.</p></div>
+        <div class="info-card"><h3>3. Set limits</h3><p>Say what to avoid or be careful about: “Do not guess a price” or “Help me prepare questions, without telling me what to take.”</p></div>
+        <div class="info-card"><h3>4. Choose a format</h3><p>Ask for a table, checklist, short explanation, or step-by-step plan. Request plain language and examples.</p></div>
+        <div class="info-card"><h3>5. Show a pattern</h3><p>If style matters, provide two or three sample inputs and answers. This is called <strong>few-shot prompting</strong>. With no examples, it is <strong>zero-shot prompting</strong>.</p></div>
+        <div class="info-card"><h3>6. Ask what to verify</h3><p>Ask the tool to flag assumptions and identify claims to check. A detailed prompt can improve an answer, but cannot guarantee accuracy.</p></div>
+      </div>
+      <div class="callout-box info"><h3 class="callout-title">Keep longer chats on track</h3><p>The <strong>context window</strong> is the limited amount of information an AI model can work with at once. It is measured in <strong>tokens</strong>, small chunks of text or data. Long chats can lose earlier details.</p><p>If an answer drifts, restate your goal, summarize the important facts, and repeat the format. Start a new chat when changing topics.</p></div>
+      <h3 class="subsection-heading">Try an example in three steps</h3>
+      <ol class="practice-steps"><li><strong>Choose an example tab.</strong> Read the basic prompt, then adjust the two choices. A complete, stronger prompt updates alongside your choices on wide screens, or below them on smaller screens.</li><li><strong>Copy, open, and paste.</strong> Select Copy completed prompt, open Gemini, ChatGPT, or Claude, and paste into its message box. Review the prompt, then send it. You may need to sign in; availability and limits vary by service and account.</li><li><strong>Review the response.</strong> Use the questions at the end of the example. Try a follow-up such as “Use simpler words and flag anything I should verify.”</li></ol>
+      <p>This page builds prompts; it does not generate AI answers. Your choices and draft prompt stay on this page until you copy and paste them into a service. Draft text is not saved when you reload or close the page. Text-size settings, theme, exploration progress, and your certificate name are saved in this browser when storage is available.</p>
+      <p class="end-marker">Read to this point to complete Start here. On each example tab, review the completed prompt and check the review box at the end. Then use Build Your Own Prompt to enter a question and review your assembled prompt. Explore all seven tabs to unlock your certificate.</p>
+    </section>
+    <section id="panel-health" class="tab-panel example-panel" role="tabpanel" aria-labelledby="tab-health" tabindex="0">
+      <h2 class="section-heading">Comparing Health Information</h2>
+      <p><strong>Your goal:</strong> Understand the general differences between two options, prepare better questions for a doctor, and avoid treating an AI response as medical advice.</p>
+      <details class="basic-example"><summary>Compare with the basic prompt</summary><blockquote>I have heard that turmeric helps with joint pain, but my doctor recommended ibuprofen. Can you compare the pros and cons of both?</blockquote></details>
+      <div class="prompt-workspace">
+      <div class="info-card builder">
+        <h3>1. Make the prompt useful to you</h3>
+        <p>Change the focus, then find the added preferences at the end of your completed prompt.</p>
+        <div class="fields-grid"><div class="field"><label for="health-choice-0">What would you like to prepare?</label><select id="health-choice-0" data-preference>
+<option>Questions for a doctor appointment</option>
+<option>Questions for a pharmacist</option>
+<option>A plain-language comparison to discuss with my doctor</option>
+</select></div>
+<div class="field"><label for="health-choice-1">What should receive extra attention?</label><select id="health-choice-1" data-preference>
+<option>Common risks and cautions</option>
+<option>The strength of the evidence</option>
+<option>Questions about interactions with other medicines</option>
+</select></div>
+</div>
+        <button type="button" class="btn-secondary reset-example">Reset example choices</button>
+        <p class="builder-status" role="status"></p>
+      </div>
+      <div class="prompt-card">
+        <h3 id="health-prompt-label">2. Your completed prompt</h3>
+        <p>Your two choices update the preferences at the end. The goal, format, and boundaries stay included.</p>
+        <pre class="completed-prompt" id="health-prompt" tabindex="0" aria-labelledby="health-prompt-label">I am trying to prepare for a conversation with my doctor about joint pain. Please compare turmeric supplements and ibuprofen in plain language.
+
+- Output format: a table with possible benefits, common risks, when to avoid or use caution, and questions to ask my doctor.
+
+- Audience: an adult who is not a medical expert.
+
+- Limits: do not give me a diagnosis or tell me what to take.
+
+- Verification: if you mention studies or medical claims, tell me what kind of source I should verify, such as a doctor, pharmacist, or reputable medical site.
+
+- Samples: include three example questions I could bring to my appointment.
+
+Additional practice preferences:
+- Questions for a doctor appointment
+- Common risks and cautions</pre>
+        <template class="base-prompt">I am trying to prepare for a conversation with my doctor about joint pain. Please compare turmeric supplements and ibuprofen in plain language.
+
+- Output format: a table with possible benefits, common risks, when to avoid or use caution, and questions to ask my doctor.
+
+- Audience: an adult who is not a medical expert.
+
+- Limits: do not give me a diagnosis or tell me what to take.
+
+- Verification: if you mention studies or medical claims, tell me what kind of source I should verify, such as a doctor, pharmacist, or reputable medical site.
+
+- Samples: include three example questions I could bring to my appointment.</template>
+        <div class="action-row"><button type="button" class="btn-primary copy-prompt">Copy completed prompt</button><button type="button" class="btn-secondary select-prompt">Select prompt text</button></div>
+        <p class="copy-status" role="status"></p>
+        <p><strong>After copying:</strong> Open a service below, paste into its message box (Command + V on a Mac or Ctrl + V on Windows), review, and send. On a phone or tablet, touch and hold the message box, then choose Paste.</p>
+        <div class="service-links"><a class="btn-secondary" href="https://gemini.google.com/" target="_blank" rel="noopener noreferrer">Open Gemini<span class="sr-only"> (opens in a new tab)</span></a><a class="btn-secondary" href="https://chatgpt.com/" target="_blank" rel="noopener noreferrer">Open ChatGPT<span class="sr-only"> (opens in a new tab)</span></a><a class="btn-secondary" href="https://claude.ai/" target="_blank" rel="noopener noreferrer">Open Claude<span class="sr-only"> (opens in a new tab)</span></a></div>
+        <p class="service-note">Links open in a new tab. They open the service; paste the copied prompt there. You may need to sign in.</p>
+      </div>
+      </div>
+      <div class="callout-box info"><h3 class="callout-title">Why this prompt is stronger</h3><p>It explains the purpose, sets a safety boundary, asks for a specific format, and requests practical follow-up questions. That helps the tool produce a useful preparation aid instead of sounding like a medical decision-maker.</p></div>
+      <div class="review-card">
+        <h3>3. Check the result</h3><p>Does the answer help you prepare questions without telling you what to take? Check medical claims with your doctor, pharmacist, or a reputable medical source.</p>
+        <p><strong>Try a follow-up:</strong> “Keep the same goal and limits. Use simpler words, give one example, and list what I should verify.”</p>
+        <p>You can finish this practice by reviewing the prompt here, even if you do not use an AI account.</p>
+        <label class="review-check"><input type="checkbox" class="reviewed"><span>I reviewed the completed prompt, its limits, and what to verify</span></label>
+      </div>
+      <p class="end-marker">End of the health information example. Choose another tab to keep practicing.</p>
+    </section>
+    <section id="panel-travel" class="tab-panel example-panel" role="tabpanel" aria-labelledby="tab-travel" tabindex="0">
+      <h2 class="section-heading">Travel Planning with Constraints</h2>
+      <p><strong>Your goal:</strong> Create a realistic travel planning checklist or draft itinerary that accounts for mobility, budget, location, and seasonal details.</p>
+      <details class="basic-example"><summary>Compare with the basic prompt</summary><blockquote>Plan a 7-day trip to Paris for someone with limited mobility. Include affordable hotels near attractions, accessible transportation, and weather in October.</blockquote></details>
+      <div class="prompt-workspace">
+      <div class="info-card builder">
+        <h3>1. Make the prompt useful to you</h3>
+        <p>Try a different pace or accessibility priority. Notice how the prompt gives the planner clearer limits.</p>
+        <div class="fields-grid"><div class="field"><label for="travel-choice-0">How much activity fits each day?</label><select id="travel-choice-0" data-preference>
+<option>One main attraction with regular rest breaks</option>
+<option>Two nearby activities with a long midday break</option>
+<option>Mostly indoor activities with short outings</option>
+</select></div>
+<div class="field"><label for="travel-choice-1">What accessibility detail matters most?</label><select id="travel-choice-1" data-preference>
+<option>Step-free entrances and elevator availability</option>
+<option>Short walking distances and places to sit</option>
+<option>Wheelchair-accessible transportation and restrooms</option>
+</select></div>
+</div>
+        <button type="button" class="btn-secondary reset-example">Reset example choices</button>
+        <p class="builder-status" role="status"></p>
+      </div>
+      <div class="prompt-card">
+        <h3 id="travel-prompt-label">2. Your completed prompt</h3>
+        <p>Your two choices update the preferences at the end. The goal, format, and boundaries stay included.</p>
+        <pre class="completed-prompt" id="travel-prompt" tabindex="0" aria-labelledby="travel-prompt-label">Help me draft a 7-day Paris travel plan for an older adult with limited mobility. I want a comfortable pace, short travel distances, and accessible options when possible.
+
+- Output format: a day-by-day table with morning, afternoon, evening, transportation notes, and rest breaks.
+
+- Constraints: avoid long walking days, include indoor backup options, and keep the plan moderate rather than packed.
+
+- Budget: suggest what to compare when looking for affordable hotels, but do not invent exact prices.
+
+- Verification: list what I should confirm on official hotel, transit, museum, and weather sites before booking.
+
+- Samples: include two sample hotel-location search phrases and three accessibility questions to ask before reserving.
+
+Additional practice preferences:
+- One main attraction with regular rest breaks
+- Step-free entrances and elevator availability</pre>
+        <template class="base-prompt">Help me draft a 7-day Paris travel plan for an older adult with limited mobility. I want a comfortable pace, short travel distances, and accessible options when possible.
+
+- Output format: a day-by-day table with morning, afternoon, evening, transportation notes, and rest breaks.
+
+- Constraints: avoid long walking days, include indoor backup options, and keep the plan moderate rather than packed.
+
+- Budget: suggest what to compare when looking for affordable hotels, but do not invent exact prices.
+
+- Verification: list what I should confirm on official hotel, transit, museum, and weather sites before booking.
+
+- Samples: include two sample hotel-location search phrases and three accessibility questions to ask before reserving.</template>
+        <div class="action-row"><button type="button" class="btn-primary copy-prompt">Copy completed prompt</button><button type="button" class="btn-secondary select-prompt">Select prompt text</button></div>
+        <p class="copy-status" role="status"></p>
+        <p><strong>After copying:</strong> Open a service below, paste into its message box (Command + V on a Mac or Ctrl + V on Windows), review, and send. On a phone or tablet, touch and hold the message box, then choose Paste.</p>
+        <div class="service-links"><a class="btn-secondary" href="https://gemini.google.com/" target="_blank" rel="noopener noreferrer">Open Gemini<span class="sr-only"> (opens in a new tab)</span></a><a class="btn-secondary" href="https://chatgpt.com/" target="_blank" rel="noopener noreferrer">Open ChatGPT<span class="sr-only"> (opens in a new tab)</span></a><a class="btn-secondary" href="https://claude.ai/" target="_blank" rel="noopener noreferrer">Open Claude<span class="sr-only"> (opens in a new tab)</span></a></div>
+        <p class="service-note">Links open in a new tab. They open the service; paste the copied prompt there. You may need to sign in.</p>
+      </div>
+      </div>
+      <div class="callout-box info"><h3 class="callout-title">Why this prompt is stronger</h3><p>It gives the tool planning priorities and tells it not to invent details such as exact prices. It also asks for verification steps, which is important because travel availability, accessibility, and weather information can change.</p></div>
+      <div class="review-card">
+        <h3>3. Check the result</h3><p>Does the plan include rest breaks and items to verify? Confirm accessibility, hours, prices, and transportation on official sites before booking.</p>
+        <p><strong>Try a follow-up:</strong> “Keep the same goal and limits. Use simpler words, give one example, and list what I should verify.”</p>
+        <p>You can finish this practice by reviewing the prompt here, even if you do not use an AI account.</p>
+        <label class="review-check"><input type="checkbox" class="reviewed"><span>I reviewed the completed prompt, its limits, and what to verify</span></label>
+      </div>
+      <p class="end-marker">End of the travel planning example. Choose another tab to keep practicing.</p>
+    </section>
+    <section id="panel-finance" class="tab-panel example-panel" role="tabpanel" aria-labelledby="tab-finance" tabindex="0">
+      <h2 class="section-heading">Comparing Financial Options</h2>
+      <p><strong>Your goal:</strong> Understand basic tradeoffs between options and prepare questions for a financial professional without receiving personalized investment advice.</p>
+      <details class="basic-example"><summary>Compare with the basic prompt</summary><blockquote>Should I invest in bonds or CDs for steady income? I am risk-averse and retired.</blockquote></details>
+      <div class="prompt-workspace">
+      <div class="info-card builder">
+        <h3>1. Make the prompt useful to you</h3>
+        <p>Choose a learning priority. Keep the boundary that asks for education, not a personal investment recommendation.</p>
+        <div class="fields-grid"><div class="field"><label for="finance-choice-0">What would you like to understand better?</label><select id="finance-choice-0" data-preference>
+<option>Access to money before the investment ends</option>
+<option>How income and interest rates can change</option>
+<option>The difference between insurance and other guarantees</option>
+</select></div>
+<div class="field"><label for="finance-choice-1">Who will you prepare questions for?</label><select id="finance-choice-1" data-preference>
+<option>A bank representative and a financial advisor</option>
+<option>A bank representative</option>
+<option>A financial advisor</option>
+</select></div>
+</div>
+        <button type="button" class="btn-secondary reset-example">Reset example choices</button>
+        <p class="builder-status" role="status"></p>
+      </div>
+      <div class="prompt-card">
+        <h3 id="finance-prompt-label">2. Your completed prompt</h3>
+        <p>Your two choices update the preferences at the end. The goal, format, and boundaries stay included.</p>
+        <pre class="completed-prompt" id="finance-prompt" tabindex="0" aria-labelledby="finance-prompt-label">Explain the general differences between CDs and bonds for someone who wants steady income and prefers lower risk. Do not recommend a specific investment for me.
+
+- Output format: a comparison table with safety, income, access to money, interest-rate risk, fees, insurance or guarantees, and questions to ask an advisor.
+
+- Audience: a retired beginner who wants plain language.
+
+- Constraints: avoid jargon unless you define it.
+
+- Verification: tell me which details change over time, such as current rates, fees, tax rules, and account insurance limits.
+
+- Samples: include two sample questions for a bank and two sample questions for a financial advisor.
+
+Additional practice preferences:
+- Access to money before the investment ends
+- A bank representative and a financial advisor</pre>
+        <template class="base-prompt">Explain the general differences between CDs and bonds for someone who wants steady income and prefers lower risk. Do not recommend a specific investment for me.
+
+- Output format: a comparison table with safety, income, access to money, interest-rate risk, fees, insurance or guarantees, and questions to ask an advisor.
+
+- Audience: a retired beginner who wants plain language.
+
+- Constraints: avoid jargon unless you define it.
+
+- Verification: tell me which details change over time, such as current rates, fees, tax rules, and account insurance limits.
+
+- Samples: include two sample questions for a bank and two sample questions for a financial advisor.</template>
+        <div class="action-row"><button type="button" class="btn-primary copy-prompt">Copy completed prompt</button><button type="button" class="btn-secondary select-prompt">Select prompt text</button></div>
+        <p class="copy-status" role="status"></p>
+        <p><strong>After copying:</strong> Open a service below, paste into its message box (Command + V on a Mac or Ctrl + V on Windows), review, and send. On a phone or tablet, touch and hold the message box, then choose Paste.</p>
+        <div class="service-links"><a class="btn-secondary" href="https://gemini.google.com/" target="_blank" rel="noopener noreferrer">Open Gemini<span class="sr-only"> (opens in a new tab)</span></a><a class="btn-secondary" href="https://chatgpt.com/" target="_blank" rel="noopener noreferrer">Open ChatGPT<span class="sr-only"> (opens in a new tab)</span></a><a class="btn-secondary" href="https://claude.ai/" target="_blank" rel="noopener noreferrer">Open Claude<span class="sr-only"> (opens in a new tab)</span></a></div>
+        <p class="service-note">Links open in a new tab. They open the service; paste the copied prompt there. You may need to sign in.</p>
+      </div>
+      </div>
+      <div class="callout-box info"><h3 class="callout-title">Why this prompt is stronger</h3><p>It changes the task from &quot;tell me what to do&quot; to &quot;help me understand and prepare.&quot; It also asks the tool to separate stable concepts from information that must be checked with current sources.</p></div>
+      <div class="review-card">
+        <h3>3. Check the result</h3><p>Does the answer explain tradeoffs without choosing an investment for you? Verify current rates, fees, tax rules, and insurance details with official sources or a qualified professional.</p>
+        <p><strong>Try a follow-up:</strong> “Keep the same goal and limits. Use simpler words, give one example, and list what I should verify.”</p>
+        <p>You can finish this practice by reviewing the prompt here, even if you do not use an AI account.</p>
+        <label class="review-check"><input type="checkbox" class="reviewed"><span>I reviewed the completed prompt, its limits, and what to verify</span></label>
+      </div>
+      <p class="end-marker">End of the financial options example. Choose another tab to keep practicing.</p>
+    </section>
+    <section id="panel-garden" class="tab-panel example-panel" role="tabpanel" aria-labelledby="tab-garden" tabindex="0">
+      <h2 class="section-heading">Troubleshooting a Hobby Problem</h2>
+      <p><strong>Your goal:</strong> Get a step-by-step troubleshooting plan that starts with observation before jumping to a single answer.</p>
+      <details class="basic-example"><summary>Compare with the basic prompt</summary><blockquote>My tomato plants have yellow leaves. What is wrong, and how do I fix it without using chemicals?</blockquote></details>
+      <div class="prompt-workspace">
+      <div class="info-card builder">
+        <h3>1. Make the prompt useful to you</h3>
+        <p>Use these sample observations or choose ones that fit your garden. Notice how observations add useful context.</p>
+        <div class="fields-grid"><div class="field"><label for="garden-choice-0">Where are the tomato plants growing?</label><select id="garden-choice-0" data-preference>
+<option>In outdoor containers</option>
+<option>In a raised garden bed</option>
+<option>In the ground</option>
+</select></div>
+<div class="field"><label for="garden-choice-1">What have you noticed?</label><select id="garden-choice-1" data-preference>
+<option>Mostly lower leaves are yellow</option>
+<option>New leaves near the top are yellow</option>
+<option>Yellow leaves appear throughout the plant</option>
+</select></div>
+</div>
+        <button type="button" class="btn-secondary reset-example">Reset example choices</button>
+        <p class="builder-status" role="status"></p>
+      </div>
+      <div class="prompt-card">
+        <h3 id="garden-prompt-label">2. Your completed prompt</h3>
+        <p>Your two choices update the preferences at the end. The goal, format, and boundaries stay included.</p>
+        <pre class="completed-prompt" id="garden-prompt" tabindex="0" aria-labelledby="garden-prompt-label">Help me troubleshoot yellow leaves on tomato plants using a cautious, organic gardening approach.
+
+- Output format: a checklist with possible causes, what to look for, simple tests, and low-risk next steps.
+
+- Context: I want to avoid synthetic pesticides and avoid overcorrecting before I know the likely cause.
+
+- Constraints: do not assume one cause from the symptom alone.
+
+- Verification: tell me when I should consult a local university extension, nursery, or gardening expert.
+
+- Samples: include three observations I can report back, such as watering pattern, leaf location, or visible pests.
+
+Additional practice preferences:
+- In outdoor containers
+- Mostly lower leaves are yellow</pre>
+        <template class="base-prompt">Help me troubleshoot yellow leaves on tomato plants using a cautious, organic gardening approach.
+
+- Output format: a checklist with possible causes, what to look for, simple tests, and low-risk next steps.
+
+- Context: I want to avoid synthetic pesticides and avoid overcorrecting before I know the likely cause.
+
+- Constraints: do not assume one cause from the symptom alone.
+
+- Verification: tell me when I should consult a local university extension, nursery, or gardening expert.
+
+- Samples: include three observations I can report back, such as watering pattern, leaf location, or visible pests.</template>
+        <div class="action-row"><button type="button" class="btn-primary copy-prompt">Copy completed prompt</button><button type="button" class="btn-secondary select-prompt">Select prompt text</button></div>
+        <p class="copy-status" role="status"></p>
+        <p><strong>After copying:</strong> Open a service below, paste into its message box (Command + V on a Mac or Ctrl + V on Windows), review, and send. On a phone or tablet, touch and hold the message box, then choose Paste.</p>
+        <div class="service-links"><a class="btn-secondary" href="https://gemini.google.com/" target="_blank" rel="noopener noreferrer">Open Gemini<span class="sr-only"> (opens in a new tab)</span></a><a class="btn-secondary" href="https://chatgpt.com/" target="_blank" rel="noopener noreferrer">Open ChatGPT<span class="sr-only"> (opens in a new tab)</span></a><a class="btn-secondary" href="https://claude.ai/" target="_blank" rel="noopener noreferrer">Open Claude<span class="sr-only"> (opens in a new tab)</span></a></div>
+        <p class="service-note">Links open in a new tab. They open the service; paste the copied prompt there. You may need to sign in.</p>
+      </div>
+      </div>
+      <div class="callout-box info"><h3 class="callout-title">Why this prompt is stronger</h3><p>It asks the tool to troubleshoot instead of guess. It also invites the tool to ask for missing information, which can prevent a confident but wrong diagnosis.</p></div>
+      <div class="review-card">
+        <h3>3. Check the result</h3><p>Does the answer consider more than one cause and begin with observations? Check uncertain advice with a local university extension, nursery, or gardening expert.</p>
+        <p><strong>Try a follow-up:</strong> “Keep the same goal and limits. Use simpler words, give one example, and list what I should verify.”</p>
+        <p>You can finish this practice by reviewing the prompt here, even if you do not use an AI account.</p>
+        <label class="review-check"><input type="checkbox" class="reviewed"><span>I reviewed the completed prompt, its limits, and what to verify</span></label>
+      </div>
+      <p class="end-marker">End of the gardening example. Choose another tab to keep practicing.</p>
+    </section>
+    <section id="panel-medicare" class="tab-panel example-panel" role="tabpanel" aria-labelledby="tab-medicare" tabindex="0">
+      <h2 class="section-heading">Explaining Medicare Part B Simply</h2>
+      <p><strong>Your goal:</strong> Get a beginner-friendly explanation that includes examples, key terms, and follow-up questions.</p>
+      <details class="basic-example"><summary>Compare with the basic prompt</summary><blockquote>Explain how Medicare Part B works, but pretend I am a beginner. Include examples of what it covers.</blockquote></details>
+      <div class="prompt-workspace">
+      <div class="info-card builder">
+        <h3>1. Make the prompt useful to you</h3>
+        <p>Choose a learning focus and a fictional example. No Medicare number or personal records are needed.</p>
+        <div class="fields-grid"><div class="field"><label for="medicare-choice-0">What would you like explained more clearly?</label><select id="medicare-choice-0" data-preference>
+<option>The meaning of common insurance terms</option>
+<option>How to read a general coverage explanation</option>
+<option>Questions to ask about possible costs</option>
+</select></div>
+<div class="field"><label for="medicare-choice-1">What kind of example would help?</label><select id="medicare-choice-1" data-preference>
+<option>A fictional outpatient doctor visit</option>
+<option>A fictional outpatient test</option>
+<option>A fictional conversation with a benefits counselor</option>
+</select></div>
+</div>
+        <button type="button" class="btn-secondary reset-example">Reset example choices</button>
+        <p class="builder-status" role="status"></p>
+      </div>
+      <div class="prompt-card">
+        <h3 id="medicare-prompt-label">2. Your completed prompt</h3>
+        <p>Your two choices update the preferences at the end. The goal, format, and boundaries stay included.</p>
+        <pre class="completed-prompt" id="medicare-prompt" tabindex="0" aria-labelledby="medicare-prompt-label">Explain Medicare Part B in beginner-friendly language for someone who wants to understand the basics before reviewing official Medicare information.
+
+- Output format: start with a one-paragraph overview, then provide a table with what it generally covers, what it may not cover, possible costs to ask about, and where to verify details.
+
+- Audience: a beginner who may not know insurance vocabulary.
+
+- Constraints: define key terms such as premium, deductible, coinsurance, and outpatient care.
+
+- Verification: remind me which details must be checked with Medicare.gov or a qualified benefits counselor.
+
+- Samples: include three example questions I could ask before making enrollment or coverage decisions.
+
+Additional practice preferences:
+- The meaning of common insurance terms
+- A fictional outpatient doctor visit</pre>
+        <template class="base-prompt">Explain Medicare Part B in beginner-friendly language for someone who wants to understand the basics before reviewing official Medicare information.
+
+- Output format: start with a one-paragraph overview, then provide a table with what it generally covers, what it may not cover, possible costs to ask about, and where to verify details.
+
+- Audience: a beginner who may not know insurance vocabulary.
+
+- Constraints: define key terms such as premium, deductible, coinsurance, and outpatient care.
+
+- Verification: remind me which details must be checked with Medicare.gov or a qualified benefits counselor.
+
+- Samples: include three example questions I could ask before making enrollment or coverage decisions.</template>
+        <div class="action-row"><button type="button" class="btn-primary copy-prompt">Copy completed prompt</button><button type="button" class="btn-secondary select-prompt">Select prompt text</button></div>
+        <p class="copy-status" role="status"></p>
+        <p><strong>After copying:</strong> Open a service below, paste into its message box (Command + V on a Mac or Ctrl + V on Windows), review, and send. On a phone or tablet, touch and hold the message box, then choose Paste.</p>
+        <div class="service-links"><a class="btn-secondary" href="https://gemini.google.com/" target="_blank" rel="noopener noreferrer">Open Gemini<span class="sr-only"> (opens in a new tab)</span></a><a class="btn-secondary" href="https://chatgpt.com/" target="_blank" rel="noopener noreferrer">Open ChatGPT<span class="sr-only"> (opens in a new tab)</span></a><a class="btn-secondary" href="https://claude.ai/" target="_blank" rel="noopener noreferrer">Open Claude<span class="sr-only"> (opens in a new tab)</span></a></div>
+        <p class="service-note">Links open in a new tab. They open the service; paste the copied prompt there. You may need to sign in.</p>
+      </div>
+      </div>
+      <div class="callout-box info"><h3 class="callout-title">Why this prompt is stronger</h3><p>It asks for a teaching sequence, not just an answer. It also defines the audience, requests examples, and points the student back to official verification for details that may change.</p></div>
+      <div class="review-card">
+        <h3>3. Check the result</h3><p>Are unfamiliar words defined? Confirm coverage, costs, and enrollment details with Medicare.gov or a qualified benefits counselor before making decisions.</p>
+        <p><strong>Try a follow-up:</strong> “Keep the same goal and limits. Use simpler words, give one example, and list what I should verify.”</p>
+        <p>You can finish this practice by reviewing the prompt here, even if you do not use an AI account.</p>
+        <label class="review-check"><input type="checkbox" class="reviewed"><span>I reviewed the completed prompt, its limits, and what to verify</span></label>
+      </div>
+      <p class="end-marker">End of the Medicare basics example. Choose another tab to keep practicing.</p>
+    </section>
+    <section id="panel-custom" class="tab-panel example-panel" role="tabpanel" aria-labelledby="tab-custom" tabindex="0">
+      <h2 class="section-heading">Build Your Own Prompt</h2>
+      <p>Start with any question you want to explore. Use the same six steps from Start here to give the AI a clearer job. Only your question is required; the other steps help you add detail.</p>
+      <p>Use a fictional situation if you prefer. Leave out passwords, account numbers, and private records. Your draft is not saved when you reload or close this page, so copy it somewhere safe if you want to keep it.</p>
+      <div class="prompt-workspace">
+        <div class="info-card builder">
+          <div class="field custom-step"><h3>1. Give it a job</h3><label for="custom-goal">What would you like help with? (required)</label><p id="custom-goal-hint">Describe your question or task. You can also suggest a role, such as a patient tutor.</p><textarea id="custom-goal" data-custom rows="3" maxlength="4000" aria-describedby="custom-goal-hint" placeholder="How can I organize and label my family photos?" required></textarea></div>
+          <div class="field custom-step"><h3>2. Add useful background</h3><label for="custom-context">What should the AI know? (optional)</label><p id="custom-context-hint">Describe the situation and who the answer is for. Leave out names, account numbers, and private records.</p><textarea id="custom-context" data-custom rows="3" maxlength="4000" aria-describedby="custom-context-hint" placeholder="I am a beginner with printed photos and pictures on my phone." ></textarea></div>
+          <div class="field custom-step"><h3>3. Set limits</h3><label for="custom-limits">What should it avoid or pay attention to? (optional)</label><p id="custom-limits-hint">Consider time, cost, detail, or actions you want to avoid.</p><textarea id="custom-limits" data-custom rows="3" maxlength="4000" aria-describedby="custom-limits-hint" placeholder="Keep the plan inexpensive and do not suggest deleting any originals." ></textarea></div>
+          <div class="field custom-step"><h3>4. Choose a format</h3><label for="custom-format">How should the answer be organized? (optional)</label><select id="custom-format" data-custom><option>A short explanation</option><option>A checklist</option><option>A comparison table</option><option>A step-by-step plan</option><option>Questions to help me explore the topic</option></select><p>Every prompt asks for plain language, defined unfamiliar terms, and a practical example.</p></div>
+          <div class="field custom-step"><h3>5. Show a pattern</h3><label for="custom-pattern">Is there an example it should follow? (optional)</label><p id="custom-pattern-hint">Provide a sample answer or two or three input/output examples if a particular style matters. Otherwise, leave this blank.</p><textarea id="custom-pattern" data-custom rows="3" maxlength="4000" aria-describedby="custom-pattern-hint" placeholder="Step: Gather one small group of photos. Why: A small task is easier to finish." ></textarea></div>
+          <div class="field custom-step"><h3>6. Ask what to verify</h3><label for="custom-verify">What should be checked? (optional)</label><p id="custom-verify-hint">Keep the suggested instructions or replace them with details specific to your question.</p><textarea id="custom-verify" data-custom rows="3" maxlength="4000" aria-describedby="custom-verify-hint" placeholder="" >Flag assumptions and uncertainty. Identify facts or changing details I should check with current, official, or expert sources. Do not invent sources. Ask clarifying questions when important information is missing.</textarea></div>
+          <button type="button" class="btn-secondary reset-example">Clear my draft</button>
+          <p class="builder-status" role="status"></p>
+        </div>
+        <div class="prompt-card">
+          <h3 id="custom-prompt-label">Your completed prompt</h3>
+          <p>This preview updates as you type. Optional blank sections are left out.</p>
+          <pre class="completed-prompt" id="custom-prompt" tabindex="0" aria-labelledby="custom-prompt-label">Enter your question in step 1 to build your completed prompt.</pre>
+          <div class="action-row"><button type="button" class="btn-primary copy-prompt" disabled>Copy completed prompt</button><button type="button" class="btn-secondary select-prompt" disabled>Select prompt text</button></div>
+          <p class="copy-status" role="status"></p>
+          <p><strong>After copying:</strong> Open a service, paste into its message box (Command + V on a Mac or Ctrl + V on Windows), review, and send. On a phone or tablet, touch and hold the message box and choose Paste.</p>
+        <div class="service-links"><a class="btn-secondary" href="https://gemini.google.com/" target="_blank" rel="noopener noreferrer">Open Gemini<span class="sr-only"> (opens in a new tab)</span></a><a class="btn-secondary" href="https://chatgpt.com/" target="_blank" rel="noopener noreferrer">Open ChatGPT<span class="sr-only"> (opens in a new tab)</span></a><a class="btn-secondary" href="https://claude.ai/" target="_blank" rel="noopener noreferrer">Open Claude<span class="sr-only"> (opens in a new tab)</span></a></div>
+          <p class="service-note">Links open in a new tab. Paste your copied prompt there. You may need to sign in.</p>
+        </div>
+      </div>
+      <div class="review-card">
+        <h3>Review before you use it</h3>
+        <p>Does the prompt describe your goal, include useful background, and ask for the kind of answer you need? Remove private details and check what needs verification. AI responses can still be wrong.</p>
+        <p>If the answer misses the point, restate your goal, explain what needs changing, and repeat the format. You do not need an AI account to complete this activity.</p>
+        <label class="review-check"><input type="checkbox" class="reviewed" disabled><span>I entered a question and reviewed my completed prompt, its limits, and what to verify</span></label>
+        <p id="custom-review-hint">Enter a question in step 1 to enable the review box.</p>
+      </div>
+      <p class="end-marker">End of Build Your Own Prompt. Review your prompt and check the box above to earn this tab’s completion badge.</p>
+    </section>
+    <section id="certificate-section" class="certificate-wrapper-card" aria-labelledby="certificate-heading" hidden>
+      <div class="no-print"><h2 id="certificate-heading">Your completion certificate</h2><p>You have explored the guide, all five examples, and built your own prompt. Enter your name to personalize your certificate.</p>
+        <label for="student-name-input">Your name</label><input id="student-name-input" type="text" maxlength="80" autocomplete="name">
+        <button type="button" class="btn-primary" id="print-certificate">Print / Save Certificate PDF</button>
+      </div>
+      <div class="certificate-printable-frame" id="printable-certificate"><div class="cert-border-outer"><div class="cert-border-inner">
+        <div class="cert-header"><h3 class="cert-institution">Intermediate Life &amp; Technology Integration</h3><div class="cert-title">Certificate of Completion</div></div>
+        <div class="cert-body"><p class="cert-text-lead">Awarded to</p><div class="cert-student-name" id="cert-display-name">Emeritus Student</div><p class="cert-text-desc">for exploring <strong>Prompt Examples</strong>, practicing clear goals, context, boundaries, and output formats, and reviewing how to verify AI responses.</p></div>
+        <div class="cert-footer"><div class="cert-sig-block"><div class="cert-sig-line">Professor Sable</div><div class="cert-sig-title">Emeritus Institute</div></div><div class="cert-date-block"><div class="cert-date-line" id="cert-display-date"></div><div class="cert-date-label">Date Awarded</div></div></div>
+      </div></div></div>
+    </section>
+  </main>
+  <footer class="app-footer">
+    <p><a href="https://cantus.us/emeritus" target="_blank" rel="noopener noreferrer">Professor Sable. Emeritus Institute. (opens in a new tab)</a></p>
+    <p>Adapted from the course pages <cite>Prompt Engineering and Context Windows</cite> and <cite>Prompt Examples</cite>.</p>
+    <p>Official AI services: <a href="https://gemini.google.com/" target="_blank" rel="noopener noreferrer">Gemini</a>, <a href="https://chatgpt.com/" target="_blank" rel="noopener noreferrer">ChatGPT</a>, and <a href="https://claude.ai/" target="_blank" rel="noopener noreferrer">Claude</a> (links open in a new tab).</p>
+    <p>AI was used in the creation of this tool.</p>
+    <p>Last Updated: 9/14/26</p>
+  </footer>
+  <script src="app.js"></script>
+</body>
+</html>
