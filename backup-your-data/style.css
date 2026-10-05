@@ -1330,6 +1330,7 @@ fieldset { min-width: 0; }
 .cert-student-name { overflow-wrap: anywhere; }
 #font-size-indicator { font-weight: bold; min-width: 48px; }
 [data-theme="dark"] .btn-primary { color: #111b24; }
+[data-theme="dark"] table.emeritus-table th { color: var(--bg-main); }
 @media (max-width: 768px) {
   .certificate-wrapper-card, .certificate-printable-frame { padding: 12px; }
   .cert-border-inner { padding: 20px 10px; }
@@ -1354,3 +1355,13 @@ fieldset { min-width: 0; }
 @media screen and (min-width: 769px) {
   .tab-panel, #certificate-section { scroll-margin-top: calc(var(--nav-height, 190px) + 16px); }
 }
+
+/* Keep instructional text easy to scan at every text size. */
+.tab-panel > p, .tab-panel > ul, .tab-panel > ol { max-width: 70ch; }
+.tab-panel > .callout-box { max-width: 75ch; }
+.tab-panel li + li { margin-top: 0.45em; }
+.source-note { font-size: 1rem; line-height: 1.7; }
+.selection-summary { padding: 16px; border-left: 5px solid var(--info-border); background: var(--info-bg); color: var(--info-text); }
+.info-card details { margin: 16px 0; }
+.info-card summary { min-height: 44px; padding: 10px 0; font-weight: 700; cursor: pointer; text-decoration: underline; }
+.info-card details p { margin-top: 12px; }

@@ -94,8 +94,9 @@ function resetProgress() {
   storage.set('explored', '[]');
   document.getElementById('backup-quiz').reset();
   document.getElementById('backup-lab').reset();
+  updateLabSelection();
   document.getElementById('lab-result').hidden = true;
-  document.getElementById('lab-practice-status').textContent = 'Run at least one scenario, then read to the end to complete this tab.';
+  document.getElementById('lab-practice-status').textContent = 'Test at least one plan, then read to the end to earn this tab’s checkmark.';
   document.querySelectorAll('.question-feedback').forEach(item => { item.hidden = true; item.textContent = ''; });
   document.getElementById('quiz-summary').textContent = "Answer every question correctly to earn this tab's checkmark. You can try again.";
   updateProgress();
@@ -105,33 +106,53 @@ function resetProgress() {
 
 /* Illustrative outcomes assume a completed clean backup from yesterday. */
 const backupScopes = {
-  documents: { count: 1, summary: 'Documents only: other personal folders, other users, apps, and the operating system are outside this backup.' },
-  home: { count: 3, summary: 'Home folder: this user’s personal files are included. Other users, installed apps, and the operating system need separate recovery.' },
-  full: { count: 5, summary: 'Full machine: this model includes all users, apps, and the operating system. Real recovery needs a supported image, compatible hardware, and recovery tools.' }
+  documents: { count: 1, summary: 'Documents only: files in other folders, other people’s files, apps, and the operating system are not saved.' },
+  home: { count: 3, summary: 'Home folder: your personal files are saved. Other people’s files, installed apps, and the operating system are not saved.' },
+  full: { count: 5, summary: 'Full machine: this activity saves all users’ files, apps, and the operating system. In real life, you need a backup tool and recovery instructions that work with your computer.' }
 };
 const sampleItems = ['Letters in Documents', 'Family photos in Pictures', 'Class project on Desktop', 'Another user’s files', 'Operating system and installed apps'];
 const recoveryPlans = {
   same: {
-    failure: [false, 'No surviving backup in this model: the original and backup were on the failed drive.'],
-    loss: [false, 'No surviving backup: the backup left with the device.'],
-    malware: [false, 'No clean reachable copy: ransomware encrypted the original and the backup folder.']
+    failure: [false, 'You cannot get these files back from this backup. The original files and the backup were on the same broken drive.'],
+    loss: [false, 'You cannot use this backup. It was on the device that was lost.'],
+    malware: [false, 'You cannot use this backup. Ransomware locked both the original files and the backup folder.']
   },
   connected: {
-    failure: [true, 'The external drive survives an internal-drive failure. Included files can be recovered from yesterday’s copy.'],
-    loss: [false, 'No surviving backup: the device and nearby external drive were taken together.'],
-    malware: [false, 'No clean backup in this scenario: ransomware reached the connected drive, and this plan keeps no earlier versions.']
+    failure: [true, 'The external drive still works after the computer’s drive breaks. You can bring back the saved files from yesterday’s backup.'],
+    loss: [false, 'You cannot use this backup. The device and the nearby backup drive were lost together.'],
+    malware: [false, 'You cannot use this backup. Ransomware locked files on the connected drive. This plan kept no older copies.']
   },
   offline: {
-    failure: [true, 'The disconnected external drive survives. Included files can be recovered from yesterday’s copy.'],
-    loss: [false, 'Being disconnected did not protect the nearby drive from the same theft or loss.'],
-    malware: [true, 'The disconnected drive was out of reach during infection and contains yesterday’s clean backup.']
+    failure: [true, 'The disconnected drive still works. You can bring back the saved files from yesterday’s backup.'],
+    loss: [false, 'Disconnecting the drive did not protect it from theft or loss. It was beside the device, and both were lost.'],
+    malware: [true, 'Ransomware could not reach the disconnected drive. It holds yesterday’s backup, made before the attack.']
   },
   '321': {
-    failure: [true, 'The independent local and offsite copies survive. Recover included data from yesterday’s completed backup.'],
-    loss: [true, 'The nearby drive was lost too, but the offsite cloud backup survives. Recover included data after regaining account access.'],
-    malware: [true, 'The offline copy and protected clean cloud history provide recovery options in this model. Choose a version from before infection.']
+    failure: [true, 'The separate drive and the cloud backup are still available. You can bring back the saved files from yesterday’s backup.'],
+    loss: [true, 'The nearby drive was lost too. The cloud backup is still available away from home. Sign in to bring back the saved files.'],
+    malware: [true, 'The disconnected drive and the protected older cloud copies are still usable in this activity. Choose a copy from before the ransomware attack.']
   }
 };
+const labPlanDescriptions = {
+  same: 'Your backup is another folder on the same computer drive.',
+  connected: 'The external backup drive stays connected. It keeps only the newest copy.',
+  offline: 'The external backup drive is disconnected, but it stays beside the device.',
+  '321': 'You have a disconnected backup drive and a cloud backup away from home. The cloud backup keeps older copies.'
+};
+const labEventDescriptions = {
+  failure: 'The computer’s internal drive breaks.',
+  loss: 'The device and the backup drive beside it are lost or stolen together.',
+  malware: 'Ransomware locks every copy it can reach.'
+};
+function updateLabSelection() {
+  document.getElementById('lab-result').hidden = true;
+  const scopeSelect = document.getElementById('backup-scope');
+  const plan = document.getElementById('backup-plan').value;
+  const event = document.getElementById('backup-event').value;
+  document.getElementById('lab-selection-summary').textContent =
+    `Your selected plan: ${scopeSelect.selectedOptions[0].textContent}. ${labPlanDescriptions[plan]} What goes wrong: ${labEventDescriptions[event]}`;
+}
+
 function runLab(event) {
   event.preventDefault();
   const scope = backupScopes[document.getElementById('backup-scope').value];
@@ -144,14 +165,14 @@ function runLab(event) {
   coverage.replaceChildren();
   sampleItems.forEach((item, index) => {
     const li = document.createElement('li');
-    li.textContent = `${item} — ${index >= scope.count ? 'Not included in this scope' : survives ? 'Recoverable in this model' : 'Included, but no surviving clean copy'}`;
+    li.textContent = `${item} — ${index >= scope.count ? 'Not saved by this choice' : survives ? 'Can be brought back in this activity' : 'Was saved, but this backup cannot be used now'}`;
     coverage.append(li);
   });
   document.getElementById('lab-next-step').textContent = eventId === 'malware'
-    ? 'Before recovery, isolate the infected device and get help cleaning or rebuilding it. Restore a known clean version; an image made after infection can carry malware. Backups do not prevent stolen data from being exposed.'
-    : 'Changes since yesterday’s backup are not included. More frequent successful backups reduce that gap. Restore to a safe device and verify your files.';
+    ? 'Before restoring, disconnect the affected device from the internet and other devices. Get help removing the malware or reinstalling the operating system. Use a backup from before the attack. A backup cannot undo the exposure of information that was stolen.'
+    : 'Files created or changed after yesterday’s backup were not saved. Backing up more often helps you lose less recent work. Bring your files back to a safe device, then open them to check.';
   document.getElementById('lab-result').hidden = false;
-  document.getElementById('lab-practice-status').textContent = 'Scenario tested. Compare another choice, then read to the end to earn this tab’s checkmark.';
+  document.getElementById('lab-practice-status').textContent = 'Plan tested. Try changing one choice and test again. Then read to the end to earn this tab’s checkmark.';
   labPracticed = true;
   announce(outcome + ' ' + scope.summary);
   checkCompletion();
@@ -160,15 +181,15 @@ function runLab(event) {
 const quizData = [
   {
     "answer": 1,
-    "explanation": "Count the original plus two backups, use different storage media, and keep at least one copy away from home."
+    "explanation": "Keep your original and two backups. Use two kinds of storage, and keep at least one copy away from home."
   },
   {
     "answer": 2,
-    "explanation": "A backup can recover only what it actually included. Check photos, Desktop files, and other locations."
+    "explanation": "You can bring back only files that were saved. Check photos, Desktop files, and other folders too."
   },
   {
     "answer": 0,
-    "explanation": "Malware can attack reachable copies. Keep an isolated copy and clean earlier versions."
+    "explanation": "Malware can damage connected backups too. Keep a disconnected or protected copy from before the attack."
   },
   {
     "answer": 2,
@@ -176,11 +197,11 @@ const quizData = [
   },
   {
     "answer": 1,
-    "explanation": "Check successful backup dates and practice restoring before a real loss occurs."
+    "explanation": "Check when the last backup finished. Practice bringing back a file before something goes wrong."
   },
   {
     "answer": 1,
-    "explanation": "Scope and safety are different. An infected image or a reachable destroyed backup will not solve the problem."
+    "explanation": "Saving more files does not make a damaged backup safe. You need a usable copy from before the malware attack."
   }
 ];
 function checkQuiz(event) {
@@ -241,6 +262,8 @@ document.addEventListener('DOMContentLoaded', () => {
   window.addEventListener('resize', checkCompletion);
   completionTimer = setTimeout(checkCompletion, 1400);
   document.getElementById('backup-lab').addEventListener('submit', runLab);
+  document.getElementById('backup-lab').addEventListener('change', updateLabSelection);
+  updateLabSelection();
   document.getElementById('backup-quiz').addEventListener('submit', checkQuiz);
   document.getElementById('reset-progress').addEventListener('click', resetProgress);
   document.getElementById('claim-certificate').addEventListener('click', openCertificate);

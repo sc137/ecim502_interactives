@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Backup Your Data Interactive Guide</title>
-<meta name="description" content="Learn the 3-2-1 backup rule, compare backup scope and recovery, explore device backup options, and earn a completion certificate.">
+<meta name="description" content="Learn the 3-2-1 backup rule, compare what backups save and how to recover files, explore device backup options, and earn a completion certificate.">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>  <!-- Skip to Main Content Link for Keyboard & Screen Reader Users -->
@@ -85,7 +85,7 @@
 </button>
 </li>
 <li role="presentation">
-<button type="button" role="tab" class="tab-button" id="tab-macos" aria-controls="panel-macos" aria-selected="false" tabindex="-1">4. macOS<span class="tab-check-badge">
+<button type="button" role="tab" class="tab-button" id="tab-macos" aria-controls="panel-macos" aria-selected="false" tabindex="-1">4. Mac (macOS)<span class="tab-check-badge">
 <span aria-hidden="true">✅</span>
 <span class="sr-only"> Explored</span>
 </span>
@@ -99,7 +99,7 @@
 </button>
 </li>
 <li role="presentation">
-<button type="button" role="tab" class="tab-button" id="tab-ios" aria-controls="panel-ios" aria-selected="false" tabindex="-1">6. iOS<span class="tab-check-badge">
+<button type="button" role="tab" class="tab-button" id="tab-ios" aria-controls="panel-ios" aria-selected="false" tabindex="-1">6. iPhone &amp; iPad<span class="tab-check-badge">
 <span aria-hidden="true">✅</span>
 <span class="sr-only"> Explored</span>
 </span>
@@ -124,15 +124,19 @@
 <main class="app-container" id="main-content" tabindex="-1">
 <section id="panel-basics" class="tab-panel active" role="tabpanel" aria-labelledby="tab-basics">
 <h2 class="section-heading">Backups give you a way back</h2>
-<p>Family photos, letters, financial records, and class projects can be difficult or impossible to replace. A backup is a separate copy you can restore when the original is deleted, damaged, encrypted by malware, or lost with a device.</p>
+<p>Family photos, letters, financial records, and class projects can be hard to replace. A <strong>backup</strong> is a separate copy you save for later. To <strong>restore</strong> means to bring files back from that copy after something goes wrong.</p>
+<div class="callout-box info"><strong>How to use this guide:</strong> Read at your own pace. Choose a tab above to open a topic. Read to the end to earn its checkmark. Try the Backup Lab and answer the quiz. Complete all eight tabs to claim your certificate. You can return to the device instructions when you need them.</div>
+<h3 class="subsection-heading">A few words used in this guide</h3>
+<ul><li><strong>Drive:</strong> The part of a computer that stores files. An external drive is a separate storage device you connect, usually with a USB cable</li><li><strong>Cloud:</strong> Storage on a company's computers that you reach through the internet</li><li><strong>Older version:</strong> A saved copy from an earlier date, before a file was changed or damaged</li><li><strong>Operating system:</strong> The main software that runs a device, such as Windows or macOS on a Mac</li></ul>
+<p>A backup can help after a file is deleted, a drive breaks, a device is lost, or harmful software damages your files.</p>
 <div class="card-grid">
 <div class="info-card">
 <h3>Hardware failure or loss</h3>
-<p>A drive can stop working. A phone can disappear. Fire or theft can take both a computer and the drive beside it. A separate, offsite copy keeps one event from taking everything.</p>
+<p>A drive can stop working. A phone can be lost. Fire or theft can take both a computer and the drive beside it. Keep another copy <strong>offsite</strong>—away from your home—so the same event is less likely to take every copy.</p>
 </div>
 <div class="info-card">
 <h3>Malware and mistakes</h3>
-<p>Ransomware is malware that can lock files by encrypting them. A backup that malware cannot reach, with a clean earlier version, gives you a recovery option. Backups also help undo accidental deletion.</p>
+<p><strong>Malware</strong> is harmful software. One kind, called <strong>ransomware</strong>, locks files so you cannot open them. Keep a backup that the harmful software cannot reach. Save older copies from before the problem began. Backups also help after accidental deletion.</p>
 </div>
 </div>
 <h3 class="subsection-heading">The 3-2-1 backup rule</h3>
@@ -142,26 +146,27 @@
 <p>Your working original plus <strong>two backup copies</strong> of each important file.</p>
 </div>
 <div class="info-card">
-<h3>2 storage media types</h3>
-<p>Use different media or storage technologies, such as a local external drive and a cloud backup service. Two folders on the same drive share a failure point.</p>
+<h3>2 kinds of storage</h3>
+<p>Use two different kinds of storage, such as an external drive and a cloud backup service. This is often called using two “media types.” Two folders on the same drive do not protect you if that drive breaks.</p>
 </div>
 <div class="info-card">
-<h3>1 copy offsite</h3>
+<h3>1 copy away from home</h3>
 <p>Keep at least one copy away from your home, such as a cloud backup or a drive stored safely elsewhere.</p>
 </div>
 </div>
 <p>
-<strong>Example:</strong> The original photos on your computer, a versioned backup on an external drive, and another backup in the cloud. Disconnect the external drive after its backup finishes. Check that the same important files are included in both backups.</p>
+<strong>Example:</strong> Keep the original photos on your computer. Save a backup with older versions on an external drive. Keep another backup in the cloud. When the drive backup finishes, disconnect the drive. Check that both backups include your important files.</p>
 <h3 class="subsection-heading">Make those copies useful</h3>
 <ul>
-<li>Automate frequent backups and check that they finish successfully</li>
+<li>Set backups to run automatically, and check that they finish successfully</li>
 <li>Keep older versions long enough to discover a problem</li>
-<li>Keep a backup offline or protected against changes and deletion</li>
+<li>Keep a backup offline (disconnected) or protected from unwanted changes and deletion</li>
 <li>Test restoring a few files to a separate folder and open them</li>
-<li>Protect backup accounts with multifactor authentication, and keep recovery codes and encryption keys somewhere safe</li>
+<li>Use a second sign-in check, such as a code, for your backup account; this is called multifactor authentication</li>
+<li>Keep backup passwords, recovery codes, and encryption keys safe; these may be needed to unlock a backup</li>
 </ul>
 <div class="callout-box warning">
-<strong>Sync is useful, but check its limits.</strong> Synchronization keeps files alike across devices. It may also spread deletion or corrupted files. Check version history, recovery limits, and a separate backup rather than assuming sync alone is a complete plan.</div>
+<strong>Sync is useful, but check its limits.</strong> <strong>Sync</strong> keeps files the same across devices. If you delete or damage a file, that change may spread to the other copies. Check whether the service lets you recover older or deleted files. Keep a separate backup too.</div>
 <p class="source-note">Source: <a href="https://www.cisa.gov/sites/default/files/publications/data_backup_options.pdf">CISA: Data Backup Options (PDF)</a>
 </p>
 <p class="source-note">Source: <a href="https://www.cisa.gov/stopransomware/ransomware-guide">CISA: Ransomware prevention and recovery</a>
@@ -169,46 +174,48 @@
 <p class="panel-end" data-end="basics">End of this topic. Your checkmark is earned after viewing this section.</p>
 </section>
 <section id="panel-scope" class="tab-panel" role="tabpanel" aria-labelledby="tab-scope" hidden>
-<h2 class="section-heading">Backup Lab: What could you recover?</h2>
-<p>Choose how much to back up, where to keep it, and what goes wrong. This is a model for learning; it does not access your files or change a device.</p>
+<h2 class="section-heading">Backup Lab: What could you get back?</h2>
+<p>Choose what to save, where to keep the backup, and what goes wrong. Then select <strong>Test My Backup Plan</strong> to see what you could get back. This is a practice activity. It does not read your files or change your device.</p>
 <div class="card-grid">
 <div class="info-card">
 <h3>Documents folder</h3>
-<p>Saves files inside Documents. Photos, Desktop files, and files stored elsewhere need their own coverage. Uses less space, but it is easy to miss something important.</p>
+<p>Saves only files in the Documents folder. Photos and files on the Desktop need a separate backup if they are outside Documents. This choice uses less space, but may miss important files.</p>
 </div>
 <div class="info-card">
 <h3>Home folder</h3>
-<p>Saves one user's personal folder, including Documents, Pictures, Desktop, and Downloads in this model. Does not include other users or the operating system and installed apps.</p>
+<p>The Home folder is your personal folder on a computer. In this activity, it includes Documents, Pictures, Desktop, and Downloads. It does not include other people's files or the operating system and installed apps.</p>
 </div>
 <div class="info-card">
 <h3>Full machine</h3>
-<p>For this model, a supported system-image backup includes all users, installed apps, and the operating system. Needs more space and a compatible recovery method. A service advertising “all your files” may still exclude system files.</p>
+<p>A <strong>system image</strong> is a backup for rebuilding a computer. In this activity, it saves all users, installed apps, and the operating system. It needs more storage space and the right recovery tools. A service promising “all your files” may not save the operating system.</p>
 </div>
 </div>
+<p><strong>Platform note:</strong> Full machine shows how a Windows system image can work. On a Mac, you normally install macOS first, then bring back your files and apps from Carbon Copy Cloner or Time Machine. See the Mac tab for details.</p>
 <div class="callout-box info">
-<strong>Model assumptions:</strong> The latest backup finished yesterday. All selected files were available locally and included successfully. The malware event began today. Offline and cloud history copies contain a clean version from before infection. Cloud accounts remain accessible. Real backup tools have exclusions, storage limits, and restore requirements.</div>
+<strong>For this activity:</strong> The backup finished yesterday. The problem happens today. All selected files were saved. The disconnected drive and cloud service have an older copy from before the malware attack. You can still sign in to the cloud service. A real backup may leave out some files or run out of space.</div>
 <form id="backup-lab" class="info-card">
 <div class="lab-controls">
-<label for="backup-scope">How much to back up<select id="backup-scope">
+<label for="backup-scope">1. What will you save?<select id="backup-scope">
 <option value="documents">Documents folder</option>
 <option value="home">Home folder</option>
-<option value="full">Full machine (system image)</option>
+<option value="full">Full machine</option>
 </select>
 </label>
-<label for="backup-plan">Where to keep backups<select id="backup-plan">
-<option value="same">Another folder on the same drive</option>
-<option value="connected">External drive, always connected, latest copy only</option>
-<option value="offline">External drive, disconnected, kept beside device</option>
-<option value="321">3-2-1: offline drive + offsite versioned cloud backup</option>
+<label for="backup-plan">2. Where is the backup?<select id="backup-plan">
+<option value="same">Same drive</option>
+<option value="connected">Drive connected</option>
+<option value="offline">Drive disconnected</option>
+<option value="321">Drive + cloud</option>
 </select>
 </label>
-<label for="backup-event">What goes wrong<select id="backup-event">
-<option value="failure">Internal drive fails</option>
-<option value="loss">Device and nearby drive are stolen or lost</option>
-<option value="malware">Ransomware encrypts reachable copies</option>
+<label for="backup-event">3. What goes wrong?<select id="backup-event">
+<option value="failure">Drive breaks</option>
+<option value="loss">Device lost</option>
+<option value="malware">Ransomware attack</option>
 </select>
 </label>
 </div>
+<p id="lab-selection-summary" class="selection-summary"></p>
 <button type="submit" class="btn-primary">Test My Backup Plan</button>
 </form>
 <div id="lab-result" class="callout-box info" role="region" aria-labelledby="lab-result-title" hidden>
@@ -223,26 +230,46 @@
 </p>
 </div>
 <p>
-<strong>Try a comparison:</strong> Test Documents against hardware failure. Then try Home folder and Full machine. Keep Full machine selected and compare the always-connected drive with the 3-2-1 plan during ransomware. Does a larger backup fix an unsafe location?</p>
-<p id="lab-practice-status">Run at least one scenario, then read to the end to complete this tab.</p>
+<strong>Try a comparison:</strong> First, choose Documents folder and Drive breaks. Test your plan. Then change only Documents folder to Home folder and test again. What changed? Next, compare a drive that stays connected with Drive + cloud during a ransomware attack.</p>
+<p id="lab-practice-status">Test at least one plan, then read to the end to earn this tab’s checkmark.</p>
 <p class="panel-end" data-end="scope">
 </p>
 </section>
 <section id="panel-windows" class="tab-panel" role="tabpanel" aria-labelledby="tab-windows" hidden>
 <h2 class="section-heading">Back up a Windows computer</h2>
-<p>Start with the files you cannot replace. Then decide whether you also need system recovery.</p>
+<p>Start with the files you cannot replace. If you also want to bring back Windows, apps, and settings after a drive breaks, consider a system image.</p>
 <h3 class="subsection-heading">Cloud folders: Windows Backup</h3>
 <ol>
 <li>Open Start, search for <strong>Windows Backup</strong>, and open it</li>
 <li>Sign in with a personal Microsoft account; work or school accounts do not work in this consumer app</li>
 <li>Review the available folders, such as Documents, Desktop, and Pictures, and turn on the ones you need</li>
-<li>Run the backup and verify its status and available OneDrive space</li>
+<li>Run the backup, check that it finished, and check that OneDrive has enough storage space</li>
 </ol>
-<p>This uses OneDrive folder sync and saves selected settings and app information. It is <strong>not a complete system image</strong>; apps may need to be installed again.</p>
+<p>This keeps selected folders in OneDrive and saves some settings and app information. It is <strong>not a full-computer image</strong>. You may need to install apps again after replacing the computer.</p>
 <h3 class="subsection-heading">Add a separate local backup</h3>
-<p>Use <strong>File History</strong> with an external drive for versions of personal files. Check included folders and test restoring one file. For a full-machine image, select a supported imaging tool and learn its recovery steps before you need them.</p>
+<p><strong>File History</strong> can save older copies of personal files on an external drive. Check which folders it includes. Try bringing back one file to a separate folder, then open it.</p>
+<h3 class="subsection-heading">Full-disk images: free and paid Windows options</h3>
+<p>A <strong>system image</strong> saves Windows, apps, settings, and included files. It can help rebuild your computer after a drive breaks. Choose the tool’s entire-computer option so it also saves the small hidden sections that Windows needs to start. Ask a trusted helper if you are unsure what to select.</p>
+<p>These three tools can make a Windows system image. Each requires an external drive or another suitable place to save the backup. The notes below were checked on October 5, 2026.</p>
+<div class="card-grid backup-tool-cards">
+<div class="info-card"><h4>Veeam Agent for Microsoft Windows Free</h4><p><strong>Cost:</strong> Free</p><p>Saves the whole computer and can bring back individual files. Its recovery USB can help restore a backup when Windows will not start.</p><p><strong>Main limit:</strong> The free version allows one backup job—a set of instructions for what to save and where to save it.</p><details><summary>More about the free version</summary><p>Use an external drive or a supported network location. Direct backups to some cloud storage services require a paid version.</p></details><p class="source-note"><a href="https://www.veeam.com/products/free/microsoft-windows.html">Veeam features</a> · <a href="https://helpcenter.veeam.com/docs/agentforwindows/userguide/license_editions.html">Free-version limits</a></p></div>
+<div class="info-card"><h4>Hasleo Backup Suite Free</h4><p><strong>Cost:</strong> Free for home use</p><p>Saves Windows or an entire drive. You can set backups to run automatically and make a recovery USB for use if Windows will not start.</p><p><strong>Main limit:</strong> Free for home use. Some features and Windows editions require a paid version.</p><details><summary>More about the free version</summary><p>The free version includes image backup and restore. Copying a system drive directly to another drive, called cloning, requires a paid version. Business use and Windows Education or Enterprise editions also need a suitable paid license. Keeping BitLocker drive encryption after a restore requires a paid edition.</p></details><p class="source-note"><a href="https://www.easyuefi.com/backup-software/backup-suite-free.html">Hasleo features and license details</a></p></div>
+<div class="info-card"><h4>TeraByte Image for Windows</h4><p><strong>Cost:</strong> US$49.98 for the Drive Image Suite</p><p>Saves a drive while Windows is running. It can schedule backups, check backup files for damage, and protect them with a password. Recovery media lets you restore a backup when Windows will not start.</p><p><strong>Before buying:</strong> A 30-day trial is available. A home-use license covers up to five computers in one household. Check the current price and license terms.</p><p class="source-note"><a href="https://www.terabyteunlimited.com/image-for-windows/">Image for Windows features and trial</a> · <a href="https://www.terabyteunlimited.com/purchase-image-for-windows/">Current price and household license</a></p></div>
+</div>
+<p><strong>Choosing a tool:</strong> Veeam and Hasleo offer free home backup options. Image for Windows is a paid option. Try a tool with a trusted helper if needed. Check that you can find your backup and use its recovery instructions before relying on it.</p>
+<h3 class="subsection-heading">Check that you can get your files back</h3>
+<ol>
+<li>Save an image on a separate drive. If the tool offers a check for backup damage, called verification, run it</li>
+<li>Create a <strong>recovery USB</strong> using the backup tool. This can start the computer when Windows cannot. Check that it starts and can find your backup. Get help with this check if needed, and exit without restoring anything</li>
+<li>Restore a few sample files to a separate folder and open them</li>
+<li>For a full-computer test, restore the image to a spare drive or test computer, with an experienced helper if needed. Check that Windows starts and your files open</li>
+</ol>
+<p><strong>A full-computer restore replaces what is on the selected drive.</strong> Check the destination carefully. Keep your working drive safe during a test. Save backup passwords and BitLocker recovery keys somewhere you can reach without this computer. BitLocker keys unlock an encrypted drive.</p><p>Opening a restored file is a useful first check. A full-computer test also checks whether Windows can start after recovery.</p>
+<p class="source-note">Recovery procedure: <a href="https://helpcenter.veeam.com/docs/agentforwindows/userguide/howto_baremetal_recovery.html?ver=13">Veeam: Whole-computer recovery using rescue media</a></p>
+<div class="callout-box info"><strong>Older advice may be out of date.</strong> Microsoft no longer develops the older Backup and Restore (Windows 7) system-image feature. Macrium Reflect Free no longer receives updates. Choose a tool that is still updated and works with your Windows version.</div>
+<p class="source-note">Sources: <a href="https://learn.microsoft.com/en-us/windows/whats-new/deprecated-features">Microsoft: Deprecated Windows features</a>; <a href="https://www.macrium.com/product-support-policy">Macrium: Reflect Free end-of-life policy</a></p>
 <div class="callout-box warning">
-<strong>Check the gaps:</strong> Files outside selected folders, other users, external drives, and cloud-only files may need separate attention. Disconnect your local backup drive when it is not backing up. Keep an offsite copy too.</div>
+<strong>Check the gaps:</strong> Check files outside your chosen folders, other people’s accounts, and other drives. Files stored only in the cloud may need another backup. Disconnect your backup drive when it is not in use. Keep a copy away from home too.</div>
 <p class="source-note">Source: <a href="https://support.microsoft.com/en-us/windows/experience/backup-recovery/back-up-and-restore-with-windows-backup">Microsoft: Windows Backup</a>
 </p>
 <p class="source-note">Source: <a href="https://support.microsoft.com/en-us/windows/experience/backup-recovery/backup-restore-and-recovery-in-windows">Microsoft: Backup, restore, and recovery</a>
@@ -254,17 +281,32 @@
 <h3 class="subsection-heading">Use Time Machine</h3>
 <p>Time Machine is Apple's built-in backup tool for personal data, including documents, photos, and apps. It keeps earlier versions so you can recover an older file.</p>
 <ol>
-<li>Connect a suitable external backup drive</li>
+<li>Connect an external drive with enough space for your backup</li>
 <li>On macOS Ventura or later, open <strong>System Settings → General → Time Machine</strong>
 </li>
-<li>Select <strong>Add Backup Disk</strong>, choose the drive, and follow setup instructions; save the password if you encrypt it</li>
+<li>Select <strong>Add Backup Disk</strong>, choose the drive, and follow the setup instructions. If you protect the backup with encryption, keep its password safe</li>
 <li>Wait for the first backup to finish, check its date, and test restoring a file to a separate location</li>
 </ol>
 <div class="callout-box warning">
 <strong>Use care during setup:</strong> If asked to erase a drive, check that it contains nothing you need before proceeding. Older backups are removed as the backup disk fills.</div>
+<h3 class="subsection-heading">Carbon Copy Cloner and whole-Mac recovery</h3>
+<p><strong>Carbon Copy Cloner (CCC)</strong> is a paid tool that can save backups to an attached drive on a schedule. It can keep older copies of your files. These saved copies are called <strong>snapshots</strong>. A standard CCC backup saves your files, the apps you installed, and your settings. It does <strong>not</strong> save the macOS operating system itself.</p>
+<p>To recover after a drive breaks or a Mac is replaced:</p><ol><li>Install macOS, or use the macOS already installed on the replacement Mac</li><li>Connect the drive containing your complete CCC backup</li><li>Use <strong>Migration Assistant</strong>, Apple's tool for moving files, apps, and accounts, to bring your information back</li></ol><p>Include all the accounts and files you need in the backup. Time Machine is a free alternative that also lets you bring your information back after macOS is installed. Either option needs backup storage.</p>
+<div class="callout-box info"><strong>A Mac recovery backup differs from a Windows disk image.</strong> Some CCC backups can start a Mac directly from an external drive. This is called a <strong>bootable backup</strong>. Bombich, the maker of CCC, advises against relying on this method. A standard CCC backup can bring back your information after macOS is installed.</div>
+<p class="source-note">Sources: <a href="https://support.bombich.com/hc/en-us/articles/20686428184727-Why-doesn-t-my-backup-show-up-as-a-startup-device">Bombich: What a standard CCC backup includes</a>; <a href="https://support.bombich.com/hc/en-us/articles/20686469175575-How-to-restore-from-your-backup">Bombich: Whole-Mac recovery and Migration Assistant</a>; <a href="https://support.bombich.com/hc/en-us/articles/20686511201943-How-much-does-CCC-cost-and-how-can-I-purchase-it">Bombich: Current CCC pricing</a></p>
+<h3 class="subsection-heading">What about a Mac disk-image file?</h3>
+<p>CCC can put a backup inside one large disk-image file. Bombich advises saving your regular Mac backup directly to an attached drive instead. Disk-image files can be harder to recover and may be damaged if a connection is lost, especially over a network.</p>
+<p class="source-note">Source: <a href="https://support.bombich.com/hc/en-us/articles/20686447588631-Backing-up-to-a-disk-image">Bombich: Disk-image support and limitations</a></p>
+<h3 class="subsection-heading">Check your Mac recovery plan</h3>
+<ul>
+<li>Check when the last backup finished, which drives and folders it includes, and whether it keeps older copies</li>
+<li>Restore a few files to another folder and open them</li>
+<li>Check that you have the backup drive and its password. Ask a trusted helper to show you <strong>macOS Recovery</strong>, Apple's built-in repair and reinstall tools</li>
+<li>If a spare Mac is available, ask a trusted helper to test bringing back your information with Migration Assistant. Opening one restored file does not check the whole recovery process</li>
+</ul>
 <h3 class="subsection-heading">Add an offsite copy</h3>
 <p>Pair Time Machine with a cloud backup or a second backup stored elsewhere. A drive beside the Mac can be lost in the same theft or fire. Disconnect a local drive between backup sessions when practical.</p>
-<p>iCloud sync does not replace a Time Machine backup of your Mac. Check that cloud-only files and data on other drives are actually included. Time Machine recovery may require reinstalling macOS and then migrating your data; do not assume the backup is a bootable clone.</p>
+<p>iCloud sync does not replace a Time Machine backup of your Mac. Check that files stored only in the cloud and files on other drives are included in your backup. To recover a whole Mac, you may need to install macOS first, then bring back your information.</p>
 <p class="source-note">Source: <a href="https://support.apple.com/en-us/104984">Apple: Back up your Mac with Time Machine</a>
 </p>
 <p class="source-note">Source: <a href="https://support.apple.com/en-us/mac-backup">Apple: Mac backup options</a>
@@ -279,13 +321,14 @@
 <li>Open <strong>Settings → Google → All services → Backup</strong> under Backup and restore</li>
 <li>Confirm the Google account you can access later and enable backup if needed</li>
 <li>Choose <strong>Back up now</strong>, let it finish, and review Backup details</li>
-<li>Check photo and video backup separately in <strong>Google Photos</strong>; check important downloaded files and app-specific exports too</li>
+<li>Check photo and video backup separately in <strong>Google Photos</strong></li>
+<li>Check important downloaded files too. Some apps need you to save a separate copy using their own backup or export option</li>
 </ol>
 <p>Google backup can include contacts, messages, settings, and supported app data. <strong>Not every app backs up all its data.</strong> Restoring to an older Android version can be incomplete.</p>
 <h3 class="subsection-heading">Make another copy of irreplaceable files</h3>
-<p>Copy important photos and documents to a computer or external storage, verify that they open, and include those copies in your 3-2-1 plan. A phone plus one cloud copy is only two copies.</p>
+<p>Copy important photos and documents to a computer or external storage, check that they open, and include those copies in your 3-2-1 plan. A phone plus one cloud copy is only two copies.</p>
 <div class="callout-box warning">
-<strong>Before replacing a phone:</strong> Check the last successful backup and access to your account and recovery methods. Keep the original device until you verify the restored data.</div>
+<strong>Before replacing a phone:</strong> Check when the last backup finished. Make sure you can sign in to your account, even without this phone. Keep the original device until you check that your files and other information came back.</div>
 <p class="source-note">Source: <a href="https://support.google.com/android/answer/2819582?hl=en">Google: Back up or restore Android data</a>
 </p>
 <p class="panel-end" data-end="android">End of this topic. Your checkmark is earned after viewing this section.</p>
@@ -303,10 +346,10 @@
 </ol>
 <p>Automatic iCloud backups normally run when the device is charging, locked, and connected to Wi-Fi.</p>
 <h3 class="subsection-heading">Option 2: A computer backup</h3>
-<p>Connect the device to a Mac and use Finder, or use the Apple Devices app on Windows. Choose the backup option. Enable <strong>Encrypt local backup</strong> to include sensitive items such as saved passwords and Health data. Keep that password safe; it is needed to use the encrypted backup.</p>
+<ol><li>Connect the iPhone or iPad to your computer</li><li>On a Mac, open Finder. On Windows, open the Apple Devices app. Select your device</li><li>Choose the option to back up to this computer</li><li>Choose <strong>Encrypt local backup</strong> to protect it with a password. This also lets the backup include saved passwords and Health data</li><li>Save the backup password somewhere safe, and start the backup. You need this password to use the backup later</li></ol>
 <div class="callout-box warning">
-<strong>Check separately synced data:</strong> Items already synced to iCloud, such as iCloud Photos, are not duplicated in the daily iCloud device backup. Export another copy of irreplaceable photos and files and include it in your computer backup plan.</div>
-<p>A computer backup is not offsite when the computer stays beside your phone. Protect the computer backup too, and verify restored data before erasing an old device.</p>
+<strong>Check your photos separately:</strong> If iCloud Photos is turned on, those photos are stored through that service. They are not also saved in your daily iCloud device backup. Download another copy of photos you cannot replace, and include it in your computer backup plan.</div>
+<p>A computer backup is not offsite when the computer stays beside your phone. Protect the computer backup too, and check that your information came back before erasing an old device.</p>
 <p class="source-note">Source: <a href="https://support.apple.com/en-us/108366">Apple: iCloud backup instructions</a>
 </p>
 <p class="source-note">Source: <a href="https://support.apple.com/en-us/108770">Apple: What iCloud backs up</a>
@@ -316,24 +359,30 @@
 <p class="panel-end" data-end="ios">End of this topic. Your checkmark is earned after viewing this section.</p>
 </section>
 <section id="panel-services" class="tab-panel" role="tabpanel" aria-labelledby="tab-services" hidden>
-<h2 class="section-heading">Consumer paid backup services</h2>
-<p>A paid service can automate an offsite copy. It still needs setup, monitoring, and a restore test. These are examples to compare; the best fit depends on your devices, files, and recovery needs.</p>
+<h2 class="section-heading">Paid backup and storage services</h2>
+<p>A paid cloud service can save a copy away from home automatically. You still need to set it up, check that backups finish, and try bringing back a file. Compare these examples based on the devices and files you want to protect.</p>
 <div class="card-grid">
 <div class="info-card">
 <h3>Backblaze Computer Backup</h3>
-<p>Automatic cloud file backup for Windows and Mac, with unlimited data for the licensed computer. Check current billing, file exclusions, external-drive rules, and version-history settings.</p>
+<p>Automatically saves Windows or Mac files to the cloud. It offers unlimited backup storage for the computer covered by your plan. Check the price, which files and external drives it includes, and how long it keeps older copies.</p>
 <p>
-<strong>Important limit:</strong> It excludes operating-system and application files. It is file recovery, not a full-machine system image or an iPhone/Android device backup.</p>
+<strong>Important limit:</strong> It does not back up the operating system or installed apps. It can bring back your files, but cannot rebuild the whole computer from a system image. It is not a full backup of a phone or tablet.</p>
 <p class="source-note">Source: <a href="https://www.backblaze.com/cloud-backup/personal">Backblaze: Plans and features</a>
 </p>
 <p class="source-note">Source: <a href="https://www.backblaze.com/computer-backup/docs/supported-backup-data">Backblaze: Included and excluded data</a>
 </p>
 </div>
 <div class="info-card">
+<h3>Arq Backup</h3>
+<p>Works on both Windows and Mac. It can automatically save your chosen files to a cloud service or an attached drive. It keeps older copies so you can bring back a file from before it was changed or damaged.</p>
+<p><strong>Setup and cost:</strong> With the Arq Backup app, you choose where to store the backup. Cloud storage is not included and may cost extra. Arq Premium includes cloud storage. Keep your backup encryption password safe; it protects your saved files.</p>
+<p class="source-note">Source: <a href="https://www.arqbackup.com/">Arq Backup: Windows and Mac features</a></p>
+</div>
+<div class="info-card">
 <h3>IDrive Personal</h3>
-<p>Cloud backup for multiple computers and selected mobile data under one account, with a storage allowance. Check your plan's capacity, supported data, versioning, and restore tools.</p>
+<p>Can save files from several computers and some phone or tablet information under one account. Each plan has a storage limit. Check what it saves, how long it keeps older copies, and how to bring your files back.</p>
 <p>
-<strong>Important limit:</strong> Mobile backup covers supported categories, not a complete phone system image. Full-machine backup and recovery requirements vary by platform and feature.</p>
+<strong>Important limit:</strong> Phone and tablet backup saves only the types of information the app supports. It does not copy everything on the device. Check the separate requirements for full-computer backup on your device.</p>
 <p class="source-note">Source: <a href="https://www.idrive.com/pricing">IDrive: Current plans</a>
 </p>
 <p class="source-note">Source: <a href="https://www.idrive.com/new-design/online-backup-features">IDrive: Backup features</a>
@@ -341,7 +390,7 @@
 </div>
 <div class="info-card">
 <h3>iCloud+ and Google One</h3>
-<p>Paid storage can provide room for the device backups and photos described in the iOS and Android tabs. Confirm what is device backup, photo backup, and sync in your account.</p>
+<p>These plans give you more storage for backups and photos. See the iPhone &amp; iPad and Android tabs for setup. Check which information is saved in a device backup and which is kept through sync.</p>
 <p>
 <strong>Important limit:</strong> Buying more storage does not automatically include every file or produce a full-computer image. Keep a separate copy of irreplaceable data.</p>
 <p class="source-note">Source: <a href="https://support.apple.com/en-us/108047">Apple: iCloud+ plans</a>
@@ -353,14 +402,14 @@
 <h3 class="subsection-heading">Before paying, ask these questions</h3>
 <ul>
 <li>Which devices, users, folders, and external drives are covered?</li>
-<li>What is the renewal price, storage limit, and per-device cost?</li>
+<li>What will it cost when the plan renews, how much can I store, and do I pay for each device?</li>
 <li>How long can you recover deleted files and older versions?</li>
 <li>Can malware or a stolen account delete the backup?</li>
 <li>How will you restore a large backup, and are there extra charges?</li>
-<li>Can you recover if the original device, password, or encryption key is lost?</li>
+<li>Can you reach your backup if the original device is lost? What passwords or keys will you need?</li>
 </ul>
 <div class="callout-box info">
-<strong>Build a plan, not just a subscription.</strong> Use the service as an offsite part of 3-2-1. Keep an independent local backup, protect account access, and confirm that a small test restore works. Prices and features can change; review the linked official plans before purchasing.</div>
+<strong>A subscription is one part of your plan.</strong> Use the service for a copy away from home. Keep a separate backup on a drive too. Protect your account and try bringing back a file. Prices and features can change. Check the linked plans before buying.</div>
 <p class="panel-end" data-end="services">End of this topic. Your checkmark is earned after viewing this section.</p>
 </section>
 <section id="panel-quizzes" class="tab-panel" role="tabpanel" aria-labelledby="tab-quizzes" hidden>
@@ -371,9 +420,9 @@
 <label>
 <input type="checkbox" class="readiness-check"> List the files you cannot replace and where they are stored</label>
 <label>
-<input type="checkbox" class="readiness-check"> Choose two backup destinations, including one offsite</label>
+<input type="checkbox" class="readiness-check"> Choose two places for backups, including one away from home</label>
 <label>
-<input type="checkbox" class="readiness-check"> Check coverage, automatic schedules, and older-version retention</label>
+<input type="checkbox" class="readiness-check"> Check what the backup saves, when it runs, and how long it keeps older copies</label>
 <label>
 <input type="checkbox" class="readiness-check"> Protect a copy from malware, and secure passwords and recovery keys</label>
 <label>
@@ -389,7 +438,7 @@
 <input type="radio" name="q0" value="0"> <span>Three folders on one drive</span>
 </label>
 <label class="quiz-option-label">
-<input type="radio" name="q0" value="1"> <span>Three copies, two media types, and one copy offsite</span>
+<input type="radio" name="q0" value="1"> <span>Three copies, two kinds of storage, and one copy away from home</span>
 </label>
 <label class="quiz-option-label">
 <input type="radio" name="q0" value="2"> <span>Three cloud accounts with no local files</span>
@@ -418,13 +467,13 @@
 <legend class="quiz-question-title">3. Which plan gives stronger protection if ransomware reaches connected drives?</legend>
 <div class="quiz-options-list">
 <label class="quiz-option-label">
-<input type="radio" name="q2" value="0"> <span>A clean older backup kept offline or protected from changes</span>
+<input type="radio" name="q2" value="0"> <span>An older copy from before the attack, kept disconnected or protected from changes</span>
 </label>
 <label class="quiz-option-label">
 <input type="radio" name="q2" value="1"> <span>A larger backup on the same infected drive</span>
 </label>
 <label class="quiz-option-label">
-<input type="radio" name="q2" value="2"> <span>A latest-only copy on an always-connected drive</span>
+<input type="radio" name="q2" value="2"> <span>Only the newest copy, on a drive that stays connected</span>
 </label>
 </div>
 <p id="feedback-2" class="question-feedback" hidden>
@@ -463,16 +512,16 @@
 </p>
 </fieldset>
 <fieldset class="quiz-question-box">
-<legend class="quiz-question-title">6. Does a full-machine backup guarantee safe recovery after malware?</legend>
+<legend class="quiz-question-title">6. Will a full-machine backup always bring back safe, usable files after malware?</legend>
 <div class="quiz-options-list">
 <label class="quiz-option-label">
 <input type="radio" name="q5" value="0"> <span>Yes, regardless of where it is stored</span>
 </label>
 <label class="quiz-option-label">
-<input type="radio" name="q5" value="1"> <span>No; it still needs a surviving clean copy and a safe recovery process</span>
+<input type="radio" name="q5" value="1"> <span>No. You still need an undamaged copy from before the attack and a safe way to restore it</span>
 </label>
 <label class="quiz-option-label">
-<input type="radio" name="q5" value="2"> <span>Yes, even if it was made after infection</span>
+<input type="radio" name="q5" value="2"> <span>Yes, even if it was made after the malware attack</span>
 </label>
 </div>
 <p id="feedback-5" class="question-feedback" hidden>
@@ -508,7 +557,7 @@
                 <p class="cert-text-lead">This certificate is proudly awarded to</p>
                 <div class="cert-student-name" id="cert-display-name">Emeritus Student</div>
                 <p class="cert-text-desc">
-                  for completing <strong>Backup Your Data</strong>, exploring the <strong>3-2-1 backup rule</strong>, comparing backup coverage and recovery, and passing the knowledge check.
+                  for completing <strong>Backup Your Data</strong>, exploring the <strong>3-2-1 backup rule</strong>, comparing what backups save and how to bring files back, and passing the knowledge check.
                 </p>
               </div>
 
@@ -535,7 +584,7 @@
 <p>
 <a href="https://cantus.us/emeritus">Professor Sable. Emeritus Institute.</a>
 </p>
-<p>Content reviewed against official CISA, Microsoft, Apple, Google, Backblaze, and IDrive guidance. Follow the source links in each topic for current instructions.</p>
+<p>Information checked using CISA safety guidance and official product instructions. Follow the source links in each topic for current details.</p>
 <p>Last Updated: 10/5/26</p>
 </footer>
 <script src="app.js">
