@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Backup Your Data Interactive Guide</title>
+<meta name="description" content="Learn the 3-2-1 backup rule, compare backup scope and recovery, explore device backup options, and earn a completion certificate.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>  <!-- Skip to Main Content Link for Keyboard & Screen Reader Users -->
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <!-- ARIA Live Region for Immediate Screen Reader Feedback -->
+  <div id="aria-live-announcer" class="sr-only" aria-live="polite" aria-atomic="true">
+</div>
+
+  <!-- Top Accessibility Controls Bar -->
+  <header class="a11y-header-bar" role="banner">
+    <div class="app-title-group">
+      <h1>
+        Backup Your Data Interactive Guide
+      </h1>
+      <span class="subhead">An interactive web tool for ECIM 502</span>
+    </div>
+
+    <div class="a11y-controls" role="region" aria-label="Accessibility Settings">
+      <!-- Font Resizer Control -->
+      <div class="font-slider-container">
+        <label for="font-scaler-slider" class="control-item">
+          <span>Text Size:</span>
+        </label>
+        <input type="range" id="font-scaler-slider" min="0.9" max="1.4" step="0.05" value="1.0" aria-label="Adjust text size scale">
+        <span id="font-size-indicator" style="font-weight: bold; min-width: 48px;">100%</span>
+      </div>
+
+      <!-- Quick Text Size Buttons -->
+      <div class="control-item" role="group" aria-label="Quick Text Presets">
+        <button type="button" class="btn-a11y active" id="btn-font-normal" onclick="setFontScale(1.0)" aria-pressed="true">Normal</button>
+        <button type="button" class="btn-a11y" id="btn-font-large" onclick="setFontScale(1.18)" aria-pressed="false">Large</button>
+        <button type="button" class="btn-a11y" id="btn-font-xlarge" onclick="setFontScale(1.35)" aria-pressed="false">Extra Large</button>
+      </div>
+
+      <!-- High Contrast Theme Switcher -->
+      <div class="control-item">
+        <label for="theme-select">Contrast Theme:</label>
+        <select id="theme-select" class="btn-a11y" onchange="changeTheme(this.value)" aria-label="Select color contrast theme">
+          <option value="default">Default Light</option>
+          <option value="dark">High Contrast Dark</option>
+          <option value="high-contrast-light">High Contrast B&W</option>
+        </select>
+      </div>
+    </div>
+  </header>
+
+<nav class="main-nav" aria-label="Backup guide navigation">
+<div class="tab-nav-header">
+<div class="progress-indicator-pill" role="status">Exploration Progress: <strong id="exploration-count">0 of 8 Tabs Explored</strong>
+<span class="progress-badge" id="exploration-percent-badge">0%</span>
+</div>
+<div class="nav-actions">
+<button type="button" class="btn-claim-certificate" id="claim-certificate" hidden>Claim Certificate</button>
+<button type="button" class="btn-reset-progress" id="reset-progress">Reset Exploration</button>
+</div>
+</div>
+<ul class="tab-list" role="tablist" aria-label="Backup topics">
+<li role="presentation">
+<button type="button" role="tab" class="tab-button" id="tab-basics" aria-controls="panel-basics" aria-selected="true" tabindex="0">1. Why & 3-2-1<span class="tab-check-badge">
+<span aria-hidden="true">✅</span>
+<span class="sr-only"> Explored</span>
+</span>
+</button>
+</li>
+<li role="presentation">
+<button type="button" role="tab" class="tab-button" id="tab-scope" aria-controls="panel-scope" aria-selected="false" tabindex="-1">2. Backup Lab<span class="tab-check-badge">
+<span aria-hidden="true">✅</span>
+<span class="sr-only"> Explored</span>
+</span>
+</button>
+</li>
+<li role="presentation">
+<button type="button" role="tab" class="tab-button" id="tab-windows" aria-controls="panel-windows" aria-selected="false" tabindex="-1">3. Windows<span class="tab-check-badge">
+<span aria-hidden="true">✅</span>
+<span class="sr-only"> Explored</span>
+</span>
+</button>
+</li>
+<li role="presentation">
+<button type="button" role="tab" class="tab-button" id="tab-macos" aria-controls="panel-macos" aria-selected="false" tabindex="-1">4. macOS<span class="tab-check-badge">
+<span aria-hidden="true">✅</span>
+<span class="sr-only"> Explored</span>
+</span>
+</button>
+</li>
+<li role="presentation">
+<button type="button" role="tab" class="tab-button" id="tab-android" aria-controls="panel-android" aria-selected="false" tabindex="-1">5. Android<span class="tab-check-badge">
+<span aria-hidden="true">✅</span>
+<span class="sr-only"> Explored</span>
+</span>
+</button>
+</li>
+<li role="presentation">
+<button type="button" role="tab" class="tab-button" id="tab-ios" aria-controls="panel-ios" aria-selected="false" tabindex="-1">6. iOS<span class="tab-check-badge">
+<span aria-hidden="true">✅</span>
+<span class="sr-only"> Explored</span>
+</span>
+</button>
+</li>
+<li role="presentation">
+<button type="button" role="tab" class="tab-button" id="tab-services" aria-controls="panel-services" aria-selected="false" tabindex="-1">7. Paid Services<span class="tab-check-badge">
+<span aria-hidden="true">✅</span>
+<span class="sr-only"> Explored</span>
+</span>
+</button>
+</li>
+<li role="presentation">
+<button type="button" role="tab" class="tab-button" id="tab-quizzes" aria-controls="panel-quizzes" aria-selected="false" tabindex="-1">8. Checklist & Quiz<span class="tab-check-badge">
+<span aria-hidden="true">✅</span>
+<span class="sr-only"> Explored</span>
+</span>
+</button>
+</li>
+</ul>
+</nav>
+<main class="app-container" id="main-content" tabindex="-1">
+<section id="panel-basics" class="tab-panel active" role="tabpanel" aria-labelledby="tab-basics">
+<h2 class="section-heading">Backups give you a way back</h2>
+<p>Family photos, letters, financial records, and class projects can be difficult or impossible to replace. A backup is a separate copy you can restore when the original is deleted, damaged, encrypted by malware, or lost with a device.</p>
+<div class="card-grid">
+<div class="info-card">
+<h3>Hardware failure or loss</h3>
+<p>A drive can stop working. A phone can disappear. Fire or theft can take both a computer and the drive beside it. A separate, offsite copy keeps one event from taking everything.</p>
+</div>
+<div class="info-card">
+<h3>Malware and mistakes</h3>
+<p>Ransomware is malware that can lock files by encrypting them. A backup that malware cannot reach, with a clean earlier version, gives you a recovery option. Backups also help undo accidental deletion.</p>
+</div>
+</div>
+<h3 class="subsection-heading">The 3-2-1 backup rule</h3>
+<div class="card-grid">
+<div class="info-card">
+<h3>3 copies</h3>
+<p>Your working original plus <strong>two backup copies</strong> of each important file.</p>
+</div>
+<div class="info-card">
+<h3>2 storage media types</h3>
+<p>Use different media or storage technologies, such as a local external drive and a cloud backup service. Two folders on the same drive share a failure point.</p>
+</div>
+<div class="info-card">
+<h3>1 copy offsite</h3>
+<p>Keep at least one copy away from your home, such as a cloud backup or a drive stored safely elsewhere.</p>
+</div>
+</div>
+<p>
+<strong>Example:</strong> The original photos on your computer, a versioned backup on an external drive, and another backup in the cloud. Disconnect the external drive after its backup finishes. Check that the same important files are included in both backups.</p>
+<h3 class="subsection-heading">Make those copies useful</h3>
+<ul>
+<li>Automate frequent backups and check that they finish successfully</li>
+<li>Keep older versions long enough to discover a problem</li>
+<li>Keep a backup offline or protected against changes and deletion</li>
+<li>Test restoring a few files to a separate folder and open them</li>
+<li>Protect backup accounts with multifactor authentication, and keep recovery codes and encryption keys somewhere safe</li>
+</ul>
+<div class="callout-box warning">
+<strong>Sync is useful, but check its limits.</strong> Synchronization keeps files alike across devices. It may also spread deletion or corrupted files. Check version history, recovery limits, and a separate backup rather than assuming sync alone is a complete plan.</div>
+<p class="source-note">Source: <a href="https://www.cisa.gov/sites/default/files/publications/data_backup_options.pdf">CISA: Data Backup Options (PDF)</a>
+</p>
+<p class="source-note">Source: <a href="https://www.cisa.gov/stopransomware/ransomware-guide">CISA: Ransomware prevention and recovery</a>
+</p>
+<p class="panel-end" data-end="basics">End of this topic. Your checkmark is earned after viewing this section.</p>
+</section>
+<section id="panel-scope" class="tab-panel" role="tabpanel" aria-labelledby="tab-scope" hidden>
+<h2 class="section-heading">Backup Lab: What could you recover?</h2>
+<p>Choose how much to back up, where to keep it, and what goes wrong. This is a model for learning; it does not access your files or change a device.</p>
+<div class="card-grid">
+<div class="info-card">
+<h3>Documents folder</h3>
+<p>Saves files inside Documents. Photos, Desktop files, and files stored elsewhere need their own coverage. Uses less space, but it is easy to miss something important.</p>
+</div>
+<div class="info-card">
+<h3>Home folder</h3>
+<p>Saves one user's personal folder, including Documents, Pictures, Desktop, and Downloads in this model. Does not include other users or the operating system and installed apps.</p>
+</div>
+<div class="info-card">
+<h3>Full machine</h3>
+<p>For this model, a supported system-image backup includes all users, installed apps, and the operating system. Needs more space and a compatible recovery method. A service advertising “all your files” may still exclude system files.</p>
+</div>
+</div>
+<div class="callout-box info">
+<strong>Model assumptions:</strong> The latest backup finished yesterday. All selected files were available locally and included successfully. The malware event began today. Offline and cloud history copies contain a clean version from before infection. Cloud accounts remain accessible. Real backup tools have exclusions, storage limits, and restore requirements.</div>
+<form id="backup-lab" class="info-card">
+<div class="lab-controls">
+<label for="backup-scope">How much to back up<select id="backup-scope">
+<option value="documents">Documents folder</option>
+<option value="home">Home folder</option>
+<option value="full">Full machine (system image)</option>
+</select>
+</label>
+<label for="backup-plan">Where to keep backups<select id="backup-plan">
+<option value="same">Another folder on the same drive</option>
+<option value="connected">External drive, always connected, latest copy only</option>
+<option value="offline">External drive, disconnected, kept beside device</option>
+<option value="321">3-2-1: offline drive + offsite versioned cloud backup</option>
+</select>
+</label>
+<label for="backup-event">What goes wrong<select id="backup-event">
+<option value="failure">Internal drive fails</option>
+<option value="loss">Device and nearby drive are stolen or lost</option>
+<option value="malware">Ransomware encrypts reachable copies</option>
+</select>
+</label>
+</div>
+<button type="submit" class="btn-primary">Test My Backup Plan</button>
+</form>
+<div id="lab-result" class="callout-box info" role="region" aria-labelledby="lab-result-title" hidden>
+<h3 id="lab-result-title">Recovery result</h3>
+<p id="lab-outcome">
+</p>
+<p id="lab-scope-summary">
+</p>
+<ul id="lab-coverage">
+</ul>
+<p id="lab-next-step">
+</p>
+</div>
+<p>
+<strong>Try a comparison:</strong> Test Documents against hardware failure. Then try Home folder and Full machine. Keep Full machine selected and compare the always-connected drive with the 3-2-1 plan during ransomware. Does a larger backup fix an unsafe location?</p>
+<p id="lab-practice-status">Run at least one scenario, then read to the end to complete this tab.</p>
+<p class="panel-end" data-end="scope">
+</p>
+</section>
+<section id="panel-windows" class="tab-panel" role="tabpanel" aria-labelledby="tab-windows" hidden>
+<h2 class="section-heading">Back up a Windows computer</h2>
+<p>Start with the files you cannot replace. Then decide whether you also need system recovery.</p>
+<h3 class="subsection-heading">Cloud folders: Windows Backup</h3>
+<ol>
+<li>Open Start, search for <strong>Windows Backup</strong>, and open it</li>
+<li>Sign in with a personal Microsoft account; work or school accounts do not work in this consumer app</li>
+<li>Review the available folders, such as Documents, Desktop, and Pictures, and turn on the ones you need</li>
+<li>Run the backup and verify its status and available OneDrive space</li>
+</ol>
+<p>This uses OneDrive folder sync and saves selected settings and app information. It is <strong>not a complete system image</strong>; apps may need to be installed again.</p>
+<h3 class="subsection-heading">Add a separate local backup</h3>
+<p>Use <strong>File History</strong> with an external drive for versions of personal files. Check included folders and test restoring one file. For a full-machine image, select a supported imaging tool and learn its recovery steps before you need them.</p>
+<div class="callout-box warning">
+<strong>Check the gaps:</strong> Files outside selected folders, other users, external drives, and cloud-only files may need separate attention. Disconnect your local backup drive when it is not backing up. Keep an offsite copy too.</div>
+<p class="source-note">Source: <a href="https://support.microsoft.com/en-us/windows/experience/backup-recovery/back-up-and-restore-with-windows-backup">Microsoft: Windows Backup</a>
+</p>
+<p class="source-note">Source: <a href="https://support.microsoft.com/en-us/windows/experience/backup-recovery/backup-restore-and-recovery-in-windows">Microsoft: Backup, restore, and recovery</a>
+</p>
+<p class="panel-end" data-end="windows">End of this topic. Your checkmark is earned after viewing this section.</p>
+</section>
+<section id="panel-macos" class="tab-panel" role="tabpanel" aria-labelledby="tab-macos" hidden>
+<h2 class="section-heading">Back up a Mac</h2>
+<h3 class="subsection-heading">Use Time Machine</h3>
+<p>Time Machine is Apple's built-in backup tool for personal data, including documents, photos, and apps. It keeps earlier versions so you can recover an older file.</p>
+<ol>
+<li>Connect a suitable external backup drive</li>
+<li>On macOS Ventura or later, open <strong>System Settings → General → Time Machine</strong>
+</li>
+<li>Select <strong>Add Backup Disk</strong>, choose the drive, and follow setup instructions; save the password if you encrypt it</li>
+<li>Wait for the first backup to finish, check its date, and test restoring a file to a separate location</li>
+</ol>
+<div class="callout-box warning">
+<strong>Use care during setup:</strong> If asked to erase a drive, check that it contains nothing you need before proceeding. Older backups are removed as the backup disk fills.</div>
+<h3 class="subsection-heading">Add an offsite copy</h3>
+<p>Pair Time Machine with a cloud backup or a second backup stored elsewhere. A drive beside the Mac can be lost in the same theft or fire. Disconnect a local drive between backup sessions when practical.</p>
+<p>iCloud sync does not replace a Time Machine backup of your Mac. Check that cloud-only files and data on other drives are actually included. Time Machine recovery may require reinstalling macOS and then migrating your data; do not assume the backup is a bootable clone.</p>
+<p class="source-note">Source: <a href="https://support.apple.com/en-us/104984">Apple: Back up your Mac with Time Machine</a>
+</p>
+<p class="source-note">Source: <a href="https://support.apple.com/en-us/mac-backup">Apple: Mac backup options</a>
+</p>
+<p class="panel-end" data-end="macos">End of this topic. Your checkmark is earned after viewing this section.</p>
+</section>
+<section id="panel-android" class="tab-panel" role="tabpanel" aria-labelledby="tab-android" hidden>
+<h2 class="section-heading">Back up an Android phone or tablet</h2>
+<p>Android menus vary by manufacturer and version. Search Settings for <strong>Backup</strong> if the route below is different on your device.</p>
+<h3 class="subsection-heading">Check your Google backup</h3>
+<ol>
+<li>Open <strong>Settings → Google → All services → Backup</strong> under Backup and restore</li>
+<li>Confirm the Google account you can access later and enable backup if needed</li>
+<li>Choose <strong>Back up now</strong>, let it finish, and review Backup details</li>
+<li>Check photo and video backup separately in <strong>Google Photos</strong>; check important downloaded files and app-specific exports too</li>
+</ol>
+<p>Google backup can include contacts, messages, settings, and supported app data. <strong>Not every app backs up all its data.</strong> Restoring to an older Android version can be incomplete.</p>
+<h3 class="subsection-heading">Make another copy of irreplaceable files</h3>
+<p>Copy important photos and documents to a computer or external storage, verify that they open, and include those copies in your 3-2-1 plan. A phone plus one cloud copy is only two copies.</p>
+<div class="callout-box warning">
+<strong>Before replacing a phone:</strong> Check the last successful backup and access to your account and recovery methods. Keep the original device until you verify the restored data.</div>
+<p class="source-note">Source: <a href="https://support.google.com/android/answer/2819582?hl=en">Google: Back up or restore Android data</a>
+</p>
+<p class="panel-end" data-end="android">End of this topic. Your checkmark is earned after viewing this section.</p>
+</section>
+<section id="panel-ios" class="tab-panel" role="tabpanel" aria-labelledby="tab-ios" hidden>
+<h2 class="section-heading">Back up an iPhone or iPad</h2>
+<h3 class="subsection-heading">Option 1: iCloud Backup</h3>
+<ol>
+<li>Open <strong>Settings → your name → iCloud → iCloud Backup</strong>
+</li>
+<li>Turn on backup for this device and choose <strong>Back Up Now</strong>
+</li>
+<li>Stay on Wi-Fi until it finishes, then check the last successful backup</li>
+<li>Check that your iCloud account has enough storage</li>
+</ol>
+<p>Automatic iCloud backups normally run when the device is charging, locked, and connected to Wi-Fi.</p>
+<h3 class="subsection-heading">Option 2: A computer backup</h3>
+<p>Connect the device to a Mac and use Finder, or use the Apple Devices app on Windows. Choose the backup option. Enable <strong>Encrypt local backup</strong> to include sensitive items such as saved passwords and Health data. Keep that password safe; it is needed to use the encrypted backup.</p>
+<div class="callout-box warning">
+<strong>Check separately synced data:</strong> Items already synced to iCloud, such as iCloud Photos, are not duplicated in the daily iCloud device backup. Export another copy of irreplaceable photos and files and include it in your computer backup plan.</div>
+<p>A computer backup is not offsite when the computer stays beside your phone. Protect the computer backup too, and verify restored data before erasing an old device.</p>
+<p class="source-note">Source: <a href="https://support.apple.com/en-us/108366">Apple: iCloud backup instructions</a>
+</p>
+<p class="source-note">Source: <a href="https://support.apple.com/en-us/108770">Apple: What iCloud backs up</a>
+</p>
+<p class="source-note">Source: <a href="https://support.apple.com/en-us/108353">Apple: Encrypted local backups</a>
+</p>
+<p class="panel-end" data-end="ios">End of this topic. Your checkmark is earned after viewing this section.</p>
+</section>
+<section id="panel-services" class="tab-panel" role="tabpanel" aria-labelledby="tab-services" hidden>
+<h2 class="section-heading">Consumer paid backup services</h2>
+<p>A paid service can automate an offsite copy. It still needs setup, monitoring, and a restore test. These are examples to compare; the best fit depends on your devices, files, and recovery needs.</p>
+<div class="card-grid">
+<div class="info-card">
+<h3>Backblaze Computer Backup</h3>
+<p>Automatic cloud file backup for Windows and Mac, with unlimited data for the licensed computer. Check current billing, file exclusions, external-drive rules, and version-history settings.</p>
+<p>
+<strong>Important limit:</strong> It excludes operating-system and application files. It is file recovery, not a full-machine system image or an iPhone/Android device backup.</p>
+<p class="source-note">Source: <a href="https://www.backblaze.com/cloud-backup/personal">Backblaze: Plans and features</a>
+</p>
+<p class="source-note">Source: <a href="https://www.backblaze.com/computer-backup/docs/supported-backup-data">Backblaze: Included and excluded data</a>
+</p>
+</div>
+<div class="info-card">
+<h3>IDrive Personal</h3>
+<p>Cloud backup for multiple computers and selected mobile data under one account, with a storage allowance. Check your plan's capacity, supported data, versioning, and restore tools.</p>
+<p>
+<strong>Important limit:</strong> Mobile backup covers supported categories, not a complete phone system image. Full-machine backup and recovery requirements vary by platform and feature.</p>
+<p class="source-note">Source: <a href="https://www.idrive.com/pricing">IDrive: Current plans</a>
+</p>
+<p class="source-note">Source: <a href="https://www.idrive.com/new-design/online-backup-features">IDrive: Backup features</a>
+</p>
+</div>
+<div class="info-card">
+<h3>iCloud+ and Google One</h3>
+<p>Paid storage can provide room for the device backups and photos described in the iOS and Android tabs. Confirm what is device backup, photo backup, and sync in your account.</p>
+<p>
+<strong>Important limit:</strong> Buying more storage does not automatically include every file or produce a full-computer image. Keep a separate copy of irreplaceable data.</p>
+<p class="source-note">Source: <a href="https://support.apple.com/en-us/108047">Apple: iCloud+ plans</a>
+</p>
+<p class="source-note">Source: <a href="https://one.google.com/about/plans">Google One: Storage plans</a>
+</p>
+</div>
+</div>
+<h3 class="subsection-heading">Before paying, ask these questions</h3>
+<ul>
+<li>Which devices, users, folders, and external drives are covered?</li>
+<li>What is the renewal price, storage limit, and per-device cost?</li>
+<li>How long can you recover deleted files and older versions?</li>
+<li>Can malware or a stolen account delete the backup?</li>
+<li>How will you restore a large backup, and are there extra charges?</li>
+<li>Can you recover if the original device, password, or encryption key is lost?</li>
+</ul>
+<div class="callout-box info">
+<strong>Build a plan, not just a subscription.</strong> Use the service as an offsite part of 3-2-1. Keep an independent local backup, protect account access, and confirm that a small test restore works. Prices and features can change; review the linked official plans before purchasing.</div>
+<p class="panel-end" data-end="services">End of this topic. Your checkmark is earned after viewing this section.</p>
+</section>
+<section id="panel-quizzes" class="tab-panel" role="tabpanel" aria-labelledby="tab-quizzes" hidden>
+<h2 class="section-heading">Your backup checklist and knowledge check</h2>
+<p>These questions cover backup principles for everyone. You do not need to own every device type.</p>
+<h3 class="subsection-heading">A practical plan for your devices</h3>
+<div class="info-card readiness-list">
+<label>
+<input type="checkbox" class="readiness-check"> List the files you cannot replace and where they are stored</label>
+<label>
+<input type="checkbox" class="readiness-check"> Choose two backup destinations, including one offsite</label>
+<label>
+<input type="checkbox" class="readiness-check"> Check coverage, automatic schedules, and older-version retention</label>
+<label>
+<input type="checkbox" class="readiness-check"> Protect a copy from malware, and secure passwords and recovery keys</label>
+<label>
+<input type="checkbox" class="readiness-check"> Check the latest successful backup and restore a few sample files</label>
+<p id="checklist-status">0 of 5 planning steps checked. This checklist is for your own planning and is not graded.</p>
+</div>
+<h3 class="subsection-heading">Knowledge check</h3>
+<form id="backup-quiz">
+<fieldset class="quiz-question-box">
+<legend class="quiz-question-title">1. What does 3-2-1 mean?</legend>
+<div class="quiz-options-list">
+<label class="quiz-option-label">
+<input type="radio" name="q0" value="0"> <span>Three folders on one drive</span>
+</label>
+<label class="quiz-option-label">
+<input type="radio" name="q0" value="1"> <span>Three copies, two media types, and one copy offsite</span>
+</label>
+<label class="quiz-option-label">
+<input type="radio" name="q0" value="2"> <span>Three cloud accounts with no local files</span>
+</label>
+</div>
+<p id="feedback-0" class="question-feedback" hidden>
+</p>
+</fieldset>
+<fieldset class="quiz-question-box">
+<legend class="quiz-question-title">2. You back up only Documents. Your drive fails. What should you expect?</legend>
+<div class="quiz-options-list">
+<label class="quiz-option-label">
+<input type="radio" name="q1" value="0"> <span>Every photo and installed app returns automatically</span>
+</label>
+<label class="quiz-option-label">
+<input type="radio" name="q1" value="1"> <span>Files anywhere on the computer are covered</span>
+</label>
+<label class="quiz-option-label">
+<input type="radio" name="q1" value="2"> <span>Included Documents files can be restored; files elsewhere may be missing</span>
+</label>
+</div>
+<p id="feedback-1" class="question-feedback" hidden>
+</p>
+</fieldset>
+<fieldset class="quiz-question-box">
+<legend class="quiz-question-title">3. Which plan gives stronger protection if ransomware reaches connected drives?</legend>
+<div class="quiz-options-list">
+<label class="quiz-option-label">
+<input type="radio" name="q2" value="0"> <span>A clean older backup kept offline or protected from changes</span>
+</label>
+<label class="quiz-option-label">
+<input type="radio" name="q2" value="1"> <span>A larger backup on the same infected drive</span>
+</label>
+<label class="quiz-option-label">
+<input type="radio" name="q2" value="2"> <span>A latest-only copy on an always-connected drive</span>
+</label>
+</div>
+<p id="feedback-2" class="question-feedback" hidden>
+</p>
+</fieldset>
+<fieldset class="quiz-question-box">
+<legend class="quiz-question-title">4. Why keep a backup offsite?</legend>
+<div class="quiz-options-list">
+<label class="quiz-option-label">
+<input type="radio" name="q3" value="0"> <span>It makes all files smaller</span>
+</label>
+<label class="quiz-option-label">
+<input type="radio" name="q3" value="1"> <span>It guarantees malware cannot exist</span>
+</label>
+<label class="quiz-option-label">
+<input type="radio" name="q3" value="2"> <span>A theft or fire at home can take both a device and its nearby backup</span>
+</label>
+</div>
+<p id="feedback-3" class="question-feedback" hidden>
+</p>
+</fieldset>
+<fieldset class="quiz-question-box">
+<legend class="quiz-question-title">5. What is the best way to check that a backup is useful?</legend>
+<div class="quiz-options-list">
+<label class="quiz-option-label">
+<input type="radio" name="q4" value="0"> <span>Assume a paid plan covers everything</span>
+</label>
+<label class="quiz-option-label">
+<input type="radio" name="q4" value="1"> <span>Restore sample files to a separate location and open them</span>
+</label>
+<label class="quiz-option-label">
+<input type="radio" name="q4" value="2"> <span>Wait until the original drive fails</span>
+</label>
+</div>
+<p id="feedback-4" class="question-feedback" hidden>
+</p>
+</fieldset>
+<fieldset class="quiz-question-box">
+<legend class="quiz-question-title">6. Does a full-machine backup guarantee safe recovery after malware?</legend>
+<div class="quiz-options-list">
+<label class="quiz-option-label">
+<input type="radio" name="q5" value="0"> <span>Yes, regardless of where it is stored</span>
+</label>
+<label class="quiz-option-label">
+<input type="radio" name="q5" value="1"> <span>No; it still needs a surviving clean copy and a safe recovery process</span>
+</label>
+<label class="quiz-option-label">
+<input type="radio" name="q5" value="2"> <span>Yes, even if it was made after infection</span>
+</label>
+</div>
+<p id="feedback-5" class="question-feedback" hidden>
+</p>
+</fieldset>
+<button type="submit" class="btn-primary">Check My Answers</button>
+<p id="quiz-summary" role="status">Answer every question correctly to earn this tab's checkmark. You can try again.</p>
+</form>      <div class="certificate-wrapper-card" id="certificate-section" hidden role="region" aria-label="Student Certificate Generator">
+        <div class="no-print">
+<h3 class="subsection-heading">Your Certificate of Completion</h3>
+          <p style="font-size: 1.15rem; font-weight: bold; color: var(--primary-blue); margin-top: 0;">
+            You have completed Backup Your Data. Enter your name below to personalize your completion certificate:
+          </p>
+          <div style="display: flex; flex-wrap: wrap; gap: 14px; margin-bottom: 24px; align-items: center;">
+            <label for="student-name-input" style="font-weight: bold; font-size: 1.05rem;">Your Full Name:</label>
+            <input type="text" id="student-name-input" maxlength="80" autocomplete="name" class="glossary-search-input" style="max-width: 340px;" placeholder="e.g. Jane Doe" oninput="updateCertificateName(this.value)" aria-label="Enter your full name for certificate">
+            <button type="button" class="btn-primary" onclick="printCertificate()">
+<span aria-hidden="true">🖨️</span> Print / Save Certificate PDF</button>
+          </div>
+        </div>
+
+        <!-- Printable Certificate Canvas / View -->
+        <div class="certificate-printable-frame" id="printable-certificate">
+          <div class="cert-border-outer">
+            <div class="cert-border-inner">
+              <div class="cert-header">
+                <span class="cert-seal" aria-hidden="true">🎓</span>
+                <h4 class="cert-institution">Intermediate Life &amp; Technology Integration</h4>
+                <div class="cert-title">Certificate of Completion</div>
+              </div>
+
+              <div class="cert-body">
+                <p class="cert-text-lead">This certificate is proudly awarded to</p>
+                <div class="cert-student-name" id="cert-display-name">Emeritus Student</div>
+                <p class="cert-text-desc">
+                  for completing <strong>Backup Your Data</strong>, exploring the <strong>3-2-1 backup rule</strong>, comparing backup coverage and recovery, and passing the knowledge check.
+                </p>
+              </div>
+
+              <div class="cert-footer">
+                <div class="cert-sig-block">
+                  <div class="cert-sig-line">Professor Sable</div>
+                  <div class="cert-sig-title">Emeritus Institute</div>
+                </div>
+                <div class="cert-date-block">
+                  <div class="cert-date-line" id="cert-display-date">
+</div>
+                  <div class="cert-date-label">Date Awarded</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+<p class="panel-end" data-end="quizzes">
+</p>
+</section>
+</main>
+<footer class="app-footer">
+<p>
+<a href="https://cantus.us/emeritus">Professor Sable. Emeritus Institute.</a>
+</p>
+<p>Content reviewed against official CISA, Microsoft, Apple, Google, Backblaze, and IDrive guidance. Follow the source links in each topic for current instructions.</p>
+<p>Last Updated: 10/5/26</p>
+</footer>
+<script src="app.js">
+</script>
+</body>
+</html>
