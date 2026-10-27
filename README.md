@@ -10,6 +10,7 @@ Interactive classroom tools for ECIM 502.
 - [AI Chat Prompt Examples](https://sc137.github.io/ecim502_interactives/prompt-examples/)
 
 - [Backup Your Data](https://sc137.github.io/ecim502_interactives/backup-your-data/)
+- [Software Update Checklist](software-update-checklist/)
 
 ---
 
