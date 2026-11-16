@@ -93,6 +93,7 @@ document.addEventListener('DOMContentLoaded', () => {
     ['After Tuesday: verified Experian frozen again. Equifax and TransUnion remain frozen. Practice complete.', 'Practice complete']
   ];
   function renderThaw() {
+    $('thaw-step-counter').textContent = `Step ${thawStep + 1} of ${thawStates.length}`;
     $('thaw-status').textContent = thawStates[thawStep][0];
     $('thaw-next').textContent = thawStates[thawStep][1];
     $('thaw-next').disabled = thawStep === 3;
