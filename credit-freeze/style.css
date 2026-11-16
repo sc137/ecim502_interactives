@@ -1321,6 +1321,11 @@ legend { font-weight: 700; padding: 0 .4rem; }
 summary { cursor: pointer; padding: .5rem; font-weight: 700; min-height: 44px; }
 .tab-nav-header { flex-wrap: wrap; }
 .tab-panel { overflow-wrap: anywhere; }
+#panel-alerts .emeritus-table th:first-child {
+  width: 20%;
+  min-width: 10rem;
+  overflow-wrap: normal;
+}
 #certificate-section { scroll-margin-top: 1rem; }
 @media (max-width: 768px) {
   .card-grid { grid-template-columns: minmax(0, 1fr); }
