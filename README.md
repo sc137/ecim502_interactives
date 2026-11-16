@@ -38,6 +38,10 @@ Learn why updates matter and review update steps for computers, phones, tablets,
 
 Practice sharing permissions and privacy choices, then follow the steps to create a shared file and submit its link in Canvas.
 
+**[Credit Freeze Interactive Guide](https://sc137.github.io/ecim502_interactives/credit-freeze/)**
+
+Practice free freezes with all three bureaus, temporary thaws and refreezing, and compare fraud alerts with monitoring services. No personal information is collected.
+
 ---
 
 *AI was used in the creation of these tools.*

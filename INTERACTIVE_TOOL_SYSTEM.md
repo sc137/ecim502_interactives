@@ -64,7 +64,7 @@ The header should contain:
 
 - an `<h1>` using the pattern **[Topic] Interactive Guide**;
 - the subtitle **An interactive web tool for ECIM 502**;
-- a text-size slider;
+- a desktop text-size slider (hidden at widths up to 768px);
 - Normal, Large, and Extra Large presets;
 - Default Light, High Contrast Dark, and High Contrast B&W themes.
 
@@ -231,6 +231,7 @@ The main breakpoint is 768 pixels.
 At mobile widths:
 
 - the header and accessibility controls stack vertically;
+- load `../shared/mobile-accessibility.css` after the local stylesheet to omit the font slider on mobile while preserving Normal, Large, Extra Large, and contrast controls;
 - controls wrap without creating page-level horizontal overflow;
 - the main navigation is not sticky;
 - tabs remain in one compact, horizontally scrollable row;
@@ -386,3 +387,7 @@ When one tool produces a better shared pattern:
 4. apply the improvement to other tools when practical.
 
 Topic content will change frequently. The shared system should remain stable, documented, and reusable.
+
+## Privacy-sensitive lessons
+
+For identity and financial topics, use fictional states instead of replicas asking for identity details. Do not collect or persist sensitive learner information. A generic certificate without a name field is appropriate. Credit Freeze keeps practice and progress only in page memory and resets on reload; no real requests are sent. Verify bureau links and phone numbers against each bureau’s own site.

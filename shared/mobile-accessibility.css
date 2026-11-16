@@ -1,0 +1,5 @@
+/* Shared compact header: retain presets and themes on small screens. */
+@media (max-width: 768px) {
+  .a11y-header-bar .font-slider-container,
+  header .font-slider-container { display: none; }
+}
