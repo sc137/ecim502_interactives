@@ -1,5 +1,4 @@
 document.addEventListener('DOMContentLoaded', () => {
-  initAccessibilitySettings();
   initTabs();
   initTimeline();
   initEngineActivity();
@@ -64,77 +63,8 @@ function clearFeedback(element) {
   element.classList.remove('visible', 'correct', 'review');
 }
 
-/* Accessibility settings */
-function initAccessibilitySettings() {
-  const slider = document.getElementById('font-scaler-slider');
-  const themeSelect = document.getElementById('theme-select');
-  const presetButtons = document.querySelectorAll('[data-font-scale]');
-
-  slider?.addEventListener('input', event => {
-    setFontScale(Number(event.target.value));
-  });
-
-  presetButtons.forEach(button => {
-    button.addEventListener('click', () => {
-      setFontScale(Number(button.dataset.fontScale));
-    });
-  });
-
-  themeSelect?.addEventListener('change', event => {
-    setTheme(event.target.value);
-  });
-
-  const savedScale = Number(readStorage(storageKeys.fontScale));
-  setFontScale(savedScale >= 0.9 && savedScale <= 1.4 ? savedScale : 1, false);
-
-  const savedTheme = readStorage(storageKeys.theme);
-  const validThemes = ['default', 'dark', 'high-contrast-light'];
-  setTheme(validThemes.includes(savedTheme) ? savedTheme : 'default', false);
-}
-
-function setFontScale(scale, shouldAnnounce = true) {
-  const normalizedScale = Math.min(1.4, Math.max(0.9, Number(scale) || 1));
-  const percent = Math.round(normalizedScale * 100);
-  const slider = document.getElementById('font-scaler-slider');
-  const indicator = document.getElementById('font-size-indicator');
-  const presetButtons = document.querySelectorAll('[data-font-scale]');
-
-  document.documentElement.style.setProperty('--font-scale', normalizedScale);
-  if (slider) {
-    slider.value = String(normalizedScale);
-    slider.setAttribute('aria-valuetext', `${percent} percent`);
-  }
-  if (indicator) indicator.textContent = `${percent}%`;
-
-  let activeScale = 1.35;
-  if (normalizedScale <= 1.05) activeScale = 1;
-  else if (normalizedScale <= 1.25) activeScale = 1.18;
-
-  presetButtons.forEach(button => {
-    const isActive = Number(button.dataset.fontScale) === activeScale;
-    button.classList.toggle('active', isActive);
-    button.setAttribute('aria-pressed', String(isActive));
-  });
-
-  writeStorage(storageKeys.fontScale, String(normalizedScale));
-  if (shouldAnnounce) announce(`Text size set to ${percent} percent.`);
-}
-
-function setTheme(theme, shouldAnnounce = true) {
-  const themeSelect = document.getElementById('theme-select');
-  const labels = {
-    default: 'Default Light',
-    dark: 'High Contrast Dark',
-    'high-contrast-light': 'High Contrast Black and White'
-  };
-
-  if (theme === 'default') document.documentElement.removeAttribute('data-theme');
-  else document.documentElement.setAttribute('data-theme', theme);
-
-  if (themeSelect) themeSelect.value = theme;
-  writeStorage(storageKeys.theme, theme);
-  if (shouldAnnounce) announce(`Contrast theme changed to ${labels[theme]}.`);
-}
+function setFontScale(value, speak = true) { EmeritusUI.setFontScale(value, speak); }
+function setTheme(value, speak = true) { EmeritusUI.setTheme(value, speak); }
 
 /* Tabs and progress */
 function initTabs() {
@@ -153,21 +83,7 @@ function initTabs() {
     ? Array.from(new Set(exploredTabIds)).filter(id => validTabIds.has(id))
     : [];
 
-  tabs.forEach((tab, index) => {
-    tab.addEventListener('click', () => activateTab(tab, tabs, panels));
-    tab.addEventListener('keydown', event => {
-      let targetIndex = null;
-      if (event.key === 'ArrowRight') targetIndex = (index + 1) % tabs.length;
-      if (event.key === 'ArrowLeft') targetIndex = (index - 1 + tabs.length) % tabs.length;
-      if (event.key === 'Home') targetIndex = 0;
-      if (event.key === 'End') targetIndex = tabs.length - 1;
-
-      if (targetIndex === null) return;
-      event.preventDefault();
-      tabs[targetIndex].focus();
-      activateTab(tabs[targetIndex], tabs, panels);
-    });
-  });
+  EmeritusUI.bindTabs(tabs, tab => activateTab(tab, tabs, panels));
 
   document.getElementById('reset-progress')?.addEventListener('click', resetProgress);
   window.addEventListener('scroll', checkReadingCompletion, { passive: true });

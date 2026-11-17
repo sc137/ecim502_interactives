@@ -1,15 +1,15 @@
-# ECIM 502 Interactive Tool System
+# Emeritus Interactive Tool System
 
-This document is the shared design, development, content, and quality reference for ECIM 502 interactive web tools. New tools should follow this system unless a documented learning need requires a variation.
+This document is the shared design, development, content, and quality reference for Emeritus interactive learning tools. New tools should follow this system unless a documented learning need requires a variation.
 
-The current working implementation is the [Zoom interactive](zoom/index.html), with its shared visual rules in [style.css](zoom/style.css) and behavior in [app.js](zoom/app.js).
+The shared implementation is maintained in `templates/` and `shared/`. Tool-specific lessons and activities remain in each tool folder. Existing public URLs and Canvas links stay unchanged.
 
 ## 1. Goals
 
 Each tool should be:
 
 - easy to open in a browser without a build step;
-- visually consistent with the other ECIM 502 tools;
+- visually consistent with the other Emeritus tools;
 - usable with a mouse, keyboard, touchscreen, screen reader, and enlarged text;
 - written in direct, learner-friendly language;
 - accurate as of its displayed update date;
@@ -25,25 +25,35 @@ Create one folder per tool:
 interactives/
 ├── README.md
 ├── INTERACTIVE_TOOL_SYSTEM.md
-├── zoom/
-│   ├── index.html
-│   ├── style.css
-│   └── app.js
-└── new-tool-name/
-    ├── index.html
-    ├── style.css
-    └── app.js
+├── templates/                 # page, header, navigation, tab, footer, slideshow
+├── shared/
+│   ├── learning.css           # themes, common page frame and components
+│   ├── orientation.css        # additional Firefox/Canvas components
+│   ├── mobile-accessibility.css
+│   └── ui.js                  # display controls and keyboard tab bindings
+├── tools/
+│   ├── build.py
+│   └── check.py
+└── tool-name/
+    ├── page.json              # title, sources, navigation, preferences
+    ├── content.html           # lesson markup and certificate content
+    ├── app.js                 # topic activities and completion rules
+    ├── style.css              # topic-specific styles
+    └── index.html             # generated, published entry page
 ```
 
 Requirements:
 
-- `index.html` contains semantic page structure and topic content.
-- `style.css` contains the shared design system and responsive rules.
-- `app.js` contains interaction, accessibility-state, progress, and persistence logic.
-- A tool should not require Node, a framework, a build command, or a web server in production.
-- Avoid external dependencies unless they are essential, approved, and documented.
-
-Start a new tool by copying the three Zoom files into a new folder, then replace topic-specific content and identifiers. Preserve the shared structure and behavior described below.
+- Edit `content.html`, `page.json`, and the local activity files; do not hand-edit generated `index.html` files.
+- Edit common frame markup in `templates/`; edit shared styles and controls in `shared/`.
+- Run `python3 tools/build.py` after changing templates, content, metadata, scripts, or styles. Commit the generated pages together with their sources when publishing is authorized.
+- Generated asset URLs contain content hashes so new shared CSS/JS is not mixed with stale cached versions. Rebuilding after an asset edit updates those URLs.
+- Run `python3 tools/check.py` before publication. `python3 tools/build.py --check` detects stale generated pages without writing files.
+- Python is an authoring tool only. The published site is ordinary HTML/CSS/JavaScript and requires no framework, server application, or build at runtime.
+- Each public tool remains at its existing folder URL. Keep the shared folder at the same repository level so `../shared/` asset links resolve on GitHub Pages.
+- New tools use `page.json` and `content.html` from an existing tool as a starting point. Adapt their metadata, navigation, preference keys, lesson content, and activity rules; build the entry page from the shared template.
+- The slideshow uses its own presentation template and local layout while sharing text-size behavior. Do not force a slideshow into the lesson tab layout.
+- Avoid adding external dependencies unless they are essential and documented.
 
 ## 3. Standard Page Architecture
 
@@ -51,19 +61,19 @@ Use this order on every page:
 
 1. Skip-to-content link.
 2. Screen-reader announcement region.
-3. Header with title, ECIM 502 subtitle, and accessibility controls.
-4. Tab navigation with exploration progress and reset control.
+3. Header with title, Emeritus Institute student subtitle, and accessibility controls.
+4. Section navigation with exploration progress and reset control (desktop tabs; mobile dropdown).
 5. Main content containing one panel per tab.
 6. Completion certificate section for full-sequence interactive tools.
 7. Footer with attribution, sources/support, and update date.
-8. Local JavaScript file loaded at the end of the body.
+8. Shared display-control script followed by local activity JavaScript at the end of the body.
 
 ### Header
 
 The header should contain:
 
-- an `<h1>` using the pattern **[Topic] Interactive Guide**;
-- the subtitle **An interactive web tool for ECIM 502**;
+- an `<h1>` using the pattern **[Topic] Interactive**;
+- the subtitle **An interactive learning tool for Emeritus Institute students.**;
 - a desktop text-size slider (hidden at widths up to 768px);
 - Normal, Large, and Extra Large presets;
 - Default Light, High Contrast Dark, and High Contrast B&W themes.
@@ -72,7 +82,7 @@ Do not place decorative emoji in the header.
 
 ### Navigation
 
-Use a semantic tab interface:
+Use a semantic tab interface on desktop and a native section selector on mobile:
 
 - `<nav>` with a useful accessible label;
 - `<ul role="tablist">`;
@@ -96,6 +106,8 @@ Use this badge structure consistently:
   <span aria-hidden="true">✅</span><span class="sr-only"> Explored</span>
 </span>
 ```
+
+The shared runtime synchronizes the mobile section selector with the same activation callbacks as desktop tabs. Mobile panels are labeled regions; desktop panels retain their tabpanel roles. Resizing preserves the current section. The reset action invokes the tool’s existing reset control.
 
 Keep the entire `.tab-check-badge` hidden until the tab earns completion. This prevents the visually hidden status from entering the tab's accessible name before completion.
 
@@ -128,7 +140,7 @@ Update the date whenever substantive content, behavior, or source information ch
 
 ### Typography
 
-Use the system font stack already defined in the Zoom stylesheet:
+Use the system font stack defined in `shared/learning.css`:
 
 ```css
 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif
@@ -234,13 +246,18 @@ At mobile widths:
 - load `../shared/mobile-accessibility.css` after the local stylesheet to omit the font slider on mobile while preserving Normal, Large, Extra Large, and contrast controls;
 - controls wrap without creating page-level horizontal overflow;
 - the main navigation is not sticky;
-- tabs remain in one compact, horizontally scrollable row;
+- JavaScript-enabled lesson pages use a labeled section dropdown, Previous/Next controls, and a section counter;
+- Reset exploration is an action in that mobile dropdown;
+- progress is shortened to “Explored X/Y” on mobile;
+- text-size presets and the theme picker use a two-column layout (Normal/Large, then Extra Large/Theme);
+- desktop retains the keyboard-accessible tab row; without JavaScript, the original tab row remains available as a reading fallback;
 - selecting a tab positions its panel near the top;
-- tables may scroll inside their own containers;
+- simple read-only tables are generated as single-column mobile cards from the same source data; desktop retains the semantic table;
+- complex tables with merged cells, form controls, or cell IDs retain a keyboard-accessible scrolling view;
 - simulator controls wrap into usable touch targets;
 - text enlargement must not push controls offscreen.
 
-The tab row may scroll horizontally, but the page itself must not. Do not use a tall sticky mobile menu that covers lesson content.
+The desktop/fallback tab row may scroll horizontally, but the page itself must not. Do not use a tall sticky mobile menu that covers lesson content.
 
 Minimum mobile verification:
 
@@ -263,9 +280,9 @@ Progress must represent meaningful learner activity.
 - Reset Exploration clears earned exploration and current quiz-completion state.
 - Saved progress is filtered to valid tab identifiers before use.
 
-Use tool-specific `localStorage` keys. Do not reuse the Zoom keys unchanged in another tool. Establish a short prefix such as `passwords_`, `files_`, or `browser_` and apply it consistently to font, theme, progress, learner name, and other stored values.
+Use tool-specific storage keys. Display-preference keys are configured under `settings.preferences` in `page.json`; existing keys are retained so saved preferences survive consolidation. Activity progress and learner-name policies remain in the local `app.js`. Credit Freeze has an empty preferences object and writes nothing to browser storage. Do not introduce global progress or personal-data storage through the shared runtime.
 
-Full-sequence ECIM 502 interactive tools should include a completion certificate unless the course requirements explicitly exclude it. The certificate should:
+Full-sequence Emeritus interactive tools should include a completion certificate unless the course requirements explicitly exclude it. The certificate should:
 
 - use the standard **Claim Certificate** control without decorative emoji;
 - display **Intermediate Life & Technology Integration** at the top of the printable certificate;
@@ -301,7 +318,8 @@ The footer should link to the most authoritative support location. For rapidly c
 
 ## 9. JavaScript Conventions
 
-- Initialize behavior from one `DOMContentLoaded` handler.
+- Initialize topic behavior from one `DOMContentLoaded` handler. The shared `ui.js` initializes display controls first, after the static page markup has loaded.
+- Reuse `EmeritusUI.bindTabs(tabs, activate)` for click and Arrow/Home/End behavior. Each local activation callback retains its own completion timing and panel rules.
 - Keep functions grouped by feature with clear section comments.
 - Store shared interaction state in small, named objects or variables.
 - Check for required elements before updating them.
@@ -314,14 +332,14 @@ The footer should link to the most authoritative support location. For rapidly c
 ## 10. Build Workflow for a New Tool
 
 1. Define the audience, learning objectives, and required activities.
-2. Create the new folder and copy `index.html`, `style.css`, and `app.js` from the current reference tool.
+2. Create the new folder using an existing tool’s `page.json`, `content.html`, and local activity files. Choose the shared lesson template or the slideshow template.
 3. Rename page titles, descriptions, panel IDs, labels, storage keys, and topic-specific classes or comments.
 4. Select only the panel types that support the learning objectives.
 5. Research current primary sources before writing time-sensitive content.
 6. Adapt examples, simulations, decision scenarios, quizzes, and glossary entries.
 7. Confirm that every quiz answer matches the instructional content and current sources.
 8. Adapt and verify the completion certificate title, description, date, personalization, and print layout.
-9. Update the footer source link and last-updated date.
+9. Update the source links and last-updated date in `page.json`, then run `python3 tools/build.py`.
 10. Add the tool link to the root `README.md`.
 11. Complete the quality checklist below before publishing.
 
@@ -371,6 +389,7 @@ The footer should link to the most authoritative support location. For rapidly c
 - [ ] JavaScript syntax passes `node --check`.
 - [ ] Browser console has no errors or warnings during core interactions.
 - [ ] `git diff --check` passes.
+- [ ] `python3 tools/check.py` passes (generated pages, README paths, IDs, accessible references, and local assets).
 - [ ] Only intended files are included in the commit.
 - [ ] The live URL works after publishing.
 - [ ] The root README contains the new tool link.
@@ -383,7 +402,7 @@ When one tool produces a better shared pattern:
 
 1. verify the pattern on desktop, mobile, keyboard, and enlarged text;
 2. document the decision here;
-3. update the reference implementation;
+3. update the shared template, stylesheet, or control implementation;
 4. apply the improvement to other tools when practical.
 
 Topic content will change frequently. The shared system should remain stable, documented, and reusable.

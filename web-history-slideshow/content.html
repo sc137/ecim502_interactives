@@ -1,0 +1,390 @@
+<a class="skip-link" href="#slideStage">Skip to the current slide</a>
+  <div class="visually-hidden" id="ariaLiveAnnouncer" aria-live="polite" aria-atomic="true"></div>
+
+  <div class="app">
+    <header class="topbar">
+      <p class="topbar-title">A Little History of the World Wide Web</p>
+      <span class="topbar-spacer"></span>
+      <div class="text-size-controls" role="region" aria-label="Text size settings">
+        <div class="font-slider-container">
+          <label for="fontScalerSlider">Text Size:</label>
+          <input id="fontScalerSlider" type="range" min="0.9" max="1.4" step="0.05" value="1" aria-label="Adjust text size scale">
+          <output id="fontSizeIndicator" for="fontScalerSlider">100%</output>
+        </div>
+        <div class="text-preset-buttons" role="group" aria-label="Quick text presets">
+          <button class="text-preset-button active" type="button" data-font-scale="1" aria-pressed="true">Normal</button>
+          <button class="text-preset-button" type="button" data-font-scale="1.18" aria-pressed="false">Large</button>
+          <button class="text-preset-button" type="button" data-font-scale="1.35" aria-pressed="false">Extra Large</button>
+        </div>
+      </div>
+      <button class="tool-button" id="fullscreenButton" type="button" title="Enter full screen" aria-label="Enter full screen">⛶</button>
+      <button class="tool-button" id="helpButton" type="button" aria-expanded="false" aria-controls="helpPanel" aria-label="Show navigation help" title="Show navigation help">?</button>
+    </header>
+
+    <main class="slide-stage" id="slideStage" tabindex="-1">
+<div class="slide title-slide" role="group" aria-roledescription="slide"
+aria-label="Slide 1 of 10" data-title="Welcome">
+<div class="slide-inner">
+<p><span class="eyebrow">How a simple idea connected the
+world</span></p>
+<h1>A Little History of the World Wide Web</h1>
+<p><span class="subtitle">The people, ideas, and decisions that helped
+the Web grow</span></p>
+<p><span class="date-range">1945–1995</span></p>
+</div>
+</div>
+<div class="slide compact-slide" role="group"
+aria-roledescription="slide" aria-label="Slide 2 of 10"
+data-title="Ideas Before the Web" hidden="">
+<div class="slide-inner">
+<div class="slide-header">
+<div class="year">
+1945–67
+</div>
+<h2>The Web began as an idea about connected information</h2>
+</div>
+<div class="lead">
+<p>Long before websites existed, researchers imagined documents that
+could lead readers directly to related information.</p>
+</div>
+<div class="visual-split">
+<div class="big-list">
+<ul>
+<li><strong>1945:</strong> Vannevar Bush described the
+<strong>Memex</strong>, a device for following links between documents
+<span class="detail"><button class="info-button" type="button" aria-expanded="false" aria-controls="detail-note-1" aria-label="More information about the Memex">i</button><span class="popover" id="detail-note-1" role="note" hidden>Memex: Bush imagined a desk-like machine that stored documents on microfilm and allowed people to create trails between related items. It was a concept, not the modern Web.</span></span></li>
+<li><strong>1960s:</strong> Doug Engelbart built a system with
+hypertext, editing, email, and a mouse</li>
+<li><strong>1965:</strong> Ted Nelson coined the word
+<strong>hypertext</strong>
+<span class="detail"><button class="info-button" type="button" aria-expanded="false" aria-controls="detail-note-2" aria-label="More information about hypertext">i</button><span class="popover" id="detail-note-2" role="note" hidden>Hypertext: Text that contains connections to other information. Today, we usually follow those connections by selecting a link.</span></span></li>
+</ul>
+</div>
+<div class="photo-card">
+<figure>
+<img src="assets/ted-nelson.jpg"
+alt="Ted Nelson, who coined the word hypertext" />
+<figcaption aria-hidden="true">Ted Nelson, who coined the word
+hypertext</figcaption>
+</figure>
+<p><em>Ted Nelson. Image from the W3C 10th Anniversary history
+presentation.</em></p>
+</div>
+</div>
+<div class="takeaway">
+<p>Key idea: Information becomes more useful when people can follow
+meaningful connections.</p>
+</div>
+<div class="source">
+<p>Source: <a href="https://www.w3.org/History.html" target="_blank"
+rel="noopener noreferrer">W3C, “A Little History of the World Wide
+Web”</a></p>
+</div>
+</div>
+</div>
+<div class="slide" role="group" aria-roledescription="slide"
+aria-label="Slide 3 of 10" data-title="ENQUIRE" hidden="">
+<div class="slide-inner">
+<div class="slide-header">
+<div class="year">
+1980
+</div>
+<h2>ENQUIRE tested connected notes at CERN</h2>
+</div>
+<div class="lead">
+<p>While working as a consultant at CERN, Tim Berners-Lee wrote a
+program called <strong>ENQUIRE</strong>.</p>
+</div>
+<div class="big-list">
+<ul>
+<li>Each piece of information was stored as a “node”</li>
+<li>Nodes could be connected with two-way links</li>
+<li>The system helped organize people, projects, and ideas</li>
+</ul>
+</div>
+<div class="takeaway">
+<p>ENQUIRE was not yet the Web, but it gave Berners-Lee a working model
+for linking information.</p>
+</div>
+<div class="source">
+<p>Source: <a href="https://www.w3.org/History.html" target="_blank"
+rel="noopener noreferrer">W3C Web history, 1980 entry</a></p>
+</div>
+</div>
+</div>
+<div class="slide" role="group" aria-roledescription="slide"
+aria-label="Slide 4 of 10" data-title="The Proposal" hidden="">
+<div class="slide-inner">
+<div class="slide-header">
+<div class="year">
+1989
+</div>
+<h2>A proposal turned the idea into a plan</h2>
+</div>
+<div class="lead">
+<p>Tim Berners-Lee circulated <strong>“Information Management: A
+Proposal”</strong> at CERN in March 1989.</p>
+</div>
+<div class="big-list">
+<ul>
+<li>CERN had information spread across many computers and systems</li>
+<li>The proposal described a global hypertext system</li>
+<li>People could connect information without placing it all in one
+database</li>
+</ul>
+</div>
+<div class="takeaway">
+<p>The goal was practical: make complicated information easier to find,
+connect, and share.</p>
+</div>
+<div class="source">
+<p>Source: <a href="https://www.w3.org/History.html" target="_blank"
+rel="noopener noreferrer">W3C Web history, 1989 entry</a></p>
+</div>
+</div>
+</div>
+<div class="slide compact-slide" role="group"
+aria-roledescription="slide" aria-label="Slide 5 of 10"
+data-title="The First Web" hidden="">
+<div class="slide-inner">
+<div class="slide-header">
+<div class="year">
+1990
+</div>
+<h2>The first working Web was ready</h2>
+</div>
+<div class="lead">
+<p>By the end of 1990, the essential pieces of the Web were working at
+CERN.</p>
+</div>
+<div class="visual-split">
+<div class="photo-card browser-shot">
+<figure>
+<img src="assets/first-worldwideweb-browser.gif"
+alt="The early WorldWideWeb browser and editor running on a NeXT computer" />
+<figcaption aria-hidden="true">The early WorldWideWeb browser and editor
+running on a NeXT computer</figcaption>
+</figure>
+<p><em>The WorldWideWeb browser and editor on a NeXT computer. Image
+from W3C.</em></p>
+</div>
+<div class="big-list">
+<ul>
+<li><strong>Browser:</strong> WorldWideWeb displayed and edited
+pages</li>
+<li><strong>Server:</strong> info.cern.ch stored and delivered
+information</li>
+<li><strong>Web page:</strong> The first page explained the WWW
+project</li>
+</ul>
+</div>
+</div>
+<div class="takeaway">
+<p>For the first time, someone could use a browser to request a linked
+page from a Web server.</p>
+</div>
+<div class="source">
+<p>Source: <a href="https://www.w3.org/History.html" target="_blank"
+rel="noopener noreferrer">W3C Web history, 1990 entry</a></p>
+</div>
+</div>
+</div>
+<div class="slide" role="group" aria-roledescription="slide"
+aria-label="Slide 6 of 10" data-title="The Web Spreads" hidden="">
+<div class="slide-inner">
+<div class="slide-header">
+<div class="year">
+1991–92
+</div>
+<h2>The Web moved beyond its first laboratory</h2>
+</div>
+<div class="big-list">
+<ul>
+<li><strong>1991:</strong> Browser software and project files became
+available over the Internet</li>
+<li><strong>December 1991:</strong> The first Web server outside Europe
+was installed at SLAC in California
+<span class="detail"><button class="info-button" type="button" aria-expanded="false" aria-controls="detail-note-3" aria-label="More information about SLAC">i</button><span class="popover" id="detail-note-3" role="note" hidden>SLAC: The Stanford Linear Accelerator Center installed a server on December 12, 1991. This was an important step in the Web’s international growth.</span></span></li>
+<li><strong>1992:</strong> New graphical browsers appeared, including
+Erwise and Viola</li>
+<li>By November 1992, the W3C history lists <strong>26 reasonably
+reliable servers</strong></li>
+</ul>
+</div>
+<div class="takeaway">
+<p>The Web could grow because people on different computers could use
+the same basic system.
+<span class="detail"><button class="info-button" type="button" aria-expanded="false" aria-controls="detail-note-4" aria-label="View the World Wide Web poster from Hypertext 91">i</button><span class="popover" id="detail-note-4" role="note" hidden>A Web project poster from 1991<img class="popover-photo" src="assets/tim-berners-lee-hypertext-91-poster.jpg" alt="World Wide Web project poster displayed at Hypertext 91"><span class="popover-credit">Image from the W3C 10th Anniversary history presentation.</span></span></span></p>
+</div>
+<div class="source">
+<p>Source: <a href="https://www.w3.org/History.html" target="_blank"
+rel="noopener noreferrer">W3C Web history, 1991–92 entries</a></p>
+</div>
+</div>
+</div>
+<div class="slide compact-slide" role="group"
+aria-roledescription="slide" aria-label="Slide 7 of 10"
+data-title="A Turning Point" hidden="">
+<div class="slide-inner">
+<div class="slide-header">
+<div class="year">
+1993
+</div>
+<h2>Two decisions helped the Web take off</h2>
+</div>
+<div class="milestone-row">
+<section id="mosaic-arrived" class="milestone">
+<h3>Mosaic arrived</h3>
+<p>A graphical browser made the Web easier to use on common computers
+<span class="detail"><button class="info-button" type="button" aria-expanded="false" aria-controls="detail-note-5" aria-label="More information about Mosaic">i</button><span class="popover" id="detail-note-5" role="note" hidden>Mosaic: NCSA released its first alpha version for X in February. By September, working versions were available for X, Windows, and Macintosh.<img class="popover-photo popover-photo-small" src="assets/marc-andreessen.jpg" alt="Marc Andreessen, a developer of the Mosaic browser"><span class="popover-credit">Marc Andreessen. Image from the W3C 10th Anniversary history presentation.</span></span></span></p>
+</section>
+<section id="the-web-stayed-open" class="milestone">
+<h3>The Web stayed open</h3>
+<p>CERN declared that Web technology could be used by anyone without
+fees
+<span class="detail"><button class="info-button" type="button" aria-expanded="false" aria-controls="detail-note-6" aria-label="More information about CERN making the Web freely usable">i</button><span class="popover" id="detail-note-6" role="note" hidden>April 30, 1993: CERN’s directors issued the declaration that made World Wide Web technology freely usable, with no fees payable to CERN.</span></span></p>
+</section>
+<section id="growth-accelerated" class="milestone">
+<h3>Growth accelerated</h3>
+<p>Known HTTP servers grew from about 50 in January to more than 200 in
+October</p>
+</section>
+</div>
+<div class="takeaway">
+<p>Ease of use plus open access created the conditions for rapid
+worldwide adoption.</p>
+</div>
+<div class="source">
+<p>Source: <a href="https://www.w3.org/History.html" target="_blank"
+rel="noopener noreferrer">W3C Web history, 1993 entry</a></p>
+</div>
+</div>
+</div>
+<div class="slide compact-slide" role="group"
+aria-roledescription="slide" aria-label="Slide 8 of 10"
+data-title="The W3C Is Founded" hidden="">
+<div class="slide-inner">
+<div class="slide-header">
+<div class="year">
+1994
+</div>
+<h2>Rapid growth created a need for coordination</h2>
+</div>
+<div class="big-list">
+<ul>
+<li>The first International World Wide Web Conference drew far more
+applicants than it could hold</li>
+<li>More than <strong>1,500 Web servers</strong> were registered by
+June</li>
+<li>The original CERN server was handling 1,000 times its 1991 load</li>
+<li>On October 1, the <strong>World Wide Web Consortium</strong> was
+founded
+<span class="detail"><button class="info-button" type="button" aria-expanded="false" aria-controls="detail-note-7" aria-label="More information about the World Wide Web Consortium">i</button><span class="popover" id="detail-note-7" role="note" hidden>W3C: The World Wide Web Consortium was created to help organizations cooperate on the Web’s core technologies and standards.<img class="popover-photo popover-photo-small" src="assets/alan-kotok.jpg" alt="Alan Kotok, who visited CERN in 1994 to discuss creating the Consortium"><span class="popover-credit">Alan Kotok. Image from the W3C 10th Anniversary history presentation.</span></span></span></li>
+</ul>
+</div>
+<div class="takeaway">
+<p>Shared standards helped the Web remain one connected system instead
+of breaking into incompatible pieces.</p>
+</div>
+<div class="source">
+<p>Source: <a href="https://www.w3.org/History.html" target="_blank"
+rel="noopener noreferrer">W3C Web history, 1994 entry</a></p>
+</div>
+</div>
+</div>
+<div class="slide" role="group" aria-roledescription="slide"
+aria-label="Slide 9 of 10" data-title="The Web Goes Public" hidden="">
+<div class="slide-inner">
+<div class="slide-header">
+<div class="year">
+1995
+</div>
+<h2>The Web entered public life</h2>
+</div>
+<div class="lead">
+<p>By 1995, the Web was no longer just a research project.</p>
+</div>
+<div class="big-list">
+<ul>
+<li>World leaders discussed the emerging “information society”</li>
+<li>CERN demonstrated the Web to 250 European reporters</li>
+<li>Thirty high-school students helped the reporters “surf the Web” on
+60 computers</li>
+<li>International conferences and new organizations supported the
+growing Web community</li>
+</ul>
+</div>
+<div class="takeaway">
+<p>The Web had become a new way for ordinary people to explore and share
+information.</p>
+</div>
+<div class="source">
+<p>Source: <a href="https://www.w3.org/History.html" target="_blank"
+rel="noopener noreferrer">W3C Web history, 1995 entry</a></p>
+</div>
+</div>
+</div>
+<div class="slide" role="group" aria-roledescription="slide"
+aria-label="Slide 10 of 10" data-title="The Big Picture" hidden="">
+<div class="slide-inner">
+<section class="slide-header">
+<h2>The Web grew because it was connected, useful, open, and shared</h2>
+</section>
+<div class="big-list">
+<ul>
+<li><strong>Connected:</strong> Links let people move between related
+information</li>
+<li><strong>Useful:</strong> The first Web solved a real information
+problem</li>
+<li><strong>Open:</strong> People could use the technology without
+paying CERN</li>
+<li><strong>Shared:</strong> Common standards allowed different
+computers to work together</li>
+</ul>
+</div>
+<div class="takeaway">
+<p>Today’s Web grew from decades of ideas—and from the decision to let
+everyone build on them.</p>
+</div>
+<div class="source">
+<p>Sources: <a href="https://www.w3.org/History.html" target="_blank"
+rel="noopener noreferrer">W3C, “A Little History of the World Wide
+Web”</a> and <a
+href="https://www.w3.org/2004/Talks/w3c10-HowItAllStarted/"
+target="_blank" rel="noopener noreferrer">W3C, “How It All
+Started”</a></p>
+</div>
+<div class="source">
+<p>Professor Sable · Emeritus Institute · Last Updated: 8/31/26</p>
+</div>
+</div>
+</div>
+    </main>
+
+    <nav class="controls" aria-label="Slideshow navigation">
+      <button class="nav-button" id="previousButton" type="button" aria-label="Previous slide" disabled><span aria-hidden="true">←</span> <span class="label">Previous</span></button>
+      <div class="progress-area">
+        <span class="slide-status" id="slideStatus" aria-live="polite">Slide 1</span>
+        <div class="progress-track" role="progressbar" aria-label="Slideshow progress" aria-valuemin="1" aria-valuemax="10" aria-valuenow="1">
+          <div class="progress-bar" id="progressBar"></div>
+        </div>
+      </div>
+      <button class="nav-button" id="nextButton" type="button" aria-label="Next slide"><span class="label">Next</span> <span aria-hidden="true">→</span></button>
+    </nav>
+  </div>
+
+  <section class="help-panel" id="helpPanel" role="dialog" aria-modal="true" aria-labelledby="helpTitle" hidden>
+    <button class="help-close" id="helpCloseButton" type="button" aria-label="Close help">×</button>
+    <h2 id="helpTitle">How to Use This Slideshow</h2>
+    <ul>
+      <li>Select <strong>Previous</strong> or <strong>Next</strong></li>
+      <li>Press the <strong>left</strong> or <strong>right arrow</strong> keys</li>
+      <li>Press <strong>Home</strong> for the first slide or <strong>End</strong> for the last slide</li>
+      <li>Select an <strong>information icon</strong> for additional details</li>
+      <li>Use the <strong>Text Size</strong> slider or a preset button to adjust the text</li>
+      <li>Select the full-screen icon for a larger presentation view</li>
+    </ul>
+    <p class="ai-disclosure">AI was used to assist with the design,
+accessibility, and consistency of this site. The instructor reviewed and
+edited the final content.</p>
+  </section>

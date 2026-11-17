@@ -1,0 +1,55 @@
+{
+  "head_title": "Using AI with a Security Mindset Interactive",
+  "title": "Using AI with a Security Mindset Interactive",
+  "description": "Practice recognizing PII, using privacy-preserving prompts, and verifying AI answers in a hands-on adult workshop.",
+  "updated": "11/16/26",
+  "settings": {
+    "preferences": {
+      "font": "ai_security_font",
+      "theme": "ai_security_theme"
+    }
+  },
+  "stylesheets": [
+    "../shared/learning.css",
+    "style.css",
+    "../shared/mobile-accessibility.css"
+  ],
+  "navigation": {
+    "percent": true,
+    "tabs": [
+      {
+        "id": "tab-pii",
+        "panel": "panel-pii",
+        "label": "1. Recognize PII",
+        "badge_id": "check-tab-pii"
+      },
+      {
+        "id": "tab-prompts",
+        "panel": "panel-prompts",
+        "label": "2. Safer Prompts",
+        "badge_id": "check-tab-prompts"
+      },
+      {
+        "id": "tab-tools",
+        "panel": "panel-tools",
+        "label": "3. Tools & Privacy",
+        "badge_id": "check-tab-tools"
+      },
+      {
+        "id": "tab-verify",
+        "panel": "panel-verify",
+        "label": "4. Pause & Verify",
+        "badge_id": "check-tab-verify"
+      },
+      {
+        "id": "tab-ready",
+        "panel": "panel-ready",
+        "label": "5. Ready to Use AI",
+        "badge_id": "check-tab-ready"
+      }
+    ],
+    "claim": "<button class=\"btn-claim-certificate\" id=\"btn-claim-cert\" hidden>Claim Certificate</button>",
+    "reset": "<button class=\"btn-reset-progress\" id=\"reset-progress\">Reset Exploration</button>"
+  },
+  "sources": "<p>Sources: NIST, official AI-provider privacy guidance, NCSC, and FTC, linked in the relevant sections</p>\n  <p>AI was used in the creation of this tool.</p>"
+}

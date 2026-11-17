@@ -16,29 +16,8 @@ function announce(message) {
   region.textContent = '';
   announcementTimer = setTimeout(() => { region.textContent = message; }, 100);
 }
-function setFontScale(value) {
-  const scale = Math.min(1.4, Math.max(0.9, Number(value) || 1));
-  document.documentElement.style.setProperty('--font-scale', scale);
-  document.getElementById('font-scaler-slider').value = scale;
-  document.getElementById('font-size-indicator').textContent = `${Math.round(scale * 100)}%`;
-  document.getElementById('font-scaler-slider').setAttribute('aria-valuetext', `${Math.round(scale * 100)} percent`);
-  [['normal', 1], ['large', 1.18], ['xlarge', 1.35]].forEach(([id, preset]) => {
-    const button = document.getElementById(`btn-font-${id}`);
-    const selected = Math.abs(scale - preset) < 0.001;
-    button.classList.toggle('active', selected);
-    button.setAttribute('aria-pressed', String(selected));
-  });
-  storage.set('font_scale', scale);
-  checkCompletion();
-}
-function changeTheme(value) {
-  const theme = ['default', 'dark', 'high-contrast-light'].includes(value) ? value : 'default';
-  if (theme === 'default') document.documentElement.removeAttribute('data-theme');
-  else document.documentElement.dataset.theme = theme;
-  document.getElementById('theme-select').value = theme;
-  storage.set('theme', theme);
-  announce(`Contrast theme: ${theme}.`);
-}
+function setFontScale(value) { EmeritusUI.setFontScale(value); checkCompletion(); }
+function changeTheme(value) { EmeritusUI.setTheme(value); }
 function activateTab(id, focus = false) {
   if (!tabIds.includes(id)) return;
   for (const tabId of tabIds) {
@@ -242,22 +221,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const saved = JSON.parse(storage.get('explored') || '[]');
     if (Array.isArray(saved)) explored = new Set(saved.filter(id => tabIds.includes(id)));
   } catch { explored = new Set(); }
-  setFontScale(storage.get('font_scale') || 1);
-  changeTheme(storage.get('theme') || 'default');
   updateProgress();
-  document.getElementById('font-scaler-slider').addEventListener('input', event => setFontScale(event.target.value));
-  for (const [index, id] of tabIds.entries()) {
-    const tab = document.getElementById(`tab-${id}`);
-    tab.addEventListener('click', () => activateTab(id));
-    tab.addEventListener('keydown', event => {
-      let target;
-      if (event.key === 'ArrowRight') target = (index + 1) % tabIds.length;
-      if (event.key === 'ArrowLeft') target = (index - 1 + tabIds.length) % tabIds.length;
-      if (event.key === 'Home') target = 0;
-      if (event.key === 'End') target = tabIds.length - 1;
-      if (target !== undefined) { event.preventDefault(); activateTab(tabIds[target], true); }
-    });
-  }
+  document.addEventListener('emeritus:textsizechange', checkCompletion);
+  EmeritusUI.bindTabs(document.querySelectorAll('.tab-button'), tab => activateTab(tab.id.slice(4)));
   window.addEventListener('scroll', checkCompletion, { passive: true });
   window.addEventListener('resize', checkCompletion);
   completionTimer = setTimeout(checkCompletion, 1400);

@@ -1,0 +1,61 @@
+{
+  "head_title": "Google Drive Sharing Interactive",
+  "title": "Google Drive Sharing Interactive",
+  "description": "Practice cloud storage and safe Google Drive sharing, then prepare your shared document assignment.",
+  "updated": "11/16/26",
+  "settings": {
+    "preferences": {
+      "font": "drive_sharing_font",
+      "theme": "drive_sharing_theme"
+    }
+  },
+  "stylesheets": [
+    "../shared/learning.css",
+    "style.css",
+    "../shared/mobile-accessibility.css"
+  ],
+  "navigation": {
+    "percent": true,
+    "tabs": [
+      {
+        "id": "tab-basics",
+        "panel": "panel-basics",
+        "label": "1. Cloud Basics",
+        "badge_id": "check-tab-basics"
+      },
+      {
+        "id": "tab-access",
+        "panel": "panel-access",
+        "label": "2. Access & Roles",
+        "badge_id": "check-tab-access"
+      },
+      {
+        "id": "tab-practice",
+        "panel": "panel-practice",
+        "label": "3. Sharing Lab",
+        "badge_id": "check-tab-practice"
+      },
+      {
+        "id": "tab-privacy",
+        "panel": "panel-privacy",
+        "label": "4. Privacy Choices",
+        "badge_id": "check-tab-privacy"
+      },
+      {
+        "id": "tab-assignment",
+        "panel": "panel-assignment",
+        "label": "5. Create & Submit",
+        "badge_id": "check-tab-assignment"
+      },
+      {
+        "id": "tab-knowledge",
+        "panel": "panel-knowledge",
+        "label": "6. Knowledge Check",
+        "badge_id": "check-tab-knowledge"
+      }
+    ],
+    "claim": "<button class=\"btn-claim-certificate\" id=\"btn-claim-cert\" hidden>Claim Certificate</button>",
+    "reset": "<button class=\"btn-reset-progress\" id=\"reset-progress\">Reset Exploration</button>"
+  },
+  "sources": "<p>Official help: <a href=\"https://support.google.com/drive/answer/2494822?hl=en\">Google Drive sharing and permissions</a> · <a href=\"https://support.google.com/drive/answer/2424368?hl=en\">Uploading files to Drive</a>. Account and administrator settings may change available options.</p>\n  <p>AI was used in the creation of this tool.</p>"
+}

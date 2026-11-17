@@ -1,0 +1,62 @@
+{
+  "head_title": "Canvas LMS Interactive: Emeritus Student Orientation",
+  "title": "Canvas LMS Interactive",
+  "description": "An accessible interactive guide for ECIM 502 students to explore Canvas LMS, choose notification preferences, update a profile photo, and submit the profile-photo assignment.",
+  "updated": "11/16/26",
+  "settings": {
+    "preferences": {
+      "font": "canvas_font_scale",
+      "theme": "canvas_theme"
+    }
+  },
+  "stylesheets": [
+    "../shared/learning.css",
+    "../shared/orientation.css",
+    "style.css",
+    "../shared/mobile-accessibility.css"
+  ],
+  "navigation": {
+    "percent": true,
+    "tabs": [
+      {
+        "id": "tab-basics",
+        "panel": "panel-basics",
+        "label": "1. Canvas Basics",
+        "badge_id": null
+      },
+      {
+        "id": "tab-navigation",
+        "panel": "panel-navigation",
+        "label": "2. Navigation Practice",
+        "badge_id": null
+      },
+      {
+        "id": "tab-notifications",
+        "panel": "panel-notifications",
+        "label": "3. Notifications",
+        "badge_id": null
+      },
+      {
+        "id": "tab-profile",
+        "panel": "panel-profile",
+        "label": "4. Profile Photo",
+        "badge_id": null
+      },
+      {
+        "id": "tab-readiness",
+        "panel": "panel-readiness",
+        "label": "5. Readiness Check",
+        "badge_id": null
+      },
+      {
+        "id": "tab-glossary",
+        "panel": "panel-glossary",
+        "label": "6. Glossary & Help",
+        "badge_id": null
+      }
+    ],
+    "claim": "<button type=\"button\" class=\"btn-claim-certificate\" id=\"claim-certificate\" aria-controls=\"certificate-section\" aria-expanded=\"false\" hidden>Claim Certificate</button>",
+    "reset": "<button type=\"button\" class=\"btn-reset-progress\" id=\"reset-progress\">Reset Exploration</button>"
+  },
+  "sources": "<p>Information reviewed against current official Instructure Canvas LMS student and basics guides.</p>"
+}

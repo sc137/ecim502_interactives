@@ -1,37 +1,59 @@
-# macOS
+# Operating-system metadata
 .DS_Store
 .AppleDouble
 .LSOverride
 ._*
-.Spotlight-V100
-.Trashes
-
-# Windows
+.Spotlight-V100/
+.Trashes/
 Thumbs.db
 Thumbs.db:encryptable
 ehthumbs.db
-Desktop.ini
 $RECYCLE.BIN/
+Desktop.ini
 
-# Editors and temporary files
-.idea/
+# Editors and local history
 .vscode/
+.idea/
+.history/
 *.swp
 *.swo
 *~
 
-# Dependencies and generated output
-node_modules/
-dist/
-build/
-coverage/
-
-# Environment files and logs
+# Local environment configuration (keep safe examples)
 .env
 .env.*
 !.env.example
+!.env.sample
+!.env.*.example
+
+# Optional development dependencies and environments
+node_modules/
+dist/
+build/
+.pnpm-store/
+.venv/
+venv/
+
+# Python and tool caches
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.cache/
+
+# Temporary files and test reports
 *.log
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
+*.tmp
+*.temp
+.coverage
+htmlcov/
+coverage/
+playwright-report/
+test-results/
+
+# Generated index.html files and published assets are intentionally tracked.

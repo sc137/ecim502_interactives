@@ -1,8 +1,5 @@
-@import url("../firefox/style.css");
-
 /* Canvas-specific components. Shared page, accessibility, certificate, and
    responsive rules come from the ECIM 502 Firefox reference implementation. */
-
 .canvas-demo {
   margin: 24px 0;
   overflow: hidden;
@@ -174,7 +171,7 @@
   place-items: center;
   border-radius: 50%;
   background: var(--primary-blue);
-  color: #ffffff;
+  color: var(--text-on-primary);
   content: counter(canvas-steps);
   font-weight: 900;
 }

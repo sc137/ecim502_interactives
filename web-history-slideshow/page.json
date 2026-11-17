@@ -1,0 +1,19 @@
+{
+  "head_title": "A Little History of the World Wide Web",
+  "title": "A Little History of the World Wide Web",
+  "description": "An accessible, senior-friendly slideshow about the history of the World Wide Web from 1945 through 1995.",
+  "updated": "11/16/26",
+  "settings": {
+    "preferences": {
+      "font": "markdown_slideshow_font_scale"
+    },
+    "sliderId": "fontScalerSlider",
+    "indicatorId": "fontSizeIndicator",
+    "announcerId": "ariaLiveAnnouncer"
+  },
+  "layout": "slideshow",
+  "stylesheets": [
+    "style.css",
+    "../shared/mobile-accessibility.css"
+  ]
+}

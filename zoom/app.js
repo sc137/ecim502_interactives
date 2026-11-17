@@ -5,13 +5,20 @@
    ========================================================================== */
 
 document.addEventListener('DOMContentLoaded', () => {
-  initA11ySettings();
   initTabs();
   initSliders();
   initGlossary();
   initCertificate();
   updateChecklistProgress();
 });
+
+function readStorage(key) {
+  try { return localStorage.getItem(key); } catch { return null; }
+}
+
+function writeStorage(key, value) {
+  try { localStorage.setItem(key, value); } catch { /* Saved preferences are optional. */ }
+}
 
 /* Helper Function for ARIA Live Region Screen Reader Announcements */
 function announceToScreenReader(message) {
@@ -27,70 +34,8 @@ function announceToScreenReader(message) {
 /* ==========================================================================
    1. ACCESSIBILITY SETTINGS (FONT SCALER & CONTRAST THEMES)
    ========================================================================== */
-function initA11ySettings() {
-  const slider = document.getElementById('font-scaler-slider');
-  if (slider) {
-    slider.addEventListener('input', (e) => {
-      setFontScale(parseFloat(e.target.value));
-    });
-  }
-
-  // Load saved preferences if available
-  const savedScale = localStorage.getItem('emeritus_font_scale');
-  if (savedScale) {
-    setFontScale(parseFloat(savedScale));
-  }
-
-  const savedTheme = localStorage.getItem('emeritus_theme');
-  if (savedTheme) {
-    const themeSelect = document.getElementById('theme-select');
-    if (themeSelect) themeSelect.value = savedTheme;
-    changeTheme(savedTheme);
-  }
-}
-
-function setFontScale(scaleValue) {
-  document.documentElement.style.setProperty('--font-scale', scaleValue);
-  
-  // Update Slider Input & Indicator
-  const slider = document.getElementById('font-scaler-slider');
-  const indicator = document.getElementById('font-size-indicator');
-  if (slider) slider.value = scaleValue;
-  if (indicator) indicator.textContent = Math.round(scaleValue * 100) + '%';
-
-  // Update Button Presets
-  const btnNorm = document.getElementById('btn-font-normal');
-  const btnLarge = document.getElementById('btn-font-large');
-  const btnXL = document.getElementById('btn-font-xlarge');
-
-  [btnNorm, btnLarge, btnXL].forEach(b => {
-    if (!b) return;
-    b.classList.remove('active');
-    b.setAttribute('aria-pressed', 'false');
-  });
-
-  let activePreset = btnXL;
-  if (scaleValue <= 1.05) activePreset = btnNorm;
-  else if (scaleValue <= 1.25) activePreset = btnLarge;
-
-  if (activePreset) {
-    activePreset.classList.add('active');
-    activePreset.setAttribute('aria-pressed', 'true');
-  }
-
-  localStorage.setItem('emeritus_font_scale', scaleValue);
-  announceToScreenReader(`Text size set to ${Math.round(scaleValue * 100)} percent.`);
-}
-
-function changeTheme(themeValue) {
-  if (themeValue === 'default') {
-    document.documentElement.removeAttribute('data-theme');
-  } else {
-    document.documentElement.setAttribute('data-theme', themeValue);
-  }
-  localStorage.setItem('emeritus_theme', themeValue);
-  announceToScreenReader(`Contrast theme changed to ${themeValue}.`);
-}
+function setFontScale(value) { EmeritusUI.setFontScale(value); }
+function changeTheme(value) { EmeritusUI.setTheme(value); }
 
 /* ==========================================================================
    2. ACCESSIBLE TAB NAVIGATION & SCROLL-TRIGGERED EXPLORATION TRACKING
@@ -109,7 +54,7 @@ function initTabs() {
 
   // Load saved explored tabs
   try {
-    const saved = localStorage.getItem('emeritus_explored_tabs');
+    const saved = readStorage('emeritus_explored_tabs');
     if (saved) exploredTabIds = JSON.parse(saved);
   } catch (e) {
     exploredTabIds = [];
@@ -127,25 +72,7 @@ function initTabs() {
   // Allow enough reading time before checking whether the full panel is visible.
   setTimeout(checkTabScrollCompletion, 1200);
 
-  tabs.forEach((tab, index) => {
-    tab.addEventListener('click', () => {
-      activateTab(tab, tabs, panels);
-    });
-
-    tab.addEventListener('keydown', (e) => {
-      let targetIndex = null;
-      if (e.key === 'ArrowRight') targetIndex = (index + 1) % tabs.length;
-      else if (e.key === 'ArrowLeft') targetIndex = (index - 1 + tabs.length) % tabs.length;
-      else if (e.key === 'Home') targetIndex = 0;
-      else if (e.key === 'End') targetIndex = tabs.length - 1;
-
-      if (targetIndex !== null) {
-        e.preventDefault();
-        tabs[targetIndex].focus();
-        activateTab(tabs[targetIndex], tabs, panels);
-      }
-    });
-  });
+  EmeritusUI.bindTabs(tabs, tab => activateTab(tab, tabs, panels));
 }
 
 function activateTab(selectedTab, allTabs, allPanels) {
@@ -228,7 +155,7 @@ function updateQuizCompletionStatus() {
 }
 
 function saveExploredTabs() {
-  localStorage.setItem('emeritus_explored_tabs', JSON.stringify(exploredTabIds));
+  writeStorage('emeritus_explored_tabs', JSON.stringify(exploredTabIds));
 }
 
 function updateExplorationUI() {
@@ -259,6 +186,9 @@ function updateExplorationUI() {
       percentBadge.style.backgroundColor = '#176b2c';
     }
   }
+
+  const certificate = document.getElementById('certificate-section');
+  if (certificate) certificate.hidden = percent !== 100;
 
   // Show the certificate only after every module has been explored.
   if (claimCertBtn) {
@@ -300,7 +230,7 @@ function initCertificate() {
   }
 
   // Load saved student name
-  const savedName = localStorage.getItem('emeritus_student_name');
+  const savedName = readStorage('emeritus_student_name');
   if (savedName) {
     const nameInput = document.getElementById('student-name-input');
     if (nameInput) nameInput.value = savedName;
@@ -314,15 +244,21 @@ function updateCertificateName(nameVal) {
   if (display) {
     display.textContent = clean.length > 0 ? clean : 'Emeritus Student';
   }
-  localStorage.setItem('emeritus_student_name', clean);
+  writeStorage('emeritus_student_name', clean);
+}
+
+function isExplorationComplete() {
+  return Array.from(document.querySelectorAll('.tab-button')).every(tab => exploredTabIds.includes(tab.id));
 }
 
 function printCertificate() {
+  if (!isExplorationComplete()) return;
   announceToScreenReader('Opening print dialog for your Emeritus Completion Certificate PDF.');
   window.print();
 }
 
 function openCertificateSection() {
+  if (!isExplorationComplete()) return;
   const tabs = document.querySelectorAll('.tab-button');
   const panels = document.querySelectorAll('.tab-panel');
   const quizzesTab = document.getElementById('tab-quizzes');
@@ -332,7 +268,9 @@ function openCertificateSection() {
     setTimeout(() => {
       const certSection = document.getElementById('certificate-section');
       if (certSection) {
-        certSection.scrollIntoView({ behavior: 'smooth' });
+        if (!isExplorationComplete()) return;
+        document.getElementById('student-name-input')?.focus({ preventScroll: true });
+        certSection.scrollIntoView({ behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth' });
       }
     }, 200);
   }

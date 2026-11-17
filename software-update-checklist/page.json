@@ -1,0 +1,67 @@
+{
+  "head_title": "Software Update Checklist",
+  "title": "Software Update Checklist",
+  "description": "Review update habits, explore instructions for your devices, and complete five friendly knowledge questions.",
+  "updated": "11/16/26",
+  "settings": {
+    "preferences": {
+      "font": "software_updates_font",
+      "theme": "software_updates_theme"
+    }
+  },
+  "stylesheets": [
+    "../shared/learning.css",
+    "style.css",
+    "../shared/mobile-accessibility.css"
+  ],
+  "navigation": {
+    "percent": true,
+    "tabs": [
+      {
+        "id": "tab-why",
+        "panel": "panel-why",
+        "label": "1. Why Updates Matter",
+        "badge_id": "check-tab-why"
+      },
+      {
+        "id": "tab-computers",
+        "panel": "panel-computers",
+        "label": "2. Desktops & Laptops",
+        "badge_id": "check-tab-computers"
+      },
+      {
+        "id": "tab-tablets",
+        "panel": "panel-tablets",
+        "label": "3. Tablets & E-readers",
+        "badge_id": "check-tab-tablets"
+      },
+      {
+        "id": "tab-phones",
+        "panel": "panel-phones",
+        "label": "4. Mobile Phones",
+        "badge_id": "check-tab-phones"
+      },
+      {
+        "id": "tab-routers",
+        "panel": "panel-routers",
+        "label": "5. Wireless Routers",
+        "badge_id": "check-tab-routers"
+      },
+      {
+        "id": "tab-iot",
+        "panel": "panel-iot",
+        "label": "6. Smart Home & IoT",
+        "badge_id": "check-tab-iot"
+      },
+      {
+        "id": "tab-knowledge",
+        "panel": "panel-knowledge",
+        "label": "7. Test Your Knowledge",
+        "badge_id": "check-tab-knowledge"
+      }
+    ],
+    "claim": "<button class=\"btn-claim-certificate\" id=\"btn-claim-cert\" hidden>Claim Certificate</button>",
+    "reset": "<button class=\"btn-reset-progress\" id=\"reset-progress\">Reset Exploration</button>"
+  },
+  "sources": "<p>Official update instructions are linked with each device. <a href=\"https://consumer.ftc.gov/articles/securing-your-internet-connected-devices-home\">FTC guidance for connected devices</a></p>\n  <p>AI was used in the creation of this tool.</p>"
+}

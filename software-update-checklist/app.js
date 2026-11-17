@@ -12,31 +12,6 @@ document.addEventListener('DOMContentLoaded', () => {
   let activatedAt = Date.now();
   const announce = message => { document.getElementById('aria-live-announcer').textContent = message; };
   const certificate = document.getElementById('certificate-section');
-  const setScale = value => {
-    const scale = Math.min(1.4, Math.max(0.9, Number(value) || 1));
-    document.documentElement.style.setProperty('--font-scale', scale);
-    document.getElementById('font-scaler-slider').value = scale;
-    document.getElementById('font-scaler-slider').setAttribute('aria-valuetext', `${Math.round(scale * 100)} percent`);
-    document.getElementById('font-size-indicator').textContent = `${Math.round(scale * 100)}%`;
-    document.querySelectorAll('[data-scale]').forEach(button => {
-      const selected = Math.abs(Number(button.dataset.scale) - scale) < 0.001;
-      button.setAttribute('aria-pressed', String(selected));
-      button.classList.toggle('active', selected);
-    });
-    save('font', String(scale));
-  };
-  const setTheme = value => {
-    const theme = ['default', 'dark', 'high-contrast-light'].includes(value) ? value : 'default';
-    document.documentElement.dataset.theme = theme;
-    document.getElementById('theme-select').value = theme;
-    save('theme', theme);
-  };
-  setScale(read('font'));
-  setTheme(read('theme'));
-  document.getElementById('font-scaler-slider').addEventListener('input', event => setScale(event.target.value));
-  document.querySelectorAll('[data-scale]').forEach(button => button.addEventListener('click', () => setScale(button.dataset.scale)));
-  document.getElementById('theme-select').addEventListener('change', event => setTheme(event.target.value));
-
   const updateProgress = () => {
     tabs.forEach(tab => {
       const badge = document.getElementById('check-' + tab.id);
@@ -67,16 +42,7 @@ document.addEventListener('DOMContentLoaded', () => {
     tab.scrollIntoView({ block: 'nearest', inline: 'nearest' });
     if (window.matchMedia('(max-width: 768px)').matches) document.getElementById(tab.getAttribute('aria-controls')).scrollIntoView({ block: 'start' });
   };
-  tabs.forEach((tab, index) => {
-    tab.addEventListener('click', () => activate(tab));
-    tab.addEventListener('keydown', event => {
-      const targets = { ArrowRight: (index + 1) % tabs.length, ArrowLeft: (index + tabs.length - 1) % tabs.length, Home: 0, End: tabs.length - 1 };
-      if (!(event.key in targets)) return;
-      event.preventDefault();
-      const next = tabs[targets[event.key]];
-      activate(next); next.focus();
-    });
-  });
+  EmeritusUI.bindTabs(tabs, tab => activate(tab));
   // Completion requires reaching the end after a viewing interval, not just opening a tab.
   const checkReading = () => {
     if (document.hidden || Date.now() - activatedAt < 4000) return;

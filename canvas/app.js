@@ -1,5 +1,4 @@
 document.addEventListener('DOMContentLoaded', () => {
-  initAccessibilitySettings();
   initTabs();
   initNavigationPractice();
   initNotifications();
@@ -52,55 +51,8 @@ function clearFeedback(element) {
   element.classList.remove('visible', 'correct', 'review');
 }
 
-/* Accessibility settings */
-function initAccessibilitySettings() {
-  const slider = document.getElementById('font-scaler-slider');
-  const themeSelect = document.getElementById('theme-select');
-  const presetButtons = document.querySelectorAll('[data-font-scale]');
-
-  slider?.addEventListener('input', event => setFontScale(Number(event.target.value)));
-  presetButtons.forEach(button => button.addEventListener('click', () => setFontScale(Number(button.dataset.fontScale))));
-  themeSelect?.addEventListener('change', event => setTheme(event.target.value));
-
-  const savedScale = Number(readStorage(storageKeys.fontScale));
-  setFontScale(savedScale >= 0.9 && savedScale <= 1.4 ? savedScale : 1, false);
-  const savedTheme = readStorage(storageKeys.theme);
-  setTheme(['default', 'dark', 'high-contrast-light'].includes(savedTheme) ? savedTheme : 'default', false);
-}
-
-function setFontScale(scale, shouldAnnounce = true) {
-  const normalized = Math.min(1.4, Math.max(0.9, Number(scale) || 1));
-  const percent = Math.round(normalized * 100);
-  const slider = document.getElementById('font-scaler-slider');
-  document.documentElement.style.setProperty('--font-scale', normalized);
-  if (slider) {
-    slider.value = String(normalized);
-    slider.setAttribute('aria-valuetext', `${percent} percent`);
-  }
-  const indicator = document.getElementById('font-size-indicator');
-  if (indicator) indicator.textContent = `${percent}%`;
-
-  let activeScale = 1.35;
-  if (normalized <= 1.05) activeScale = 1;
-  else if (normalized <= 1.25) activeScale = 1.18;
-  document.querySelectorAll('[data-font-scale]').forEach(button => {
-    const active = Number(button.dataset.fontScale) === activeScale;
-    button.classList.toggle('active', active);
-    button.setAttribute('aria-pressed', String(active));
-  });
-  writeStorage(storageKeys.fontScale, String(normalized));
-  if (shouldAnnounce) announce(`Text size set to ${percent} percent.`);
-}
-
-function setTheme(theme, shouldAnnounce = true) {
-  const labels = { default: 'Default Light', dark: 'High Contrast Dark', 'high-contrast-light': 'High Contrast Black and White' };
-  if (theme === 'default') document.documentElement.removeAttribute('data-theme');
-  else document.documentElement.setAttribute('data-theme', theme);
-  const select = document.getElementById('theme-select');
-  if (select) select.value = theme;
-  writeStorage(storageKeys.theme, theme);
-  if (shouldAnnounce) announce(`Contrast theme changed to ${labels[theme]}.`);
-}
+function setFontScale(value, speak = true) { EmeritusUI.setFontScale(value, speak); }
+function setTheme(value, speak = true) { EmeritusUI.setTheme(value, speak); }
 
 /* Tabs and meaningful completion */
 function initTabs() {
@@ -110,20 +62,7 @@ function initTabs() {
   const validIds = new Set(tabs.map(tab => tab.id));
   exploredTabIds = Array.isArray(exploredTabIds) ? [...new Set(exploredTabIds)].filter(id => validIds.has(id)) : [];
 
-  tabs.forEach((tab, index) => {
-    tab.addEventListener('click', () => activateTab(tab, tabs, panels));
-    tab.addEventListener('keydown', event => {
-      let targetIndex = null;
-      if (event.key === 'ArrowRight') targetIndex = (index + 1) % tabs.length;
-      if (event.key === 'ArrowLeft') targetIndex = (index - 1 + tabs.length) % tabs.length;
-      if (event.key === 'Home') targetIndex = 0;
-      if (event.key === 'End') targetIndex = tabs.length - 1;
-      if (targetIndex === null) return;
-      event.preventDefault();
-      tabs[targetIndex].focus();
-      activateTab(tabs[targetIndex], tabs, panels);
-    });
-  });
+  EmeritusUI.bindTabs(tabs, tab => activateTab(tab, tabs, panels));
 
   document.getElementById('reset-progress')?.addEventListener('click', resetProgress);
   window.addEventListener('scroll', checkReadingCompletion, { passive: true });

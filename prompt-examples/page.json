@@ -1,0 +1,68 @@
+{
+  "head_title": "Prompt Examples Interactive",
+  "title": "Prompt Examples Interactive",
+  "description": "Practice stronger AI prompts with five everyday examples for Emeritus learners. Customize, copy, and try prompts in Gemini, ChatGPT, or Claude.",
+  "updated": "11/16/26",
+  "settings": {
+    "preferences": {
+      "font": "prompt_examples_font_scale",
+      "theme": "prompt_examples_theme",
+      "encoding": "json"
+    }
+  },
+  "stylesheets": [
+    "../shared/learning.css",
+    "style.css",
+    "../shared/mobile-accessibility.css"
+  ],
+  "navigation": {
+    "percent": true,
+    "tabs": [
+      {
+        "id": "tab-basics",
+        "panel": "panel-basics",
+        "label": "1. Start here",
+        "badge_id": null
+      },
+      {
+        "id": "tab-health",
+        "panel": "panel-health",
+        "label": "2. Health information",
+        "badge_id": null
+      },
+      {
+        "id": "tab-travel",
+        "panel": "panel-travel",
+        "label": "3. Travel planning",
+        "badge_id": null
+      },
+      {
+        "id": "tab-finance",
+        "panel": "panel-finance",
+        "label": "4. Financial options",
+        "badge_id": null
+      },
+      {
+        "id": "tab-garden",
+        "panel": "panel-garden",
+        "label": "5. Gardening",
+        "badge_id": null
+      },
+      {
+        "id": "tab-medicare",
+        "panel": "panel-medicare",
+        "label": "6. Medicare basics",
+        "badge_id": null
+      },
+      {
+        "id": "tab-custom",
+        "panel": "panel-custom",
+        "label": "7. Build Your Own Prompt",
+        "badge_id": null
+      }
+    ],
+    "claim": "<button type=\"button\" class=\"btn-claim-certificate\" id=\"btn-claim-cert\" hidden>Claim Certificate</button>",
+    "reset": "<button type=\"button\" class=\"btn-reset-progress\" id=\"reset-progress\">Reset Exploration</button>"
+  },
+  "sources": "<p>Adapted from the course pages <cite>Prompt Engineering and Context Windows</cite> and <cite>Prompt Examples</cite>.</p>\n  <p>Official AI services: <a href=\"https://gemini.google.com/\" target=\"_blank\" rel=\"noopener noreferrer\">Gemini</a>, <a href=\"https://chatgpt.com/\" target=\"_blank\" rel=\"noopener noreferrer\">ChatGPT</a>, and <a href=\"https://claude.ai/\" target=\"_blank\" rel=\"noopener noreferrer\">Claude</a> (links open in a new tab).</p>\n  <p>AI was used in the creation of this tool.</p>"
+}

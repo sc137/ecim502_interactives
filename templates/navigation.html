@@ -1,0 +1,26 @@
+<nav class="main-nav" aria-label="Learning sections">
+  <div class="tab-nav-header">
+    <div class="progress-indicator-pill" role="status">
+      <span class="full-progress-label">Exploration Progress:</span> <strong id="exploration-count">0 of {{section_count}} Tabs Explored</strong>
+      <span id="compact-exploration-count" class="compact-progress">Explored 0/{{section_count}}</span>
+{{percent_badge}}
+    </div>
+    <div class="progress-actions">{{claim_button}} {{reset_button}}</div>
+  </div>
+  <div class="mobile-section-menu" hidden>
+    <label for="section-menu">Choose a section</label>
+    <select id="section-menu" aria-describedby="section-menu-help">
+      <optgroup label="Learning sections">{{section_options}}</optgroup>
+      <optgroup label="Actions"><option value="__reset__">Reset exploration</option></optgroup>
+    </select>
+    <span id="section-menu-help" class="sr-only">Choosing a section opens its content below. Reset exploration clears activity progress.</span>
+    <div class="section-step-controls">
+      <button type="button" id="section-previous" class="btn-secondary" disabled>Previous</button>
+      <span id="section-position">Section 1 of {{section_count}}</span>
+      <button type="button" id="section-next" class="btn-secondary">Next</button>
+    </div>
+  </div>
+  <ul class="tab-list" role="tablist" aria-label="Learning sections">
+    {{tabs}}
+  </ul>
+</nav>

@@ -46,38 +46,10 @@ document.addEventListener('DOMContentLoaded', () => {
     clearTimeout(readingTimer);
     readingTimer = setTimeout(checkReading, 1300);
   }
-  tabs.forEach((tab, index) => {
-    tab.addEventListener('click', () => activate(index));
-    tab.addEventListener('keydown', event => {
-      const targets = { ArrowRight: (index + 1) % tabs.length, ArrowLeft: (index + tabs.length - 1) % tabs.length, Home: 0, End: tabs.length - 1 };
-      if (event.key in targets) { event.preventDefault(); activate(targets[event.key], true); }
-    });
-  });
+  EmeritusUI.bindTabs(tabs, tab => activate(tabs.indexOf(tab)));
   window.addEventListener('scroll', checkReading, { passive: true });
   window.addEventListener('resize', checkReading);
   readingTimer = setTimeout(checkReading, 1300);
-
-  function setFontScale(value) {
-    const scale = Math.max(.9, Math.min(1.4, Number(value) || 1));
-    document.documentElement.style.setProperty('--font-scale', scale);
-    $('font-scaler-slider').value = scale;
-    $('font-scaler-slider').setAttribute('aria-valuetext', `${Math.round(scale * 100)} percent`);
-    $('font-size-indicator').textContent = `${Math.round(scale * 100)}%`;
-    [1, 1.18, 1.35].forEach((preset, index) => {
-      const button = $(['btn-font-normal', 'btn-font-large', 'btn-font-xlarge'][index]);
-      const selected = Math.abs(scale - preset) < .001;
-      button.setAttribute('aria-pressed', String(selected));
-      button.classList.toggle('active', selected);
-    });
-    announce(`Text size ${Math.round(scale * 100)} percent.`);
-  }
-  [1, 1.18, 1.35].forEach((scale, index) => $(['btn-font-normal', 'btn-font-large', 'btn-font-xlarge'][index]).addEventListener('click', () => setFontScale(scale)));
-  $('font-scaler-slider').addEventListener('input', event => setFontScale(event.target.value));
-  $('theme-select').addEventListener('change', event => {
-    document.documentElement.dataset.theme = event.target.value;
-    announce(`Contrast theme: ${event.target.selectedOptions[0].textContent}.`);
-  });
-  setFontScale(1);
 
   document.querySelectorAll('[data-freeze]').forEach(button => button.addEventListener('click', () => {
     frozen.add(button.dataset.freeze);
@@ -93,6 +65,7 @@ document.addEventListener('DOMContentLoaded', () => {
     ['After Tuesday: verified Experian frozen again. Equifax and TransUnion remain frozen. Practice complete.', 'Practice complete']
   ];
   function renderThaw() {
+    $('thaw-practice').classList.toggle('is-complete', thawStep === thawStates.length - 1);
     $('thaw-step-counter').textContent = `Step ${thawStep + 1} of ${thawStates.length}`;
     $('thaw-status').textContent = thawStates[thawStep][0];
     $('thaw-next').textContent = thawStates[thawStep][1];
@@ -119,8 +92,10 @@ document.addEventListener('DOMContentLoaded', () => {
       const selected = document.querySelector(`input[name="q${index}"]:checked`);
       const passed = selected?.value === answer;
       if (passed) correct++;
-      $(`feedback-${index}`).hidden = false;
-      $(`feedback-${index}`).textContent = `${passed ? 'Correct.' : selected ? 'Review.' : 'Choose an answer.'} ${explanations[index]}`;
+      const feedback = $(`feedback-${index}`);
+      feedback.hidden = false;
+      feedback.className = `quiz-feedback-box ${passed ? 'correct' : 'incorrect'}`;
+      feedback.textContent = `${passed ? 'Correct.' : selected ? 'Incorrect.' : 'Choose an answer.'} ${explanations[index]}`;
     });
     $('quiz-result').textContent = `${correct} of 4 correct. ${correct === 4 ? 'Knowledge checks complete.' : 'Review the feedback and try again.'}`;
     if (correct === 4) complete('quizzes');

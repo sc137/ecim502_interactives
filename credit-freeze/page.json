@@ -1,0 +1,52 @@
+{
+  "head_title": "Credit Freeze Interactive | ECIM 502",
+  "title": "Credit Freeze Interactive",
+  "description": "Practice free credit freezes, temporary thaws, fraud alerts, and safe monitoring choices without sharing personal information.",
+  "updated": "11/16/26",
+  "settings": {
+    "preferences": {}
+  },
+  "stylesheets": [
+    "../shared/learning.css",
+    "style.css",
+    "../shared/mobile-accessibility.css"
+  ],
+  "navigation": {
+    "percent": false,
+    "tabs": [
+      {
+        "id": "tab-basics",
+        "panel": "panel-basics",
+        "label": "1. Why Freeze?",
+        "badge_id": null
+      },
+      {
+        "id": "tab-freeze",
+        "panel": "panel-freeze",
+        "label": "2. Place a Freeze",
+        "badge_id": null
+      },
+      {
+        "id": "tab-thaw",
+        "panel": "panel-thaw",
+        "label": "3. Thaw & Refreeze",
+        "badge_id": null
+      },
+      {
+        "id": "tab-alerts",
+        "panel": "panel-alerts",
+        "label": "4. Alerts & Monitoring",
+        "badge_id": null
+      },
+      {
+        "id": "tab-quizzes",
+        "panel": "panel-quizzes",
+        "label": "5. Safety & Check",
+        "badge_id": null
+      }
+    ],
+    "claim": "<button id=\"btn-claim-cert\" class=\"btn-claim-certificate\" type=\"button\" hidden>Claim Certificate</button>",
+    "reset": "<button id=\"reset-progress\" class=\"btn-reset-progress\" type=\"button\">Reset Exploration</button>"
+  },
+  "sources": "<p>Based on the course handouts <cite>How to Freeze Your Credit</cite> and <cite>Identity Theft and Fraud Targeting Seniors</cite>; verified with official bureau, FTC, and USAGov guidance. Educational practice only.</p>"
+}

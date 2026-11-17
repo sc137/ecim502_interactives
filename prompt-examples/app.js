@@ -28,37 +28,6 @@ document.addEventListener('DOMContentLoaded', () => {
     announcementTimer = setTimeout(() => { $('#aria-live-announcer').textContent = message; }, 100);
   }
 
-  // Accessibility controls preserve the shared text presets and theme choices.
-  const presets = [1, 1.18, 1.35];
-  const presetButtons = ['#btn-font-normal', '#btn-font-large', '#btn-font-xlarge'].map($);
-  function setScale(value, speak = true) {
-    const scale = Number.isFinite(Number(value)) ? Math.min(1.4, Math.max(0.9, Number(value))) : 1;
-    document.documentElement.style.setProperty('--font-scale', scale);
-    $('#font-scaler-slider').value = scale;
-    const label = `${Math.round(scale * 100)}%`;
-    $('#font-size-indicator').textContent = label;
-    $('#font-scaler-slider').setAttribute('aria-valuetext', `${Math.round(scale * 100)} percent`);
-    presetButtons.forEach((button, i) => {
-      const selected = Math.abs(scale - presets[i]) < 0.001;
-      button.classList.toggle('active', selected);
-      button.setAttribute('aria-pressed', String(selected));
-    });
-    storage.write('font_scale', scale);
-    if (speak) announce(`Text size set to ${label}.`);
-  }
-  function setTheme(value, speak = true) {
-    const theme = ['default', 'dark', 'high-contrast-light'].includes(value) ? value : 'default';
-    document.documentElement.dataset.theme = theme;
-    $('#theme-select').value = theme;
-    storage.write('theme', theme);
-    if (speak) announce(`Contrast theme changed to ${$('#theme-select').selectedOptions[0].textContent}.`);
-  }
-  presetButtons.forEach((button, i) => button.addEventListener('click', () => setScale(presets[i])));
-  $('#font-scaler-slider').addEventListener('input', event => setScale(event.target.value));
-  $('#theme-select').addEventListener('change', event => setTheme(event.target.value));
-  setScale(storage.read('font_scale', 1), false);
-  setTheme(storage.read('theme', 'default'), false);
-
   // Progress requires reaching the panel end; examples also require prompt review.
   function updateProgress() {
     tabs.forEach(tab => tab.classList.toggle('explored', explored.has(tab.id)));
@@ -104,17 +73,7 @@ document.addEventListener('DOMContentLoaded', () => {
     announce(`Opened ${tab.textContent.replace('✅', '').replace('Explored', '').trim()}.`);
     scheduleCompletion();
   }
-  tabs.forEach((tab, index) => {
-    tab.addEventListener('click', () => activateTab(tab));
-    tab.addEventListener('keydown', event => {
-      let next;
-      if (event.key === 'ArrowRight') next = (index + 1) % tabs.length;
-      if (event.key === 'ArrowLeft') next = (index - 1 + tabs.length) % tabs.length;
-      if (event.key === 'Home') next = 0;
-      if (event.key === 'End') next = tabs.length - 1;
-      if (next !== undefined) { event.preventDefault(); activateTab(tabs[next], true); }
-    });
-  });
+  EmeritusUI.bindTabs(tabs, tab => activateTab(tab));
   window.addEventListener('scroll', checkCompletion, { passive: true });
   window.addEventListener('resize', checkCompletion);
   $('#reset-progress').addEventListener('click', () => {

@@ -1,0 +1,62 @@
+{
+  "head_title": "Firefox and Web Browser History Interactive",
+  "title": "Firefox Interactive",
+  "description": "An accessible ECIM 502 interactive guide to web browser history, browser engines, installing Firefox, and completing the Firefox assignment.",
+  "updated": "11/16/26",
+  "settings": {
+    "preferences": {
+      "font": "firefox_font_scale",
+      "theme": "firefox_theme"
+    }
+  },
+  "stylesheets": [
+    "../shared/learning.css",
+    "../shared/orientation.css",
+    "style.css",
+    "../shared/mobile-accessibility.css"
+  ],
+  "navigation": {
+    "percent": true,
+    "tabs": [
+      {
+        "id": "tab-basics",
+        "panel": "panel-basics",
+        "label": "1. Browser Basics",
+        "badge_id": null
+      },
+      {
+        "id": "tab-history",
+        "panel": "panel-history",
+        "label": "2. Browser History",
+        "badge_id": null
+      },
+      {
+        "id": "tab-families",
+        "panel": "panel-families",
+        "label": "3. Browser Families",
+        "badge_id": null
+      },
+      {
+        "id": "tab-install",
+        "panel": "panel-install",
+        "label": "4. Install Firefox",
+        "badge_id": null
+      },
+      {
+        "id": "tab-assignment",
+        "panel": "panel-assignment",
+        "label": "5. Complete Assignment",
+        "badge_id": null
+      },
+      {
+        "id": "tab-glossary",
+        "panel": "panel-glossary",
+        "label": "6. Glossary",
+        "badge_id": null
+      }
+    ],
+    "claim": "<button type=\"button\" class=\"btn-claim-certificate\" id=\"claim-certificate\" hidden>Claim Certificate</button>",
+    "reset": "<button type=\"button\" class=\"btn-reset-progress\" id=\"reset-progress\">Reset Exploration</button>"
+  },
+  "sources": "<p>Browser history is supported by <a href=\"https://www.w3.org/History.html\" target=\"_blank\" rel=\"noopener noreferrer\">W3C historical materials</a>. Installation and platform guidance is based on <a href=\"https://support.mozilla.org/\" target=\"_blank\" rel=\"noopener noreferrer\">Mozilla Support</a>. Links open in a new tab.</p>"
+}

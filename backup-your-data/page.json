@@ -1,0 +1,73 @@
+{
+  "head_title": "Backup Your Data Interactive",
+  "title": "Backup Your Data Interactive",
+  "description": "Learn the 3-2-1 backup rule, compare what backups save and how to recover files, explore device backup options, and earn a completion certificate.",
+  "updated": "11/16/26",
+  "settings": {
+    "preferences": {
+      "font": "backup_font_scale",
+      "theme": "backup_theme"
+    }
+  },
+  "stylesheets": [
+    "../shared/learning.css",
+    "style.css",
+    "../shared/mobile-accessibility.css"
+  ],
+  "navigation": {
+    "percent": true,
+    "tabs": [
+      {
+        "id": "tab-basics",
+        "panel": "panel-basics",
+        "label": "1. Why & 3-2-1",
+        "badge_id": null
+      },
+      {
+        "id": "tab-scope",
+        "panel": "panel-scope",
+        "label": "2. Backup Lab",
+        "badge_id": null
+      },
+      {
+        "id": "tab-windows",
+        "panel": "panel-windows",
+        "label": "3. Windows",
+        "badge_id": null
+      },
+      {
+        "id": "tab-macos",
+        "panel": "panel-macos",
+        "label": "4. Mac (macOS)",
+        "badge_id": null
+      },
+      {
+        "id": "tab-android",
+        "panel": "panel-android",
+        "label": "5. Android",
+        "badge_id": null
+      },
+      {
+        "id": "tab-ios",
+        "panel": "panel-ios",
+        "label": "6. iPhone & iPad",
+        "badge_id": null
+      },
+      {
+        "id": "tab-services",
+        "panel": "panel-services",
+        "label": "7. Paid Services",
+        "badge_id": null
+      },
+      {
+        "id": "tab-quizzes",
+        "panel": "panel-quizzes",
+        "label": "8. Checklist & Quiz",
+        "badge_id": null
+      }
+    ],
+    "claim": "<button type=\"button\" class=\"btn-claim-certificate\" id=\"claim-certificate\" hidden>Claim Certificate</button>",
+    "reset": "<button type=\"button\" class=\"btn-reset-progress\" id=\"reset-progress\">Reset Exploration</button>"
+  },
+  "sources": "<p>Information checked using CISA safety guidance and official product instructions. Follow the source links in each topic for current details.</p>"
+}

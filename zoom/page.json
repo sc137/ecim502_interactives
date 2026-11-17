@@ -1,0 +1,61 @@
+{
+  "head_title": "Zoom Workplace & What's New: Emeritus Student Interactive",
+  "title": "Zoom Workplace Interactive",
+  "description": "An accessible, interactive guide for Emeritus learners to explore Zoom Workplace basics and the newest Zoom AI features like ZoomMate, My Notes, and Zoom Canvas.",
+  "updated": "11/16/26",
+  "settings": {
+    "preferences": {
+      "font": "emeritus_font_scale",
+      "theme": "emeritus_theme"
+    }
+  },
+  "stylesheets": [
+    "../shared/learning.css",
+    "style.css",
+    "../shared/mobile-accessibility.css"
+  ],
+  "navigation": {
+    "percent": true,
+    "tabs": [
+      {
+        "id": "tab-basics",
+        "panel": "panel-basics",
+        "label": "1. Zoom Basics",
+        "badge_id": "check-tab-basics"
+      },
+      {
+        "id": "tab-simulator",
+        "panel": "panel-simulator",
+        "label": "2. Toolbar Practice",
+        "badge_id": "check-tab-simulator"
+      },
+      {
+        "id": "tab-whats-new",
+        "panel": "panel-whats-new",
+        "label": "3. What's New & AI",
+        "badge_id": "check-tab-whats-new"
+      },
+      {
+        "id": "tab-privacy-tree",
+        "panel": "panel-privacy-tree",
+        "label": "4. AI Privacy Evaluator",
+        "badge_id": "check-tab-privacy-tree"
+      },
+      {
+        "id": "tab-quizzes",
+        "panel": "panel-quizzes",
+        "label": "5. Checklist & Quizzes",
+        "badge_id": "check-tab-quizzes"
+      },
+      {
+        "id": "tab-glossary",
+        "panel": "panel-glossary",
+        "label": "6. Terminology Glossary",
+        "badge_id": "check-tab-glossary"
+      }
+    ],
+    "claim": "<button type=\"button\" class=\"btn-claim-certificate\" id=\"btn-claim-cert\" onclick=\"openCertificateSection()\" style=\"display:none;\" aria-label=\"Claim your completion certificate\">\n          Claim Certificate\n        </button>",
+    "reset": "<button type=\"button\" class=\"btn-reset-progress\" onclick=\"resetExplorationProgress()\" aria-label=\"Reset your tab exploration progress\">\n          Reset Exploration\n        </button>"
+  },
+  "sources": "<p>Content based on official Zoom documentation. For support visit <a href=\"https://support.zoom.com\" target=\"_blank\" rel=\"noopener noreferrer\">Zoom Official Support (opens in new tab)</a>.</p>"
+}
