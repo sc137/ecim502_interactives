@@ -17,6 +17,6 @@ No particular monitoring vendor is endorsed. Costs depend on the plan; the $15/$
 
 ## Privacy and release checks
 
-No personal-information fields, account authentication, analytics, network requests from lesson JavaScript, cookies, or browser storage are used by this lesson. All simulated freezes, answers, and exploration state are kept in page memory and disappear on reload. Certificate uses a generic learner label. External official links leave the lesson and have their own privacy practices. Existing interactives retain their prior behavior; only their header stylesheet link changes.
+No credit/identity-detail fields, account authentication, analytics, network requests from lesson JavaScript, cookies, or browser storage are used by this lesson. The certificate has an optional display-name field; its value stays in page memory, is cleared on reset or reload, and is included only in the learner’s printed/saved certificate. All simulated freezes, answers, and exploration state are kept in page memory and disappear on reload. If the name field is blank, the certificate uses the generic “Emeritus Student” label. External official links leave the lesson and have their own privacy practices. Existing interactives retain their prior behavior; only their header stylesheet link changes.
 
 This is a buildless HTML/CSS/JavaScript tool. Production follows the repository’s existing GitHub Pages URLs. Include the sibling `shared/` folder when copying the tool elsewhere.

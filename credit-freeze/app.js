@@ -111,6 +111,8 @@ document.addEventListener('DOMContentLoaded', () => {
     $('knowledge-check').reset();
     answers.forEach((_, index) => { $(`feedback-${index}`).hidden = true; });
     $('quiz-result').textContent = '';
+    $('cert-name').value = '';
+    $('cert-display-name').textContent = 'Emeritus Student';
     refreshProgress(); activate(0, true);
     announce('Exploration, practice activities, and quiz answers reset.');
   });
@@ -118,9 +120,14 @@ document.addEventListener('DOMContentLoaded', () => {
     if (completed.size !== tabs.length) return;
     $('certificate-section').hidden = false;
     $('certificate-date').textContent = new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
-    $('certificate-section').focus();
+    $('cert-name').focus({ preventScroll: true });
     $('certificate-section').scrollIntoView({ block: 'start' });
   });
-  $('print-certificate').addEventListener('click', () => window.print());
+  $('cert-name').addEventListener('input', event => {
+    $('cert-display-name').textContent = event.target.value.trim() || 'Emeritus Student';
+  });
+  $('print-certificate').addEventListener('click', () => {
+    if (completed.size === tabs.length) window.print();
+  });
   refreshProgress();
 });

@@ -143,13 +143,16 @@
 <p class="end-marker">End of this section. Be sure to complete all practice activities and claim your certificate.</p>
 </section>
 <section class="certificate-wrapper-card" id="certificate-section" aria-label="Completion certificate" tabindex="-1" hidden><div class="no-print"><h2>Completion certificate</h2>
-<p>No personal details are required. This certificate records learning activities, not a real credit freeze.</p>
+<p>This certificate records learning activities, not a real credit freeze.</p>
+<label for="cert-name" class="certificate-name-label">Name for certificate (optional)</label>
+<input type="text" id="cert-name" class="glossary-search-input" maxlength="80" autocomplete="name" aria-describedby="cert-name-help">
+<p id="cert-name-help">Use your name or a nickname. It stays in this open page and appears on the certificate when you print or save it.</p>
 <button type="button" id="print-certificate" class="btn-primary">Print / Save Certificate PDF</button></div>
 <div class="certificate-printable-frame"><div class="cert-border-outer"><div class="cert-border-inner"><div class="cert-header"><p class="cert-institution">Intermediate Life &amp; Technology Integration</p>
 <div class="cert-title">Certificate of Completion</div>
 </div>
 <div class="cert-body"><p class="cert-text-lead">Awarded to</p>
-<div class="cert-student-name">Emeritus Student</div>
+<div class="cert-student-name" id="cert-display-name">Emeritus Student</div>
 <p>For exploring credit freezes, practicing a temporary thaw and refreeze, comparing fraud alerts and monitoring, and completing the knowledge checks.</p>
 </div>
 <div class="cert-footer"><div><div class="cert-sig-line">Professor Sable</div>

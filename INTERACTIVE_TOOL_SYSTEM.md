@@ -310,7 +310,7 @@ Progress must represent meaningful learner activity.
 - A quiz panel is completed only after all required knowledge checks are answered correctly.
 - Blank or incorrect submissions provide feedback but do not award completion.
 - The certificate claim control appears only at 100% completion.
-- Selecting **Claim Certificate** opens or focuses the certificate and, where present, its optional personalization controls. Credit Freeze uses a generic certificate without a name field.
+- Selecting **Claim Certificate** opens or focuses the certificate and, where present, its optional personalization controls. Credit Freeze offers an optional certificate name or nickname kept only in page memory, with “Emeritus Student” as the blank-field default.
 - Reset Exploration clears earned exploration and current quiz-completion state.
 - Saved progress is filtered to valid tab identifiers before use.
 
@@ -447,4 +447,4 @@ Topic content will change frequently. The shared system should remain stable, do
 
 ## 13. Privacy-Sensitive Lessons
 
-For identity and financial topics, use fictional states instead of replicas asking for identity details. Do not collect or persist sensitive learner information. A generic certificate without a name field is appropriate. Credit Freeze keeps practice and progress only in page memory and resets on reload; no real requests are sent. Verify bureau links and phone numbers against each bureau’s own site.
+For identity and financial topics, use fictional states instead of replicas asking for identity details. Do not collect or persist sensitive learner information. An optional certificate display name may be used without requesting sensitive identity details. Credit Freeze keeps the optional display name, practice, and progress only in page memory and clears them on reset or reload; no real requests are sent. Verify bureau links and phone numbers against each bureau’s own site.

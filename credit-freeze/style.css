@@ -132,3 +132,5 @@ summary {
     display: block !important;
   }
 }
+
+.certificate-name-label { display: block; font-weight: 700; margin: 12px 0 4px; }
