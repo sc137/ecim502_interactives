@@ -609,6 +609,9 @@ body {
   }
 
   .cert-footer {
+    /* A printed page can also match the narrow-screen breakpoint. */
+    display: flex !important;
+    gap: 24px !important;
     margin-top: 24px !important;
     padding-top: 12px !important;
   }

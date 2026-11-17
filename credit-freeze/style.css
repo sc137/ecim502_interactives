@@ -98,7 +98,23 @@ summary {
 }
 
 #certificate-section {
-  scroll-margin-top: 1rem;
+  scroll-margin-top: 190px;
+}
+
+#certificate-section .cert-student-name {
+  min-width: 0;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+}
+
+#certificate-section .cert-footer {
+  gap: 1rem;
+}
+
+#certificate-section .cert-sig-block,
+#certificate-section .cert-date-block {
+  min-width: 0;
+  flex: 0 1 45%;
 }
 
 @media (max-width: 768px) {
@@ -110,8 +126,8 @@ summary {
     padding: .5rem;
   }
 
-  .cert-title {
-    font-size: 1.5rem;
+  #certificate-section {
+    scroll-margin-top: 1rem;
   }
 
   .cert-border-inner {
