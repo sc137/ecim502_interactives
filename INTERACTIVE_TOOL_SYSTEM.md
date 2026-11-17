@@ -327,6 +327,8 @@ Full-sequence Emeritus interactive tools should include a completion certificate
 - support printing or saving as a PDF;
 - print the certificate without the surrounding navigation, lesson, or form controls.
 
+Certificate controls belong in a `.no-print` wrapper. Use the shared `.cert-text-desc`, `.cert-sig-block`, and `.cert-date-block` structure. Print styles keep the signature and date side by side and use a fixed 15pt base size independent of screen text preferences. Keep hidden certificates hidden in print, and never hide overflow to force a one-page result. Check actual PDFs at Normal and Extra Large with a long test name; screen previews alone do not verify printing.
+
 ## 8. Content and Accuracy Standards
 
 ### Research

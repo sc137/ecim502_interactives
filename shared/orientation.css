@@ -563,6 +563,12 @@ button, select, input[type="checkbox"], input[type="radio"], input[type="range"]
   margin-bottom: 24px;
 }
 
+.certificate-controls > * {
+  min-width: 0;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+}
+
 .certificate-controls label {
   font-weight: 850;
 }
@@ -818,7 +824,13 @@ button, select, input[type="checkbox"], input[type="radio"], input[type="range"]
 
   .cert-footer {
     display: grid;
+    grid-template-columns: minmax(0, 1fr);
     gap: 22px;
+  }
+
+  .cert-footer > :is(.cert-sig-block, .cert-date-block) {
+    min-width: 0;
+    overflow-wrap: anywhere;
   }
 }
 

@@ -208,17 +208,19 @@
       </div>
 
       <section id="certificate-section" class="certificate-wrapper-card" aria-labelledby="certificate-heading" hidden>
+        <div class="no-print">
         <h3 id="certificate-heading">Canvas LMS Interactive Certificate</h3>
         <div class="certificate-controls">
           <label for="student-name-input">Name for certificate:</label>
           <input type="text" id="student-name-input" class="certificate-name-input" maxlength="80" autocomplete="name">
           <button type="button" id="print-certificate" class="btn-primary">Print or Save as PDF</button>
         </div>
+        </div>
         <div class="certificate-printable-frame" id="certificate-print-area">
           <div class="cert-border-outer"><div class="cert-border-inner">
             <div class="cert-header"><p class="cert-institution">Intermediate Life &amp; Technology Integration</p><h2 class="cert-title">Certificate of Exploration</h2></div>
-            <div class="cert-body"><p>This certificate recognizes</p><p class="cert-student-name" id="cert-display-name">Emeritus Student</p><p>for completing the <strong>Canvas LMS Interactive</strong>, including Canvas navigation, notification preferences, profile-photo choices, privacy, and assignment submission readiness.</p></div>
-            <div class="cert-footer"><p>Awarded <span id="cert-display-date"></span></p><p>Professor Sable<br>Emeritus Institute</p></div>
+            <div class="cert-body"><p class="cert-text-lead">This certificate recognizes</p><p class="cert-student-name" id="cert-display-name">Emeritus Student</p><p class="cert-text-desc">for completing the <strong>Canvas LMS Interactive</strong>, including Canvas navigation, notification preferences, profile-photo choices, privacy, and assignment submission readiness.</p></div>
+            <div class="cert-footer"><div class="cert-sig-block"><div class="cert-sig-line">Professor Sable</div><div class="cert-sig-title">Emeritus Institute</div></div><div class="cert-date-block"><div class="cert-date-line" id="cert-display-date"></div><div class="cert-date-label">Date Awarded</div></div></div>
           </div></div>
         </div>
       </section>

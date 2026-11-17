@@ -461,6 +461,8 @@ body {
   padding: 0 24px 6px 24px;
   margin: 10px 0 16px 0;
   min-width: 260px;
+  max-width: 100%;
+  overflow-wrap: anywhere;
 }
 
 .cert-text-desc {
@@ -510,11 +512,15 @@ body {
 }
 
 @media print {
+  html {
+    font-size: 15pt !important;
+  }
+
   html, body {
     background: #ffffff !important;
     color: #000000 !important;
-    height: 100% !important;
-    overflow: hidden !important;
+    height: auto !important;
+    overflow: visible !important;
     margin: 0 !important;
     padding: 0 !important;
   }
@@ -548,6 +554,10 @@ body {
     background: transparent !important;
     page-break-inside: avoid !important;
     break-inside: avoid !important;
+  }
+
+  #certificate-section[hidden] {
+    display: none !important;
   }
 
   .certificate-printable-frame {
@@ -611,9 +621,18 @@ body {
   .cert-footer {
     /* A printed page can also match the narrow-screen breakpoint. */
     display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    align-items: flex-end !important;
     gap: 24px !important;
     margin-top: 24px !important;
     padding-top: 12px !important;
+  }
+
+  .cert-sig-block, .cert-date-block {
+    min-width: 0 !important;
+    flex: 1 1 0;
+    overflow-wrap: anywhere;
   }
 
   .cert-sig-line, .cert-date-line {
