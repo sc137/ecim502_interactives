@@ -1,0 +1,58 @@
+{
+  "head_title": "Signal Interactive | ECIM 502",
+  "title": "Signal Interactive",
+  "description": "Practice connecting, privacy settings, group calls, and safer decisions with fictional Signal examples. No account or personal information required.",
+  "updated": "11/23/26",
+  "settings": {
+    "preferences": {}
+  },
+  "stylesheets": [
+    "../shared/learning.css",
+    "style.css",
+    "../shared/mobile-accessibility.css"
+  ],
+  "navigation": {
+    "percent": true,
+    "tabs": [
+      {
+        "id": "tab-basics",
+        "panel": "panel-basics",
+        "label": "1. Signal Basics",
+        "badge_id": "check-tab-basics"
+      },
+      {
+        "id": "tab-connect",
+        "panel": "panel-connect",
+        "label": "2. Get Connected",
+        "badge_id": "check-tab-connect"
+      },
+      {
+        "id": "tab-privacy",
+        "panel": "panel-privacy",
+        "label": "3. Practice Privacy Settings",
+        "badge_id": "check-tab-privacy"
+      },
+      {
+        "id": "tab-choices",
+        "panel": "panel-choices",
+        "label": "4. Real-World Choices",
+        "badge_id": "check-tab-choices"
+      },
+      {
+        "id": "tab-calls",
+        "panel": "panel-calls",
+        "label": "5. Group Calls & Links",
+        "badge_id": "check-tab-calls"
+      },
+      {
+        "id": "tab-knowledge",
+        "panel": "panel-knowledge",
+        "label": "6. Knowledge Check",
+        "badge_id": "check-tab-knowledge"
+      }
+    ],
+    "claim": "<button id=\"btn-claim-cert\" class=\"btn-claim-certificate\" type=\"button\" hidden>Claim Certificate</button>",
+    "reset": "<button id=\"reset-progress\" class=\"btn-reset-progress\" type=\"button\">Reset Exploration</button>"
+  },
+  "sources": "<!-- Signal help links are in Signal Basics. -->"
+}

@@ -1,0 +1,148 @@
+/* Topic-specific additions to shared/learning.css. */
+.btn-primary {
+  background-color: var(--primary-blue);
+  color: var(--text-on-primary);
+  border: 3px solid var(--primary-blue);
+  border-radius: 8px;
+  padding: 12px 24px;
+  font-size: 1.05rem;
+  font-weight: bold;
+  cursor: pointer;
+  min-height: 52px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  transition: background-color 0.2s, transform 0.1s;
+}
+
+a {
+  color: var(--primary-blue); overflow-wrap: anywhere;
+}
+
+fieldset {
+  min-width: 0; border: 2px solid var(--border-color); padding: 1rem; margin: 1rem 0;
+}
+
+legend {
+  font-weight: 700; padding: 0 .4rem;
+}
+
+.choice {
+  display: flex; align-items: flex-start; gap: .6rem; padding: .5rem; min-height: 44px; cursor: pointer;
+}
+
+.choice input {
+  width: 24px; height: 24px; flex: 0 0 24px; margin-top: .25rem;
+}
+
+.practice-actions {
+  display: flex; flex-wrap: wrap; gap: .6rem; margin: 1rem 0;
+}
+
+.practice-message {
+  max-width: 32rem;
+  padding: .75rem 1rem;
+  background: var(--bg-main);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+}
+
+.practice-message p {
+  margin: 0;
+}
+
+.practice-message p + p {
+  margin-top: .4rem;
+}
+
+/* Empty feedback has no visible border until a practice choice produces text. */
+.practice-status:empty,
+#connect-feedback:empty,
+#setup-feedback:empty {
+  display: none;
+}
+
+.practice-status {
+  font-weight: 700; border-left: 5px solid var(--border-color); padding: .6rem;
+}
+
+.end-marker {
+  margin-top: 1.5rem; font-style: italic;
+}
+
+.info-card {
+  min-width: 0;
+}
+
+.info-card h3 {
+  color: var(--primary-blue); margin-top: 0;
+}
+
+summary {
+  cursor: pointer; padding: .5rem; font-weight: 700; min-height: 44px;
+}
+
+.tab-nav-header {
+  flex-wrap: wrap;
+}
+
+.tab-panel {
+  overflow-wrap: anywhere;
+}
+
+#certificate-section .cert-student-name {
+  min-width: 0;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+}
+
+#certificate-section .cert-footer {
+  gap: 1rem;
+}
+
+#certificate-section .cert-sig-block,
+#certificate-section .cert-date-block {
+  min-width: 0;
+  flex: 0 1 45%;
+}
+
+@media (max-width: 768px) {
+  .app-container {
+    padding: 1rem;
+  }
+
+  .certificate-wrapper-card {
+    padding: .5rem;
+  }
+
+  .cert-border-inner {
+    padding: .5rem;
+  }
+}
+
+@media print {
+  body > :not(main),
+  main > :not(#panel-certificate),
+  #panel-certificate > :not(#certificate-section) {
+    display: none !important;
+  }
+
+  #certificate-section[hidden] {
+    display: none !important;
+  }
+
+  #certificate-section:not([hidden]) {
+    display: block !important;
+  }
+}
+
+
+label:not(.choice) { display: block; font-weight: 700; margin-top: 1rem; }
+select { max-width: 100%; width: 100%; min-height: 48px; padding: .5rem; font: inherit; background: var(--bg-card); color: var(--text-main); border: 2px solid var(--border-color); }
+.practice-actions button { white-space: normal; }
+
+.feedback-check {
+  font-size: 1.3em;
+  font-weight: 700;
+}

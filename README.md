@@ -42,6 +42,10 @@ Practice sharing permissions and privacy choices, then follow the steps to creat
 
 Practice free freezes with all three bureaus, temporary thaws and refreezing, and compare fraud alerts with monitoring services. No personal information is collected.
 
+**[Signal Interactive](https://sc137.github.io/ecim502_interactives/signal/)**
+
+Practice account setup, connecting by username, managing privacy settings, and joining group calls. Use fictional examples to make safer messaging choices and earn a completion certificate.
+
 Shared templates and assets keep the tools consistent. Authoring and maintenance conventions are documented in [the interactive tool system](INTERACTIVE_TOOL_SYSTEM.md).
 
 ---
